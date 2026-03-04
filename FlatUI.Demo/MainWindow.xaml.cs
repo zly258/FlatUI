@@ -18,6 +18,8 @@ using System.Collections.ObjectModel;
  {
      public ObservableCollection<DemoItem> Items { get; set; }
      public ObservableCollection<PropertyItem> PropertyList { get; set; }
+     public ObservableCollection<CardItem> CardItems { get; set; }
+     public List<double> ChartData { get; set; } = new List<double> { 10, 25, 15, 40, 20, 35, 30 };
 
      public MainWindow()
      {
@@ -38,14 +40,33 @@ using System.Collections.ObjectModel;
              new PropertyItem { Category = "Network", Name = "IP Address", Value = "192.168.1.50" },
              new PropertyItem { Category = "Network", Name = "Port", Value = 8080 },
          };
+
+         CardItems = new ObservableCollection<CardItem>
+         {
+             new CardItem { Title = "Storage A", Subtitle = "Local SSD", Description = "Capacity: 1TB, Used: 450GB", Progress = 45 },
+             new CardItem { Title = "Storage B", Subtitle = "NAS Storage", Description = "Capacity: 10TB, Used: 8.2TB", Progress = 82 },
+             new CardItem { Title = "Cloud Cache", Subtitle = "Azure Cache", Description = "Capacity: 500GB, Used: 120GB", Progress = 24 },
+         };
          
          DataContext = this;
+         Loaded += (s, e) => NotificationService.RegisterHost(this);
       }
 
       private void TestDialog_Click(object sender, RoutedEventArgs e)
       {
           FlatMessageBox.Show("This is a custom flat message box for industrial software applications.", "System Notice", this);
       }
+
+      private void Notify_Click(object sender, RoutedEventArgs e)
+      {
+          var types = new[] { StatusType.Info, StatusType.Success, StatusType.Warning, StatusType.Error };
+          var random = new Random();
+          var type = types[random.Next(types.Length)];
+          NotificationService.Show($"Event of type '{type}'", "This is a notification message that will disappear automatically.", type);
+      }
+
+      private void OpenDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = true;
+      private void CloseDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = false;
   }
 
 public class DemoItem
@@ -54,4 +75,12 @@ public class DemoItem
     public string Name { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public double Value { get; set; }
+}
+
+public class CardItem
+{
+    public string Title { get; set; } = string.Empty;
+    public string Subtitle { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public int Progress { get; set; }
 }

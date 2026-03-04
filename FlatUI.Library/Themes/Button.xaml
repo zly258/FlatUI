@@ -7,6 +7,20 @@
         <ResourceDictionary Source="Shared.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource FlatButton}">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Path Data="{Binding}" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" 
+                          Width="16" Height="16" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="FlatButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>

@@ -6,156 +6,249 @@
         xmlns:local="clr-namespace:FlatUI.Demo"
         xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
         mc:Ignorable="d"
-        Title="Industrial Flat UI Demo" Height="600" Width="1000">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Text="Navigation" FontWeight="Bold" Margin="0,0,0,5"/>
-            <ListBox Style="{StaticResource SideNavStyle}" ItemContainerStyle="{StaticResource SideNavItemStyle}">
-                <ListBoxItem Content="Dashboard" IsSelected="True"/>
-                <ListBoxItem Content="Monitoring"/>
-                <ListBoxItem Content="History"/>
-                <ListBoxItem Content="Settings"/>
-            </ListBox>
+        Title="Industrial Flat UI Demo" Height="700" Width="1100">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Save"/>
+                    <Separator/>
+                    <MenuItem Header="_Exit"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Cut"/>
+                    <MenuItem Header="_Copy"/>
+                    <MenuItem Header="_Paste"/>
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Header="Open Drawer" Click="OpenDrawer_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About"/>
+                </MenuItem>
+            </Menu>
+            
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="User Profile" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <Border Style="{StaticResource FlatAvatar}" Margin="0,0,10,0">
+                            <TextBlock Text="AD"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Admin User" FontWeight="Bold"/>
+                            <TextBlock Text="System Manager" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
 
-            <TextBlock Text="Basic Controls" FontWeight="Bold" Margin="0,15,0,5"/>
-            <Button Content="Standard Button" Margin="0,0,0,5"/>
-            <Button Content="Primary Button" Style="{StaticResource PrimaryButton}" Margin="0,0,0,5"/>
-            
-            <TextBlock Text="Status Badges" FontWeight="Bold" Margin="0,15,0,5"/>
-            <flat:StatusBadge Status="Success" Text="System Online" Margin="0,0,0,5"/>
-            <flat:StatusBadge Status="Warning" Text="High Temperature" Margin="0,0,0,5"/>
-            <flat:StatusBadge Status="Error" Text="Connection Failed" Margin="0,0,0,5"/>
-            <flat:StatusBadge Status="Info" Text="Syncing Data..." Margin="0,0,0,5"/>
-            
-            <TextBlock Text="Input" FontWeight="Bold" Margin="0,15,0,5"/>
-            <TextBox Text="Text input field" Margin="0,0,0,5"/>
-            <CheckBox Content="Enable Service" IsChecked="True" Margin="0,0,0,5"/>
-            <RadioButton Content="Manual Mode" IsChecked="True" Margin="0,0,0,5"/>
-            <RadioButton Content="Automatic Mode" Margin="0,0,0,5"/>
-        </StackPanel>
-        
-        <Grid Grid.Column="1" Margin="20,0,0,0">
-            <TabControl>
-                <TabItem Header="Data &amp; Properties">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="250"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Grid Grid.Column="0" Margin="0,0,10,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                <TextBox Width="150" Tag="Search..." Margin="0,0,10,0"/>
-                                <Button Content="Search" Style="{StaticResource PrimaryButton}"/>
-                            </StackPanel>
-                            <DataGrid Grid.Row="1" ItemsSource="{Binding Items}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
-                                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="80"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                        
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Properties" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <flat:PropertyGrid Grid.Row="1" Properties="{Binding PropertyList}"/>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Containers">
-                    <ScrollViewer>
-                        <StackPanel Margin="10">
-                            <HeaderedContentControl Header="Module Status" Style="{StaticResource FlatCard}" Margin="0,0,0,20">
-                                <Grid>
+                    <TextBlock Text="Navigation" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ListBox Style="{StaticResource SideNavStyle}" ItemContainerStyle="{StaticResource SideNavItemStyle}">
+                        <ListBoxItem Content="Dashboard" IsSelected="True"/>
+                        <ListBoxItem Content="Monitoring"/>
+                        <ListBoxItem Content="History"/>
+                        <ListBoxItem Content="Settings"/>
+                    </ListBox>
+
+                    <TextBlock Text="Status Badges" FontWeight="Bold" Margin="0,15,0,5"/>
+                    <flat:StatusBadge Status="Success" Text="System Online" Margin="0,0,0,5"/>
+                    <flat:StatusBadge Status="Warning" Text="High Temperature" Margin="0,0,0,5"/>
+                    
+                    <TextBlock Text="Quick Actions" FontWeight="Bold" Margin="0,15,0,5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource IconButton}" Content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" ToolTip="Add Device"/>
+                        <Button Style="{StaticResource IconButton}" Content="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ToolTip="Edit Layout" Margin="5,0"/>
+                        <Button Style="{StaticResource IconButton}" Content="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" ToolTip="Delete Selected" Margin="5,0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <Grid Grid.Column="1" Margin="20,0,0,0">
+                    <TabControl>
+                        <TabItem Header="Data &amp; Paging">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid Margin="0,0,0,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel>
-                                        <flat:StatusBadge Status="Success" Text="PLC Connection" Margin="0,0,0,5"/>
-                                        <flat:StatusBadge Status="Success" Text="Database" Margin="0,0,0,5"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1">
-                                        <flat:StatusBadge Status="Info" Text="Cloud Sync" Margin="0,0,0,5"/>
-                                        <flat:StatusBadge Status="Warning" Text="Fan Speed" Margin="0,0,0,5"/>
+                                    <TextBox Style="{StaticResource FlatSearchBox}" Width="250" HorizontalAlignment="Left" Tag="Filter devices..."/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <CheckBox Style="{StaticResource FlatSwitch}" IsChecked="True" VerticalAlignment="Center" Margin="0,0,10,0" ToolTip="Real-time Monitoring"/>
+                                        <TextBlock Text="Auto-refresh" VerticalAlignment="Center" FontSize="12"/>
                                     </StackPanel>
                                 </Grid>
+
+                                <DataGrid Grid.Row="1" ItemsSource="{Binding Items}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                        <DataGridTemplateColumn Header="Status" Width="100">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <flat:StatusBadge Status="Success" Text="{Binding Status}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="80"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                
+                                <flat:Pagination Grid.Row="2" Margin="0,15,0,0" TotalCount="100" PageSize="10" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </TabItem>
+                        
+                        <TabItem Header="Cards &amp; Flow">
+                            <ScrollViewer>
+                                <ItemsControl ItemsSource="{Binding CardItems}" Margin="10">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <HeaderedContentControl Header="{Binding Title}" Style="{StaticResource FlatCard}" Width="250" Margin="10">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                    <TextBlock Text="{Binding Description}" Margin="0,10" TextWrapping="Wrap"/>
+                                                    <ProgressBar Value="{Binding Progress}" Margin="0,5"/>
+                                                    <TextBlock Text="{Binding Progress, StringFormat={}{0}%}" FontSize="10" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </HeaderedContentControl>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </TabItem>
+
+                        <TabItem Header="Advanced Forms">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <ScrollViewer Grid.Column="0">
+                                    <flat:Form>
+                                        <flat:FormItem Header="Device Name">
+                                            <TextBox Text="Main Processor"/>
+                                        </flat:FormItem>
+                                        <flat:FormItem Header="Threshold">
+                                            <flat:NumericUpDown Value="45.5" Minimum="0" Maximum="100" Increment="0.5"/>
+                                        </flat:FormItem>
+                                        <flat:FormItem Header="Selection">
+                                            <flat:DropdownGrid ItemsSource="{Binding Items}"/>
+                                        </flat:FormItem>
+                                        <flat:FormItem Header="Actions">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Content="Save" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+                                                <Button Content="Notify" Click="Notify_Click" Margin="0,0,10,0"/>
+                                                <Button Content="Test Dialog" Click="TestDialog_Click"/>
+                                            </StackPanel>
+                                        </flat:FormItem>
+                                        <flat:FormItem Header="Feedback">
+                                            <StackPanel>
+                                                <Control Style="{StaticResource FlatSpinner}" Margin="0,0,0,20"/>
+                                                <Control Style="{StaticResource FlatSkeleton}" Width="200" HorizontalAlignment="Left"/>
+                                            </StackPanel>
+                                        </flat:FormItem>
+                                    </flat:Form>
+                                </ScrollViewer>
+
+                                <Grid Grid.Column="1" Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="Properties (Grouped)" FontWeight="Bold" Margin="0,0,0,10"/>
+                                    <flat:PropertyGrid Grid.Row="1" Properties="{Binding PropertyList}"/>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        
+                        <TabItem Header="Empty States">
+                            <HeaderedContentControl Style="{StaticResource FlatEmptyState}" Header="No data available">
+                                <Button Content="Initialize Database" Style="{StaticResource PrimaryButton}"/>
                             </HeaderedContentControl>
-                            
-                            <Expander Header="System Configuration">
-                                <StackPanel>
-                                    <CheckBox Content="Verbose Logging" Margin="0,0,0,10"/>
-                                    <CheckBox Content="Auto-reconnect" Margin="0,0,0,10"/>
-                                    <TextBlock Text="Render Mode:" Margin="0,0,0,5"/>
-                                    <ComboBox SelectedIndex="1">
-                                        <ComboBoxItem Content="Low Latency"/>
-                                        <ComboBoxItem Content="Balanced"/>
-                                        <ComboBoxItem Content="High Fidelity"/>
-                                    </ComboBox>
-                                </StackPanel>
-                            </Expander>
-                        </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Form &amp; Advanced">
-                    <ScrollViewer>
-                        <flat:Form>
-                            <flat:FormItem Header="Device Name">
-                                <TextBox Text="Main Processor"/>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Selection Mode">
-                                <flat:DropdownGrid ItemsSource="{Binding Items}"/>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Logic Tree">
-                                <flat:DropdownTree>
-                                    <TreeViewItem Header="Root">
-                                        <TreeViewItem Header="Child A"/>
-                                        <TreeViewItem Header="Child B"/>
-                                    </TreeViewItem>
-                                </flat:DropdownTree>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Tags">
-                                <StackPanel Orientation="Horizontal">
-                                    <Border Style="{StaticResource TagStyle}" Margin="0,0,5,0">
-                                        <TextBlock Text="V1.0"/>
+                        </TabItem>
+
+                        <TabItem Header="Tree &amp; Media">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <ScrollViewer Grid.Column="0">
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="Simple TreeGrid" FontWeight="Bold" Margin="0,0,0,10"/>
+                                        <TreeView Style="{StaticResource FlatTreeGrid}" ItemContainerStyle="{StaticResource TreeGridItem}">
+                                            <TreeViewItem Header="Production Line A">
+                                                <TreeViewItem Header="Conveyor 1 - Running"/>
+                                                <TreeViewItem Header="Robot Arm 2 - Idle"/>
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Production Line B">
+                                                <TreeViewItem Header="Conveyor 3 - Error"/>
+                                            </TreeViewItem>
+                                        </TreeView>
+                                        
+                                        <TextBlock Text="Simple Charts (Sparklines)" FontWeight="Bold" Margin="0,20,0,10"/>
+                                        <ItemsControl Style="{StaticResource FlatSparkline}" ItemsSource="{Binding ChartData}"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                    <TextBlock Text="Media &amp; Tools" FontWeight="Bold" Margin="0,0,0,10"/>
+                                    <Border Style="{StaticResource FlatImage}" Width="200" Height="150" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                        <TextBlock Text="Image Placeholder" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}"/>
                                     </Border>
-                                    <Border Style="{StaticResource TagStyle}">
-                                        <TextBlock Text="STABLE"/>
-                                    </Border>
+                                    
+                                    <TextBlock Text="QRCode Placeholder" FontSize="12" Margin="0,0,0,5"/>
+                                    <Control Style="{StaticResource FlatQRCode}" HorizontalAlignment="Left"/>
                                 </StackPanel>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Actions">
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Save" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
-                                    <Button Content="Test Dialog" Click="TestDialog_Click" Margin="0,0,10,0"/>
-                                    <Button Content="Cancel"/>
-                                </StackPanel>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Threshold">
-                                <flat:NumericUpDown Value="50" Minimum="0" Maximum="100"/>
-                            </flat:FormItem>
-                            <flat:FormItem Header="Task Progress">
-                                <ProgressBar Value="65" VerticalAlignment="Center"/>
-                            </flat:FormItem>
-                        </flat:Form>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </Grid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Grid>
+        </DockPanel>
+        
+        <flat:Drawer x:Name="SideDrawer" Background="{StaticResource BackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" DrawerWidth="350">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Device Details" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel>
+                        <HeaderedContentControl Header="Live Metrics" Style="{StaticResource FlatCard}" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Temperature: 42.5°C"/>
+                                <TextBlock Text="Pressure: 1.2 MPa"/>
+                            </StackPanel>
+                        </HeaderedContentControl>
+                        <TextBlock Text="System Logs" FontWeight="Bold" Margin="0,10"/>
+                        <Border Background="{StaticResource RegionBrush}" Padding="10" CornerRadius="2">
+                            <TextBlock Text="[14:22:01] Connection established\n[14:22:05] Data sync complete" FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Grid.Row="2" Content="Close" Click="CloseDrawer_Click" Margin="0,20,0,0"/>
+            </Grid>
+        </flat:Drawer>
     </Grid>
 </Window>

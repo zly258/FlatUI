@@ -6,7 +6,96 @@
         <ResourceDictionary Source="Brushes.xaml"/>
         <ResourceDictionary Source="Fonts.xaml"/>
         <ResourceDictionary Source="Shared.xaml"/>
+        <ResourceDictionary Source="Button.xaml"/>
+        <ResourceDictionary Source="ComboBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type controls:Drawer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Drawer}">
+                    <Grid x:Name="PART_Root" Background="Transparent">
+                        <Border x:Name="PART_Overlay" Background="#40000000" Visibility="Collapsed" Opacity="0">
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CloseCommand}"/>
+                            </Border.InputBindings>
+                        </Border>
+                        <Border x:Name="PART_Drawer"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1,0,0,0"
+                                Width="{TemplateBinding DrawerWidth}"
+                                HorizontalAlignment="Right">
+                            <Border.RenderTransform>
+                                <TranslateTransform X="{TemplateBinding DrawerWidth}"/>
+                            </Border.RenderTransform>
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="PART_Overlay" Property="Visibility" Value="Visible"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_Overlay" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="PART_Drawer" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_Overlay" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="PART_Drawer" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="{TemplateBinding DrawerWidth}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:Pagination}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Pagination}">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="&lt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PrevCommand}" Style="{StaticResource FlatButton}" Margin="0,0,5,0"/>
+                        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Pages}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding}" 
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=controls:Pagination}, Path=PageCommand}" 
+                                            CommandParameter="{Binding}"
+                                            Margin="0,0,5,0">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=controls:Pagination}, Path=PageIndex}" Value="{Binding}">
+                                                        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                                        <Setter Property="Foreground" Value="{StaticResource WhiteTextBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button Content="&gt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextCommand}" Style="{StaticResource FlatButton}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="ProgressBar">
         <Setter Property="Height" Value="4"/>
@@ -55,8 +144,12 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Button x:Name="PART_UpButton" Grid.Row="0" Content="▲" Padding="0" FontSize="8" BorderThickness="0,0,0,1" Style="{StaticResource FlatButton}"/>
-                                <Button x:Name="PART_DownButton" Grid.Row="1" Content="▼" Padding="0" FontSize="8" BorderThickness="0" Style="{StaticResource FlatButton}"/>
+                                <Button x:Name="PART_UpButton" Grid.Row="0" Content="▲" Padding="0" FontSize="7" BorderThickness="0,0,0,1" 
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                        Style="{StaticResource FlatButton}"/>
+                                <Button x:Name="PART_DownButton" Grid.Row="1" Content="▼" Padding="0" FontSize="7" BorderThickness="0" 
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                        Style="{StaticResource FlatButton}"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -188,7 +281,7 @@
                     <Border Background="{StaticResource BackgroundBrush}"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1">
-                        <ItemsControl ItemsSource="{TemplateBinding Properties}">
+                        <ItemsControl ItemsSource="{TemplateBinding InternalCollectionView}">
                             <ItemsControl.GroupStyle>
                                 <GroupStyle>
                                     <GroupStyle.HeaderTemplate>

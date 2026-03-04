@@ -75,7 +75,10 @@
                                     BorderBrush="{StaticResource BorderBrush}"
                                     BorderThickness="1"
                                     Padding="2">
-                                <ScrollViewer x:Name="SubMenuScrollViewer">
+                                <ScrollViewer x:Name="SubMenuScrollViewer" 
+                                              VerticalScrollBarVisibility="Auto" 
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              Focusable="False">
                                     <Grid RenderOptions.ClearTypeHint="Enabled">
                                         <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                                             <Rectangle x:Name="OpaqueRect"
