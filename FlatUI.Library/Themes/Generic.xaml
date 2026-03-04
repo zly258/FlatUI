@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Brushes.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Fonts.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Shared.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Button.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Input.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Selection.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/ComboBox.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/DataGrid.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Menu.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/TabControl.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Containers.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Overlay.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Custom.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Navigation.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Window.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

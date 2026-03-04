@@ -1,0 +1,161 @@
+<Window x:Class="FlatUI.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlatUI.Demo"
+        xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+        mc:Ignorable="d"
+        Title="Industrial Flat UI Demo" Height="600" Width="1000">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Navigation" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ListBox Style="{StaticResource SideNavStyle}" ItemContainerStyle="{StaticResource SideNavItemStyle}">
+                <ListBoxItem Content="Dashboard" IsSelected="True"/>
+                <ListBoxItem Content="Monitoring"/>
+                <ListBoxItem Content="History"/>
+                <ListBoxItem Content="Settings"/>
+            </ListBox>
+
+            <TextBlock Text="Basic Controls" FontWeight="Bold" Margin="0,15,0,5"/>
+            <Button Content="Standard Button" Margin="0,0,0,5"/>
+            <Button Content="Primary Button" Style="{StaticResource PrimaryButton}" Margin="0,0,0,5"/>
+            
+            <TextBlock Text="Status Badges" FontWeight="Bold" Margin="0,15,0,5"/>
+            <flat:StatusBadge Status="Success" Text="System Online" Margin="0,0,0,5"/>
+            <flat:StatusBadge Status="Warning" Text="High Temperature" Margin="0,0,0,5"/>
+            <flat:StatusBadge Status="Error" Text="Connection Failed" Margin="0,0,0,5"/>
+            <flat:StatusBadge Status="Info" Text="Syncing Data..." Margin="0,0,0,5"/>
+            
+            <TextBlock Text="Input" FontWeight="Bold" Margin="0,15,0,5"/>
+            <TextBox Text="Text input field" Margin="0,0,0,5"/>
+            <CheckBox Content="Enable Service" IsChecked="True" Margin="0,0,0,5"/>
+            <RadioButton Content="Manual Mode" IsChecked="True" Margin="0,0,0,5"/>
+            <RadioButton Content="Automatic Mode" Margin="0,0,0,5"/>
+        </StackPanel>
+        
+        <Grid Grid.Column="1" Margin="20,0,0,0">
+            <TabControl>
+                <TabItem Header="Data &amp; Properties">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0" Margin="0,0,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBox Width="150" Tag="Search..." Margin="0,0,10,0"/>
+                                <Button Content="Search" Style="{StaticResource PrimaryButton}"/>
+                            </StackPanel>
+                            <DataGrid Grid.Row="1" ItemsSource="{Binding Items}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
+                                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="80"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Properties" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <flat:PropertyGrid Grid.Row="1" Properties="{Binding PropertyList}"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Containers">
+                    <ScrollViewer>
+                        <StackPanel Margin="10">
+                            <HeaderedContentControl Header="Module Status" Style="{StaticResource FlatCard}" Margin="0,0,0,20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <flat:StatusBadge Status="Success" Text="PLC Connection" Margin="0,0,0,5"/>
+                                        <flat:StatusBadge Status="Success" Text="Database" Margin="0,0,0,5"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <flat:StatusBadge Status="Info" Text="Cloud Sync" Margin="0,0,0,5"/>
+                                        <flat:StatusBadge Status="Warning" Text="Fan Speed" Margin="0,0,0,5"/>
+                                    </StackPanel>
+                                </Grid>
+                            </HeaderedContentControl>
+                            
+                            <Expander Header="System Configuration">
+                                <StackPanel>
+                                    <CheckBox Content="Verbose Logging" Margin="0,0,0,10"/>
+                                    <CheckBox Content="Auto-reconnect" Margin="0,0,0,10"/>
+                                    <TextBlock Text="Render Mode:" Margin="0,0,0,5"/>
+                                    <ComboBox SelectedIndex="1">
+                                        <ComboBoxItem Content="Low Latency"/>
+                                        <ComboBoxItem Content="Balanced"/>
+                                        <ComboBoxItem Content="High Fidelity"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Form &amp; Advanced">
+                    <ScrollViewer>
+                        <flat:Form>
+                            <flat:FormItem Header="Device Name">
+                                <TextBox Text="Main Processor"/>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Selection Mode">
+                                <flat:DropdownGrid ItemsSource="{Binding Items}"/>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Logic Tree">
+                                <flat:DropdownTree>
+                                    <TreeViewItem Header="Root">
+                                        <TreeViewItem Header="Child A"/>
+                                        <TreeViewItem Header="Child B"/>
+                                    </TreeViewItem>
+                                </flat:DropdownTree>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Tags">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Style="{StaticResource TagStyle}" Margin="0,0,5,0">
+                                        <TextBlock Text="V1.0"/>
+                                    </Border>
+                                    <Border Style="{StaticResource TagStyle}">
+                                        <TextBlock Text="STABLE"/>
+                                    </Border>
+                                </StackPanel>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Actions">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Save" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+                                    <Button Content="Cancel"/>
+                                </StackPanel>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Threshold">
+                                <flat:NumericUpDown Value="50" Minimum="0" Maximum="100"/>
+                            </flat:FormItem>
+                            <flat:FormItem Header="Task Progress">
+                                <ProgressBar Value="65" VerticalAlignment="Center"/>
+                            </flat:FormItem>
+                        </flat:Form>
+                        </flat:Form>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
