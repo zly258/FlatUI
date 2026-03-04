@@ -111,6 +111,23 @@ using System.Collections.ObjectModel;
           };
           fw.Show();
       }
+
+      private void FlashTray_Click(object sender, RoutedEventArgs e)
+      {
+          TrayManager.StartFlashing();
+          NotificationService.Show("Tray Flashing", "The tray icon is now flashing.", StatusType.Info);
+      }
+
+      private void StopFlash_Click(object sender, RoutedEventArgs e)
+      {
+          TrayManager.StopFlashing();
+          NotificationService.Show("Flash Stopped", "The tray icon stopped flashing.", StatusType.Success);
+      }
+
+      private void ShowSystemNotify_Click(object sender, RoutedEventArgs e)
+      {
+          NotificationService.ShowSystem("FlatUI System Notify", "This is a native Windows balloon tip notification!");
+      }
   }
 
 public class DemoItem

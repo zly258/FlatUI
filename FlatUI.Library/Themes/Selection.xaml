@@ -18,6 +18,30 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
                     <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="dot"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                         To="20" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="switchBorder"
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={StaticResource PrimaryBrush}}" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="switchBorder"
+                                                        Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{Binding Color, Source={StaticResource PrimaryBrush}}" Duration="0:0:0.15"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="dot"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                         To="0" Duration="0:0:0.15"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                         <Border x:Name="switchBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -37,28 +61,6 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="switchBorder" Property="Background" Value="{StaticResource PrimaryBrush}"/>
-                            <Setter TargetName="switchBorder" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="dot"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                         To="20" Duration="0:0:0.15"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="dot"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                         To="0" Duration="0:0:0.15"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="switchBorder" Property="Opacity" Value="0.5"/>
                         </Trigger>

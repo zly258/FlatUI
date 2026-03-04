@@ -234,7 +234,10 @@
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
                                         <Button Content="Take Screenshot" Click="Screenshot_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"/>
                                         <Button Content="Crop Selection" Click="Crop_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
-                                        <Button Content="Show Floating Ball" Click="OpenFloatingWindow_Click" Style="{DynamicResource FlatButton}"/>
+                                        <Button Content="Show Floating Ball" Click="OpenFloatingWindow_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
+                                        <Button Content="Flash Tray" Click="FlashTray_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
+                                        <Button Content="Stop Flash" Click="StopFlash_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
+                                        <Button Content="System Notify" Click="ShowSystemNotify_Click" Style="{DynamicResource FlatButton}"/>
                                     </StackPanel>
                                     
                                     <Grid>

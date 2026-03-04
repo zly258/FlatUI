@@ -37,5 +37,10 @@ namespace FlatUI.Library.Controls
             
             _notificationPanel.Children.Add(notification);
         }
+
+        public static void ShowSystem(string title, string message, System.Windows.Forms.ToolTipIcon icon = System.Windows.Forms.ToolTipIcon.Info)
+        {
+            TrayManager.ShowBalloonTip(title, message, icon);
+        }
     }
 }

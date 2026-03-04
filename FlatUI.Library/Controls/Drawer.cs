@@ -56,8 +56,13 @@ namespace FlatUI.Library.Controls
 
         private void UpdateState(bool isOpen)
         {
-            // Animation logic will be handled by VisualState in XAML
             VisualStateManager.GoToState(this, isOpen ? "Opened" : "Closed", true);
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            VisualStateManager.GoToState(this, IsOpen ? "Opened" : "Closed", false);
         }
     }
 }
