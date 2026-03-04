@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace FlatUI.Library.Controls
 {
-    public class Pagination : Control
+    public class Pagination : System.Windows.Controls.Control
     {
         static Pagination()
         {
@@ -66,15 +66,6 @@ namespace FlatUI.Library.Controls
 
         public ICommand PrevCommand => new RelayCommand(_ => PageIndex = Math.Max(1, PageIndex - 1));
         public ICommand NextCommand => new RelayCommand(_ => PageIndex = Math.Min(TotalPages, PageIndex + 1));
-        public ICommand PageCommand => new RelayCommand(p => PageIndex = (int)p);
-    }
-
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object> _execute;
-        public RelayCommand(Action<object> execute) => _execute = execute;
-        public bool CanExecute(object? parameter) => true;
-        public void Execute(object? parameter) => _execute(parameter!);
-        public event EventHandler? CanExecuteChanged;
+        public ICommand PageCommand => new RelayCommand(p => PageIndex = (int)p!);
     }
 }

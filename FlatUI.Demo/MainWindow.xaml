@@ -1,4 +1,4 @@
-<Window x:Class="FlatUI.Demo.MainWindow"
+<flat:FlatWindow x:Class="FlatUI.Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,6 +24,9 @@
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem Header="Open Drawer" Click="OpenDrawer_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Light Mode" Click="SetLightMode_Click"/>
+                    <MenuItem Header="Dark Mode" Click="SetDarkMode_Click"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_About"/>
@@ -220,6 +223,49 @@
                                 </StackPanel>
                             </Grid>
                         </TabItem>
+                        <TabItem Header="System &amp; Tools">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <DockPanel Grid.Column="0" Margin="10">
+                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                                        <Button Content="Take Screenshot" Click="Screenshot_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"/>
+                                        <Button Content="Crop Selection" Click="Crop_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
+                                        <Button Content="Show Floating Ball" Click="OpenFloatingWindow_Click" Style="{DynamicResource FlatButton}"/>
+                                    </StackPanel>
+                                    
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                                            <flat:ImageCropper x:Name="Cropper" Source="{Binding ElementName=ScreenshotImage, Path=Source}"/>
+                                        </Border>
+                                        <Image x:Name="ScreenshotImage" Grid.Row="1" MaxHeight="200" Margin="0,10,0,0" Stretch="Uniform"/>
+                                    </Grid>
+                                </DockPanel>
+
+                                <StackPanel Grid.Column="1" Margin="10">
+                                    <TextBlock Text="Draggable List" FontWeight="Bold" Margin="0,0,0,10"/>
+                                    <ListBox ItemsSource="{Binding Items}" flat:DragDropHelper.IsEnabled="True" Height="200">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" Padding="5"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <TextBlock Text="* Try dragging items to reorder" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,5,0,0"/>
+
+                                    <TextBlock Text="LED Indicators" FontWeight="Bold" Margin="0,20,0,10"/>
+                                    <flat:LedText Text="23:59:59" Margin="0,0,0,10"/>
+                                    <flat:LedText Text="128.5 kW" LedColor="Orange"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
                     </TabControl>
                 </Grid>
             </Grid>
@@ -251,4 +297,4 @@
             </Grid>
         </flat:Drawer>
     </Grid>
-</Window>
+</flat:FlatWindow>

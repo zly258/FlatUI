@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace FlatUI.Library.Controls
 {
-    public class DropdownGrid : ComboBox
+    public class DropdownGrid : System.Windows.Controls.ComboBox
     {
         static DropdownGrid()
         {

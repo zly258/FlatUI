@@ -13,7 +13,7 @@ namespace FlatUI.Library.Controls
         Info
     }
 
-    public class StatusBadge : Control
+    public class StatusBadge : System.Windows.Controls.Control
     {
         static StatusBadge()
         {

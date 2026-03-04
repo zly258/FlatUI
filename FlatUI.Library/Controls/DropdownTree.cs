@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace FlatUI.Library.Controls
 {
-    public class DropdownTree : ComboBox
+    public class DropdownTree : System.Windows.Controls.ComboBox
     {
         static DropdownTree()
         {

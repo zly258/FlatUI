@@ -10,6 +10,88 @@
         <ResourceDictionary Source="ComboBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style TargetType="{x:Type controls:ImageCropper}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ImageCropper}">
+                    <Canvas x:Name="PART_Canvas" Background="Transparent" ClipToBounds="True">
+                        <Image x:Name="PART_Image" Source="{TemplateBinding Source}" 
+                               Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                               Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}"
+                               Stretch="Uniform"/>
+                        <Rectangle x:Name="PART_SelectionRect" 
+                                   Stroke="{DynamicResource PrimaryBrush}" 
+                                   StrokeThickness="2" 
+                                   StrokeDashArray="4 2"
+                                   Visibility="Collapsed"
+                                   Fill="#40007ACC"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:FloatingWindow}">
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:FloatingWindow}">
+                    <Grid>
+                        <Ellipse x:Name="border"
+                                 Fill="{DynamicResource PrimaryBrush}"
+                                 Stroke="{DynamicResource BorderBrush}"
+                                 StrokeThickness="1">
+                            <Ellipse.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Path Data="{TemplateBinding IconPathData}"
+                              Fill="{DynamicResource WhiteTextBrush}"
+                              Width="24" Height="24"
+                              Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Fill" Value="{DynamicResource PrimaryHoverBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:LedText}">
+        <Setter Property="Background" Value="#1A1A1A"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LedText}">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="2"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1">
+                        <TextBlock Text="{TemplateBinding Text}"
+                                   Foreground="{TemplateBinding LedColor}"
+                                   FontFamily="Consolas"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="{Binding Color, Source={RelativeSource TemplatedParent}, Path=LedColor}" BlurRadius="10" ShadowDepth="0" Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type controls:Drawer}">
         <Setter Property="Template">
             <Setter.Value>
@@ -63,7 +145,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Pagination}">
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="&lt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PrevCommand}" Style="{StaticResource FlatButton}" Margin="0,0,5,0"/>
+                        <Button Content="&lt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PrevCommand}" Style="{DynamicResource FlatButton}" Margin="0,0,5,0"/>
                         <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Pages}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -77,11 +159,11 @@
                                             CommandParameter="{Binding}"
                                             Margin="0,0,5,0">
                                         <Button.Style>
-                                            <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                            <Style TargetType="Button" BasedOn="{DynamicResource FlatButton}">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=controls:Pagination}, Path=PageIndex}" Value="{Binding}">
-                                                        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-                                                        <Setter Property="Foreground" Value="{StaticResource WhiteTextBrush}"/>
+                                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource WhiteTextBrush}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -90,7 +172,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <Button Content="&gt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextCommand}" Style="{StaticResource FlatButton}"/>
+                        <Button Content="&gt;" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextCommand}" Style="{DynamicResource FlatButton}"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -146,10 +228,10 @@
                                 </Grid.RowDefinitions>
                                 <Button x:Name="PART_UpButton" Grid.Row="0" Content="▲" Padding="0" FontSize="7" BorderThickness="0,0,0,1" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                        Style="{StaticResource FlatButton}"/>
+                                        Style="{DynamicResource FlatButton}"/>
                                 <Button x:Name="PART_DownButton" Grid.Row="1" Content="▼" Padding="0" FontSize="7" BorderThickness="0" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                        Style="{StaticResource FlatButton}"/>
+                                        Style="{DynamicResource FlatButton}"/>
                             </Grid>
                         </Grid>
                     </Border>

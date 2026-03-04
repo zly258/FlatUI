@@ -13,7 +13,7 @@ namespace FlatUI.Library.Controls
         public static void RegisterHost(Window window)
         {
             if (VisualTreeHelper.GetChild(window, 0) is not Decorator decorator) return;
-            if (decorator.Child is not Panel originalContent) return;
+            if (decorator.Child is not System.Windows.Controls.Panel originalContent) return;
 
             var grid = new Grid();
             decorator.Child = grid;
@@ -21,8 +21,8 @@ namespace FlatUI.Library.Controls
 
             _notificationPanel = new StackPanel
             {
-                VerticalAlignment = VerticalAlignment.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 Margin = new Thickness(0, 0, 20, 20)
             };
             grid.Children.Add(_notificationPanel);

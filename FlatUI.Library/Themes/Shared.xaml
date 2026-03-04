@@ -6,4 +6,8 @@
     <Thickness x:Key="ControlPadding">8,4</Thickness>
     <Thickness x:Key="CompactPadding">4,2</Thickness>
     
+    <Style x:Key="FlatTextBlockEllipsis" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+    </Style>
 </ResourceDictionary>

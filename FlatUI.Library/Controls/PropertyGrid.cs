@@ -14,7 +14,7 @@ namespace FlatUI.Library.Controls
         public string Description { get; set; } = string.Empty;
     }
 
-    public class PropertyGrid : Control
+    public class PropertyGrid : System.Windows.Controls.Control
     {
         static PropertyGrid()
         {

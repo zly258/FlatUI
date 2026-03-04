@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace FlatUI.Library.Controls
 {
-    public class NumericUpDown : Control
+    public class NumericUpDown : System.Windows.Controls.Control
     {
         static NumericUpDown()
         {
@@ -49,8 +49,8 @@ namespace FlatUI.Library.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var upBtn = GetTemplateChild("PART_UpButton") as Button;
-            var downBtn = GetTemplateChild("PART_DownButton") as Button;
+            var upBtn = GetTemplateChild("PART_UpButton") as System.Windows.Controls.Button;
+            var downBtn = GetTemplateChild("PART_DownButton") as System.Windows.Controls.Button;
 
             if (upBtn != null) upBtn.Click += (s, e) => Value = Math.Min(Maximum, Value + Increment);
             if (downBtn != null) downBtn.Click += (s, e) => Value = Math.Max(Minimum, Value - Increment);

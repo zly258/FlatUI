@@ -6,7 +6,7 @@ using System.Windows.Threading;
 
 namespace FlatUI.Library.Controls
 {
-    public partial class NotificationControl : UserControl
+    public partial class NotificationControl : System.Windows.Controls.UserControl
     {
         public event Action<NotificationControl>? Closed;
 
@@ -15,9 +15,8 @@ namespace FlatUI.Library.Controls
             InitializeComponent();
             TitleText.Text = title;
             MessageText.Text = message;
-
             Icon.Fill = GetBrushForStatus(type);
-
+            
             if (durationSeconds > 0)
             {
                 var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(durationSeconds) };
@@ -26,14 +25,14 @@ namespace FlatUI.Library.Controls
             }
         }
 
-        private Brush GetBrushForStatus(StatusType type)
+        private System.Windows.Media.Brush GetBrushForStatus(StatusType type)
         {
             return type switch
             {
-                StatusType.Success => (Brush)FindResource("SuccessBrush"),
-                StatusType.Warning => (Brush)FindResource("WarningBrush"),
-                StatusType.Error => (Brush)FindResource("ErrorBrush"),
-                _ => (Brush)FindResource("InfoBrush"),
+                StatusType.Success => (System.Windows.Media.Brush)FindResource("SuccessBrush"),
+                StatusType.Warning => (System.Windows.Media.Brush)FindResource("WarningBrush"),
+                StatusType.Error => (System.Windows.Media.Brush)FindResource("ErrorBrush"),
+                _ => (System.Windows.Media.Brush)FindResource("InfoBrush"),
             };
         }
 

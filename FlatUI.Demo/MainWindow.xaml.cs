@@ -14,8 +14,8 @@ using System.Collections.ObjectModel;
 
  namespace FlatUI.Demo;
 
- public partial class MainWindow : Window
- {
+ public partial class MainWindow : FlatWindow
+    {
      public ObservableCollection<DemoItem> Items { get; set; }
      public ObservableCollection<PropertyItem> PropertyList { get; set; }
      public ObservableCollection<CardItem> CardItems { get; set; }
@@ -49,7 +49,21 @@ using System.Collections.ObjectModel;
          };
          
          DataContext = this;
-         Loaded += (s, e) => NotificationService.RegisterHost(this);
+         Loaded += (s, e) => {
+             NotificationService.RegisterHost(this);
+             TrayManager.Initialize("FlatUI Demo", System.Drawing.SystemIcons.Application);
+              
+              var menu = new System.Windows.Forms.ContextMenuStrip();
+              menu.Items.Add("Show MainWindow", null, (s, e) => {
+                  this.Show();
+                  this.WindowState = WindowState.Normal;
+                  this.Activate();
+              });
+              menu.Items.Add("Exit", null, (s, e) => Application.Current.Shutdown());
+              TrayManager.SetContextMenu(menu);
+          };
+         
+         Closed += (s, e) => TrayManager.Dispose();
       }
 
       private void TestDialog_Click(object sender, RoutedEventArgs e)
@@ -67,6 +81,36 @@ using System.Collections.ObjectModel;
 
       private void OpenDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = true;
       private void CloseDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = false;
+
+      private void SetLightMode_Click(object sender, RoutedEventArgs e) => ThemeManager.ChangeTheme(ThemeMode.Light);
+      private void SetDarkMode_Click(object sender, RoutedEventArgs e) => ThemeManager.ChangeTheme(ThemeMode.Dark);
+
+      private void Screenshot_Click(object sender, RoutedEventArgs e)
+      {
+          var bmp = ScreenshotService.CaptureScreen();
+          ScreenshotImage.Source = bmp;
+          NotificationService.Show("Screenshot Captured", "Current screen has been captured and displayed below.", StatusType.Success);
+      }
+
+      private void Crop_Click(object sender, RoutedEventArgs e)
+      {
+          var cropped = Cropper.GetCroppedImage();
+          if (cropped != null)
+          {
+              ScreenshotImage.Source = cropped;
+              NotificationService.Show("Image Cropped", "Selected area has been cropped.", StatusType.Success);
+          }
+      }
+
+      private void OpenFloatingWindow_Click(object sender, RoutedEventArgs e)
+      {
+          var fw = new FloatingWindow
+          {
+              IconPathData = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z",
+              Content = new TextBlock { Text = "42", Foreground = (Brush)FindResource("WhiteTextBrush"), FontSize = 20, FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center }
+          };
+          fw.Show();
+      }
   }
 
 public class DemoItem
