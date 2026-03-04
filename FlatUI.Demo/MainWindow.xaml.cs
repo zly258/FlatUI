@@ -40,8 +40,13 @@ using System.Collections.ObjectModel;
          };
          
          DataContext = this;
-     }
- }
+      }
+
+      private void TestDialog_Click(object sender, RoutedEventArgs e)
+      {
+          FlatMessageBox.Show("This is a custom flat message box for industrial software applications.", "System Notice", this);
+      }
+  }
 
 public class DemoItem
 {

@@ -1,0 +1,38 @@
+<Window x:Class="FlatUI.Library.Controls.FlatMessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Message" Height="180" Width="350"
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource FlatWindow}"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent">
+    <Border Background="{StaticResource BackgroundBrush}" 
+            BorderBrush="{StaticResource PrimaryBrush}" 
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Border Background="{StaticResource PrimaryBrush}">
+                <Grid>
+                    <TextBlock x:Name="TitleText" Text="Message" Foreground="{StaticResource WhiteTextBrush}" 
+                               VerticalAlignment="Center" Margin="10,0" FontWeight="Bold"/>
+                    <Button Content="✕" HorizontalAlignment="Right" Width="32" 
+                            Background="Transparent" BorderThickness="0" Foreground="{StaticResource WhiteTextBrush}"
+                            Click="Close_Click"/>
+                </Grid>
+            </Border>
+            
+            <TextBlock x:Name="MessageText" Grid.Row="1" Margin="20" TextWrapping="Wrap" VerticalAlignment="Center" 
+                       FontSize="{StaticResource FontSizeMedium}"/>
+            
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                <Button x:Name="BtnOk" Content="OK" Width="80" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0" Click="Ok_Click"/>
+                <Button x:Name="BtnCancel" Content="Cancel" Width="80" Click="Cancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

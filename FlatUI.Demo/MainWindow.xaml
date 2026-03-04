@@ -142,6 +142,7 @@
                             <flat:FormItem Header="Actions">
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Save" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+                                    <Button Content="Test Dialog" Click="TestDialog_Click" Margin="0,0,10,0"/>
                                     <Button Content="Cancel"/>
                                 </StackPanel>
                             </flat:FormItem>
@@ -151,7 +152,6 @@
                             <flat:FormItem Header="Task Progress">
                                 <ProgressBar Value="65" VerticalAlignment="Center"/>
                             </flat:FormItem>
-                        </flat:Form>
                         </flat:Form>
                     </ScrollViewer>
                 </TabItem>
