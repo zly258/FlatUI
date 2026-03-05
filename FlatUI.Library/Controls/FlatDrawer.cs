@@ -12,15 +12,14 @@ namespace FlatUI.Library.Controls
         Bottom
     }
 
-    public class Drawer : ContentControl
+    public class FlatDrawer : ContentControl
     {
-        static Drawer()
+        static FlatDrawer()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Drawer), new FrameworkPropertyMetadata(typeof(Drawer)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatDrawer), new FrameworkPropertyMetadata(typeof(FlatDrawer)));
         }
 
-        public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.Register("IsOpen", typeof(bool), typeof(Drawer), new PropertyMetadata(false, OnIsOpenChanged));
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof(bool), typeof(FlatDrawer), new PropertyMetadata(false, OnIsOpenChanged));
 
         public bool IsOpen
         {
@@ -29,7 +28,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty PlacementProperty =
-            DependencyProperty.Register("Placement", typeof(DrawerPlacement), typeof(Drawer), new PropertyMetadata(DrawerPlacement.Right));
+            DependencyProperty.Register("Placement", typeof(DrawerPlacement), typeof(FlatDrawer), new PropertyMetadata(DrawerPlacement.Left));
 
         public DrawerPlacement Placement
         {
@@ -38,7 +37,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty DrawerWidthProperty =
-            DependencyProperty.Register("DrawerWidth", typeof(double), typeof(Drawer), new PropertyMetadata(300.0));
+            DependencyProperty.Register("DrawerWidth", typeof(double), typeof(FlatDrawer), new PropertyMetadata(300.0));
 
         public double DrawerWidth
         {
@@ -48,7 +47,7 @@ namespace FlatUI.Library.Controls
 
         private static void OnIsOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Drawer drawer)
+            if (d is FlatDrawer drawer)
             {
                 drawer.UpdateState((bool)e.NewValue);
             }

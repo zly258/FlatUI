@@ -1,16 +1,17 @@
 using System.Windows;
 using System.Windows.Controls;
+using ProgressBar = System.Windows.Controls.ProgressBar;
 
 namespace FlatUI.Library.Controls
 {
     /// <summary>
-    /// 进度条控件 - 支持多种样式和类型
+    /// 进度条控件
     /// </summary>
-    public class ProgressBar : System.Windows.Controls.Control
+    public class FlatProgressBar : System.Windows.Controls.Control
     {
-        static ProgressBar()
+        static FlatProgressBar()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatProgressBar), new FrameworkPropertyMetadata(typeof(FlatProgressBar)));
         }
 
         #region 属性

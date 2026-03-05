@@ -8,11 +8,11 @@ namespace FlatUI.Library.Controls
     /// <summary>
     /// 头像控件 - 支持图片、文字、图标三种模式
     /// </summary>
-    public class Avatar : System.Windows.Controls.Control
+    public class FlatAvatar : System.Windows.Controls.Control
     {
-        static Avatar()
+        static FlatAvatar()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Avatar), new FrameworkPropertyMetadata(typeof(Avatar)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatAvatar), new FrameworkPropertyMetadata(typeof(FlatAvatar)));
         }
 
         #region 属性
@@ -20,8 +20,7 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 头像图片源
         /// </summary>
-        public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(ImageSource), typeof(Avatar), new PropertyMetadata(null));
+        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(ImageSource), typeof(FlatAvatar), new PropertyMetadata(null));
 
         public ImageSource Source
         {
@@ -32,8 +31,7 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 显示的文字（当没有图片时显示）
         /// </summary>
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(Avatar), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(FlatAvatar), new PropertyMetadata(string.Empty));
 
         public string Text
         {
@@ -44,8 +42,7 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 显示的图标
         /// </summary>
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Geometry), typeof(Avatar), new PropertyMetadata(null));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Geometry), typeof(FlatAvatar), new PropertyMetadata(null));
 
         public Geometry Icon
         {
@@ -57,7 +54,7 @@ namespace FlatUI.Library.Controls
         /// 头像尺寸（直径）
         /// </summary>
         public static readonly DependencyProperty SizeProperty =
-            DependencyProperty.Register("Size", typeof(double), typeof(Avatar), new PropertyMetadata(40.0));
+            DependencyProperty.Register("Size", typeof(double), typeof(FlatAvatar), new PropertyMetadata(40.0));
 
         public double Size
         {
@@ -69,7 +66,7 @@ namespace FlatUI.Library.Controls
         /// 形状类型（圆形/圆角矩形）
         /// </summary>
         public static readonly DependencyProperty ShapeProperty =
-            DependencyProperty.Register("Shape", typeof(AvatarShape), typeof(Avatar), new PropertyMetadata(AvatarShape.Circle));
+            DependencyProperty.Register("Shape", typeof(AvatarShape), typeof(FlatAvatar), new PropertyMetadata(AvatarShape.Circle));
 
         public AvatarShape Shape
         {
@@ -81,7 +78,7 @@ namespace FlatUI.Library.Controls
         /// 背景画刷
         /// </summary>
         public static readonly DependencyProperty AvatarBackgroundProperty =
-            DependencyProperty.Register("AvatarBackground", typeof(System.Windows.Media.Brush), typeof(Avatar), new PropertyMetadata(null));
+            DependencyProperty.Register("AvatarBackground", typeof(System.Windows.Media.Brush), typeof(FlatAvatar), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush AvatarBackground
         {
@@ -93,7 +90,7 @@ namespace FlatUI.Library.Controls
         /// 前景色/文字颜色
         /// </summary>
         public static readonly DependencyProperty AvatarForegroundProperty =
-            DependencyProperty.Register("AvatarForeground", typeof(System.Windows.Media.Brush), typeof(Avatar), new PropertyMetadata(null));
+            DependencyProperty.Register("AvatarForeground", typeof(System.Windows.Media.Brush), typeof(FlatAvatar), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush AvatarForeground
         {
@@ -105,7 +102,7 @@ namespace FlatUI.Library.Controls
         /// 字体大小
         /// </summary>
         public static new readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register("FontSize", typeof(double), typeof(Avatar), new PropertyMetadata(16.0));
+            DependencyProperty.Register("FontSize", typeof(double), typeof(FlatAvatar), new PropertyMetadata(16.0));
 
         public new double FontSize
         {
@@ -117,7 +114,7 @@ namespace FlatUI.Library.Controls
         /// 是否启用边框
         /// </summary>
         public static readonly DependencyProperty ShowBorderProperty =
-            DependencyProperty.Register("ShowBorder", typeof(bool), typeof(Avatar), new PropertyMetadata(false));
+            DependencyProperty.Register("ShowBorder", typeof(bool), typeof(FlatAvatar), new PropertyMetadata(false));
 
         public bool ShowBorder
         {
@@ -129,7 +126,7 @@ namespace FlatUI.Library.Controls
         /// 边框颜色
         /// </summary>
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register("BorderColor", typeof(System.Windows.Media.Brush), typeof(Avatar), new PropertyMetadata(null));
+            DependencyProperty.Register("BorderColor", typeof(System.Windows.Media.Brush), typeof(FlatAvatar), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BorderColor
         {
@@ -141,7 +138,7 @@ namespace FlatUI.Library.Controls
         /// 边框厚度
         /// </summary>
         public new static readonly DependencyProperty BorderThicknessProperty =
-            DependencyProperty.Register("BorderThickness", typeof(double), typeof(Avatar), new PropertyMetadata(2.0));
+            DependencyProperty.Register("BorderThickness", typeof(double), typeof(FlatAvatar), new PropertyMetadata(2.0));
 
         public new double BorderThickness
         {

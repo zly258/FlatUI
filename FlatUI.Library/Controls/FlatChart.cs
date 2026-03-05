@@ -1,248 +1,495 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using WpfPoint = System.Windows.Point;
-using WpfRect = System.Windows.Rect;
-using WpfSize = System.Windows.Size;
-using WpfPen = System.Windows.Media.Pen;
-using WpfColor = System.Windows.Media.Color;
-using WpfBrushes = System.Windows.Media.Brushes;
-using WpfApplication = System.Windows.Application;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
+using Control = System.Windows.Controls.Control;
+using ToolTip = System.Windows.Controls.ToolTip;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
+using Rectangle = System.Windows.Shapes.Rectangle;
 
 namespace FlatUI.Library.Controls
 {
     /// <summary>
-    /// 扁平化图表控件 - 支持折线、柱状、饼图、环形、面积图
+    /// 扁平化图表控件 - 支持悬浮提示、轴刻度、标题等完整功能
     /// </summary>
-    public class FlatChart : System.Windows.Controls.Control
+    public class FlatChart : Control
     {
         static FlatChart()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatChart), new FrameworkPropertyMetadata(typeof(FlatChart)));
         }
 
-        #region 数据源属性
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable<double>), typeof(FlatChart), new PropertyMetadata(null, OnDataChanged));
-        public IEnumerable<double> ItemsSource { get => (IEnumerable<double>)GetValue(ItemsSourceProperty); set => SetValue(ItemsSourceProperty, value); }
+        #region 依赖属性
 
-        public static readonly DependencyProperty LabelsProperty = DependencyProperty.Register("Labels", typeof(IEnumerable<string>), typeof(FlatChart), new PropertyMetadata(null));
-        public IEnumerable<string> Labels { get => (IEnumerable<string>)GetValue(LabelsProperty); set => SetValue(LabelsProperty, value); }
-        #endregion
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<ChartDataItem>), typeof(FlatChart), 
+                new PropertyMetadata(new ObservableCollection<ChartDataItem>(), OnDataChanged));
 
-        #region 图表类型
-        public static readonly DependencyProperty ChartTypeProperty = DependencyProperty.Register("ChartType", typeof(ChartType), typeof(FlatChart), new PropertyMetadata(ChartType.Line));
-        public ChartType ChartType { get => (ChartType)GetValue(ChartTypeProperty); set => SetValue(ChartTypeProperty, value); }
-        #endregion
-
-        #region 显示属性
-        public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register("Stroke", typeof(SolidColorBrush), typeof(FlatChart), new PropertyMetadata(null));
-        public SolidColorBrush Stroke { get => (SolidColorBrush)GetValue(StrokeProperty); set => SetValue(StrokeProperty, value); }
-
-        public static readonly DependencyProperty FillProperty = DependencyProperty.Register("Fill", typeof(SolidColorBrush), typeof(FlatChart), new PropertyMetadata(null));
-        public SolidColorBrush Fill { get => (SolidColorBrush)GetValue(FillProperty); set => SetValue(FillProperty, value); }
-
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(FlatChart), new PropertyMetadata(string.Empty));
-        public string Title { get => (string)GetValue(TitleProperty); set => SetValue(TitleProperty, value); }
-
-        public static readonly DependencyProperty ShowGridProperty = DependencyProperty.Register("ShowGrid", typeof(bool), typeof(FlatChart), new PropertyMetadata(true));
-        public bool ShowGrid { get => (bool)GetValue(ShowGridProperty); set => SetValue(ShowGridProperty, value); }
-
-        public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register("StartAngle", typeof(double), typeof(FlatChart), new PropertyMetadata(-90.0));
-        public double StartAngle { get => (double)GetValue(StartAngleProperty); set => SetValue(StartAngleProperty, value); }
-        #endregion
-
-        private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) { if (d is FlatChart chart) chart.InvalidateVisual(); }
-
-        protected override void OnRender(DrawingContext drawingContext)
+        public ObservableCollection<ChartDataItem> ItemsSource
         {
-            base.OnRender(drawingContext);
-            double width = ActualWidth, height = ActualHeight;
-            if (width < 20 || height < 20) return;
+            get => (ObservableCollection<ChartDataItem>)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
+        }
 
-            var data = ItemsSource?.ToList() ?? new List<double>();
-            if (!data.Any()) return;
+        public static readonly DependencyProperty ChartTypeProperty =
+            DependencyProperty.Register("ChartType", typeof(ChartType), typeof(FlatChart), 
+                new PropertyMetadata(ChartType.Line, OnChartTypeChanged));
 
+        public ChartType ChartType
+        {
+            get => (ChartType)GetValue(ChartTypeProperty);
+            set => SetValue(ChartTypeProperty, value);
+        }
+
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(FlatChart), 
+                new PropertyMetadata("图表标题"));
+
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+
+        public static readonly DependencyProperty ShowGridProperty =
+            DependencyProperty.Register("ShowGrid", typeof(bool), typeof(FlatChart), 
+                new PropertyMetadata(true));
+
+        public bool ShowGrid
+        {
+            get => (bool)GetValue(ShowGridProperty);
+            set => SetValue(ShowGridProperty, value);
+        }
+
+        public static readonly DependencyProperty ShowLegendProperty =
+            DependencyProperty.Register("ShowLegend", typeof(bool), typeof(FlatChart), 
+                new PropertyMetadata(true));
+
+        public bool ShowLegend
+        {
+            get => (bool)GetValue(ShowLegendProperty);
+            set => SetValue(ShowLegendProperty, value);
+        }
+
+        public static readonly DependencyProperty ShowTooltipProperty =
+            DependencyProperty.Register("ShowTooltip", typeof(bool), typeof(FlatChart), 
+                new PropertyMetadata(true));
+
+        public bool ShowTooltip
+        {
+            get => (bool)GetValue(ShowTooltipProperty);
+            set => SetValue(ShowTooltipProperty, value);
+        }
+
+        #endregion
+
+        #region 事件
+
+        public static readonly RoutedEvent TooltipShowingEvent = 
+            EventManager.RegisterRoutedEvent("TooltipShowing", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FlatChart));
+
+        public event RoutedEventHandler TooltipShowing
+        {
+            add => AddHandler(TooltipShowingEvent, value);
+            remove => RemoveHandler(TooltipShowingEvent, value);
+        }
+
+        #endregion
+
+        private Canvas? _chartCanvas;
+        private ToolTip? _tooltip;
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            
+            _chartCanvas = GetTemplateChild("PART_ChartCanvas") as Canvas;
+            _tooltip = new ToolTip { Style = (Style)FindResource("FlatTooltip") };
+            
+            if (_chartCanvas != null)
+            {
+                _chartCanvas.MouseMove += OnChartMouseMove;
+                _chartCanvas.MouseLeave += OnChartMouseLeave;
+            }
+            
+            UpdateChart();
+        }
+
+        private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FlatChart chart) chart.UpdateChart();
+        }
+
+        private static void OnChartTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FlatChart chart) chart.UpdateChart();
+        }
+
+        private void UpdateChart()
+        {
+            if (_chartCanvas == null) return;
+            
+            _chartCanvas.Children.Clear();
+            
+            if (ItemsSource == null || !ItemsSource.Any()) return;
+            
+            DrawChart();
+        }
+
+        private void DrawChart()
+        {
+            double width = _chartCanvas!.ActualWidth;
+            double height = _chartCanvas.ActualHeight;
+            
+            if (width < 50 || height < 50) return;
+            
+            // 绘制标题
+            DrawTitle(width, height);
+            
+            // 绘制数据
             switch (ChartType)
             {
                 case ChartType.Line:
                 case ChartType.Area:
-                    RenderLineOrAreaChart(drawingContext, width, height, data);
+                    // 对于折线图和面积图，绘制坐标轴和网格
+                    DrawAxes(width, height);
+                    if (ShowGrid) DrawGrid(width, height);
+                    DrawLineChart(width, height);
                     break;
                 case ChartType.Bar:
-                    RenderBarChart(drawingContext, width, height, data);
+                    // 对于柱状图，绘制坐标轴和网格
+                    DrawAxes(width, height);
+                    if (ShowGrid) DrawGrid(width, height);
+                    DrawBarChart(width, height);
                     break;
                 case ChartType.Pie:
-                    RenderPieChart(drawingContext, width, height, data);
+                    DrawPieChart(width, height);
                     break;
                 case ChartType.Donut:
-                    RenderDonutChart(drawingContext, width, height, data);
+                    DrawDonutChart(width, height);
                     break;
             }
         }
 
-        private void RenderLineOrAreaChart(DrawingContext dc, double w, double h, List<double> data)
+        private void DrawTitle(double width, double height)
         {
-            double pad = 30, cw = w - pad * 2, ch = h - pad * 2;
-            double max = data.Max() == 0 ? 1 : data.Max();
-            double stepX = data.Count > 1 ? cw / (data.Count - 1) : 0;
-
-            if (ShowGrid)
+            var titleText = new TextBlock
             {
-                var gridPen = new WpfPen(new SolidColorBrush(WpfColor.FromRgb(240, 240, 240)), 1);
-                for (int i = 0; i <= 5; i++)
+                Text = Title,
+                FontSize = 16,
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("TextBrush"),
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center
+            };
+            
+            Canvas.SetLeft(titleText, width / 2 - titleText.ActualWidth / 2);
+            Canvas.SetTop(titleText, 5);
+            _chartCanvas!.Children.Add(titleText);
+        }
+
+        private void DrawAxes(double width, double height)
+        {
+            double margin = 60;
+            
+            // X轴
+            var xAxis = new Line
+            {
+                X1 = margin,
+                Y1 = height - margin,
+                X2 = width - margin,
+                Y2 = height - margin,
+                Stroke = (Brush)FindResource("TextSecondaryBrush"),
+                StrokeThickness = 1
+            };
+            _chartCanvas!.Children.Add(xAxis);
+            
+            // Y轴
+            var yAxis = new Line
+            {
+                X1 = margin,
+                Y1 = margin,
+                X2 = margin,
+                Y2 = height - margin,
+                Stroke = (Brush)FindResource("TextSecondaryBrush"),
+                StrokeThickness = 1
+            };
+            _chartCanvas.Children.Add(yAxis);
+        }
+
+        private void DrawGrid(double width, double height)
+        {
+            double margin = 60;
+            double chartWidth = width - margin * 2;
+            double chartHeight = height - margin * 2;
+            
+            // 水平网格线
+            for (int i = 0; i <= 5; i++)
+            {
+                double y = margin + (chartHeight / 5) * i;
+                var gridLine = new Line
                 {
-                    double y = pad + (ch / 5) * i;
-                    dc.DrawLine(gridPen, new WpfPoint(pad, y), new WpfPoint(w - pad, y));
-                }
-            }
-
-            var axisPen = new WpfPen(new SolidColorBrush(WpfColor.FromRgb(200, 200, 200)), 1.5);
-            dc.DrawLine(axisPen, new WpfPoint(pad, h - pad), new WpfPoint(w - pad, h - pad));
-            dc.DrawLine(axisPen, new WpfPoint(pad, pad), new WpfPoint(pad, h - pad));
-
-            var brush = Stroke ?? (WpfApplication.Current?.FindResource("PrimaryBrush") as SolidColorBrush) ?? new SolidColorBrush(WpfColor.FromRgb(64, 158, 255));
-
-            if (ChartType == ChartType.Area)
-            {
-                var geo = new StreamGeometry();
-                using (var ctx = geo.Open())
-                {
-                    ctx.BeginFigure(new System.Windows.Point(pad, h - pad), false, false);
-                    ctx.LineTo(new System.Windows.Point(pad, h - pad - (data[0] / max * ch)), true, false);
-                    for (int i = 1; i < data.Count; i++)
-                        ctx.LineTo(new System.Windows.Point(pad + i * stepX, h - pad - (data[i] / max * ch)), true, false);
-                    ctx.LineTo(new System.Windows.Point(w - pad, h - pad), true, false);
-                    ctx.Close();
-                }
-                dc.DrawGeometry(Fill ?? new SolidColorBrush(WpfColor.FromArgb(50, 64, 158, 255)), null, geo);
-            }
-
-            var lineGeo = new StreamGeometry();
-            using (var ctx = lineGeo.Open())
-            {
-                ctx.BeginFigure(new WpfPoint(pad, h - pad - (data[0] / max * ch)), false, false);
-                for (int i = 1; i < data.Count; i++)
-                    ctx.LineTo(new WpfPoint(pad + i * stepX, h - pad - (data[i] / max * ch)), true, true);
-            }
-            dc.DrawGeometry(null, new WpfPen(brush, 2), lineGeo);
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                double x = pad + i * stepX, y = h - pad - (data[i] / max * ch);
-                dc.DrawEllipse(brush, null, new WpfPoint(x, y), 4, 4);
+                    X1 = margin,
+                    Y1 = y,
+                    X2 = width - margin,
+                    Y2 = y,
+                    Stroke = (Brush)FindResource("RegionBrush"),
+                    StrokeThickness = 0.5
+                };
+                _chartCanvas!.Children.Add(gridLine);
             }
         }
 
-        private void RenderBarChart(DrawingContext dc, double w, double h, List<double> data)
+        private void DrawLineChart(double width, double height)
         {
-            double pad = 30, cw = w - pad * 2, ch = h - pad * 2;
-            double max = data.Max() == 0 ? 1 : data.Max();
-            double barW = (cw / data.Count) * 0.6, spacing = cw / data.Count;
-
-            if (ShowGrid)
+            double margin = 60;
+            double chartWidth = width - margin * 2;
+            double chartHeight = height - margin * 2;
+            
+            double maxValue = ItemsSource.Max(item => item.Value);
+            if (maxValue == 0) maxValue = 1;
+            
+            var points = new List<System.Windows.Point>();
+            
+            for (int i = 0; i < ItemsSource.Count; i++)
             {
-                var gridPen = new WpfPen(new SolidColorBrush(WpfColor.FromRgb(240, 240, 240)), 1);
-                for (int i = 0; i <= 5; i++)
+                double x = margin + (chartWidth / (ItemsSource.Count - 1)) * i;
+                double y = height - margin - (ItemsSource[i].Value / maxValue) * chartHeight;
+                points.Add(new System.Windows.Point(x, y));
+                
+                // 绘制数据点
+                var ellipse = new Ellipse
                 {
-                    double y = pad + (ch / 5) * i;
-                    dc.DrawLine(gridPen, new WpfPoint(pad, y), new WpfPoint(w - pad, y));
-                }
+                    Width = 6,
+                    Height = 6,
+                    Fill = (Brush)FindResource("PrimaryBrush"),
+                    Stroke = Brushes.White,
+                    StrokeThickness = 1,
+                    Tag = ItemsSource[i]
+                };
+                Canvas.SetLeft(ellipse, x - 3);
+                Canvas.SetTop(ellipse, y - 3);
+                _chartCanvas!.Children.Add(ellipse);
             }
-
-            var axisPen = new WpfPen(new SolidColorBrush(WpfColor.FromRgb(200, 200, 200)), 1.5);
-            dc.DrawLine(axisPen, new WpfPoint(pad, h - pad), new WpfPoint(w - pad, h - pad));
-            dc.DrawLine(axisPen, new WpfPoint(pad, pad), new WpfPoint(pad, h - pad));
-
-            var brush = Stroke ?? (WpfApplication.Current?.FindResource("PrimaryBrush") as SolidColorBrush) ?? new SolidColorBrush(WpfColor.FromRgb(64, 158, 255));
-            for (int i = 0; i < data.Count; i++)
+            
+            // 绘制连线
+            var polyline = new Polyline
             {
-                double barH = (data[i] / max) * ch;
-                double x = pad + (i * spacing) + (spacing - barW) / 2, y = h - pad - barH;
-                dc.DrawRectangle(brush, null, new WpfRect(x, y, barW, barH));
+                Points = new PointCollection(points),
+                Stroke = (Brush)FindResource("PrimaryBrush"),
+                StrokeThickness = 2,
+                StrokeLineJoin = PenLineJoin.Round
+            };
+            _chartCanvas.Children.Add(polyline);
+        }
+
+        private void DrawBarChart(double width, double height)
+        {
+            double margin = 60;
+            double chartWidth = width - margin * 2;
+            double chartHeight = height - margin * 2;
+            
+            double maxValue = ItemsSource.Max(item => item.Value);
+            if (maxValue == 0) maxValue = 1;
+            
+            double barWidth = (chartWidth / ItemsSource.Count) * 0.6;
+            double spacing = chartWidth / ItemsSource.Count;
+            
+            for (int i = 0; i < ItemsSource.Count; i++)
+            {
+                double barHeight = (ItemsSource[i].Value / maxValue) * chartHeight;
+                double x = margin + (i * spacing) + (spacing - barWidth) / 2;
+                double y = height - margin - barHeight;
+                
+                var rectangle = new Rectangle
+                {
+                    Width = barWidth,
+                    Height = barHeight,
+                    Fill = (Brush)FindResource("PrimaryBrush"),
+                    Tag = ItemsSource[i]
+                };
+                Canvas.SetLeft(rectangle, x);
+                Canvas.SetTop(rectangle, y);
+                _chartCanvas!.Children.Add(rectangle);
             }
         }
 
-        private void RenderPieChart(DrawingContext dc, double w, double h, List<double> data)
+        private void DrawPieChart(double width, double height)
         {
-            double total = data.Sum(), cx = w / 2, cy = h / 2, r = Math.Min(w, h) / 2 - 10;
-            double startAngle = StartAngle;
+            double centerX = width / 2;
+            double centerY = height / 2;
+            double radius = Math.Min(width, height) / 2 - 20;
+            
+            double total = ItemsSource.Sum(item => item.Value);
+            if (total == 0) return;
+            
+            double startAngle = 0;
             var colors = GetChartColors();
-
-            for (int i = 0; i < data.Count; i++)
+            
+            for (int i = 0; i < ItemsSource.Count; i++)
             {
-                double sweepAngle = (data[i] / total) * 360;
-                var geo = CreateArcGeometry(cx, cy, r, r, startAngle, sweepAngle);
-                dc.DrawGeometry(i < colors.Count ? colors[i] : colors[0], new WpfPen(WpfBrushes.White, 2), geo);
+                double sweepAngle = (ItemsSource[i].Value / total) * 360;
+                
+                // 绘制扇形
+                var path = new Path
+                {
+                    Fill = colors[i % colors.Count],
+                    Stroke = Brushes.White,
+                    StrokeThickness = 1,
+                    Tag = ItemsSource[i]
+                };
+                
+                var geometry = CreateArcGeometry(centerX, centerY, radius, radius, startAngle, sweepAngle);
+                path.Data = geometry;
+                
+                _chartCanvas!.Children.Add(path);
                 startAngle += sweepAngle;
             }
         }
 
-        private void RenderDonutChart(DrawingContext dc, double w, double h, List<double> data)
+        private void DrawDonutChart(double width, double height)
         {
-            double total = data.Sum(), cx = w / 2, cy = h / 2;
-            double outerR = Math.Min(w, h) / 2 - 10, innerR = outerR * 0.6;
-            double startAngle = StartAngle;
+            double centerX = width / 2;
+            double centerY = height / 2;
+            double outerRadius = Math.Min(width, height) / 2 - 20;
+            double innerRadius = outerRadius * 0.6;
+            
+            double total = ItemsSource.Sum(item => item.Value);
+            if (total == 0) return;
+            
+            double startAngle = 0;
             var colors = GetChartColors();
-
-            for (int i = 0; i < data.Count; i++)
+            
+            for (int i = 0; i < ItemsSource.Count; i++)
             {
-                double sweepAngle = (data[i] / total) * 360;
-                var geo = CreateDonutGeometry(cx, cy, outerR, innerR, startAngle, sweepAngle);
-                dc.DrawGeometry(i < colors.Count ? colors[i] : colors[0], null, geo);
+                double sweepAngle = (ItemsSource[i].Value / total) * 360;
+                
+                // 绘制环形扇形
+                var path = new Path
+                {
+                    Fill = colors[i % colors.Count],
+                    Stroke = Brushes.White,
+                    StrokeThickness = 1,
+                    Tag = ItemsSource[i]
+                };
+                
+                var geometry = CreateDonutGeometry(centerX, centerY, outerRadius, innerRadius, startAngle, sweepAngle);
+                path.Data = geometry;
+                
+                _chartCanvas!.Children.Add(path);
                 startAngle += sweepAngle;
             }
         }
 
         private StreamGeometry CreateArcGeometry(double cx, double cy, double rx, double ry, double startAngle, double sweepAngle)
         {
-            var geo = new StreamGeometry();
-            using (var ctx = geo.Open())
+            var geometry = new StreamGeometry();
+            using (var ctx = geometry.Open())
             {
-                ctx.BeginFigure(new WpfPoint(cx, cy), false, false);
-                double startRad = startAngle * Math.PI / 180, endRad = (startAngle + sweepAngle) * Math.PI / 180;
-                ctx.LineTo(new WpfPoint(cx + rx * Math.Cos(startRad), cy + ry * Math.Sin(startRad)), true, false);
-                ctx.ArcTo(new WpfPoint(cx + rx * Math.Cos(endRad), cy + ry * Math.Sin(endRad)), new WpfSize(rx, ry), 0, sweepAngle > 180, SweepDirection.Clockwise, true, false);
-                ctx.LineTo(new WpfPoint(cx, cy), true, false);
+                double startRad = startAngle * Math.PI / 180;
+                double endRad = (startAngle + sweepAngle) * Math.PI / 180;
+                
+                var startPoint = new System.Windows.Point(cx + rx * Math.Cos(startRad), cy + ry * Math.Sin(startRad));
+                var endPoint = new System.Windows.Point(cx + rx * Math.Cos(endRad), cy + ry * Math.Sin(endRad));
+                
+                ctx.BeginFigure(new System.Windows.Point(cx, cy), false, false);
+                ctx.LineTo(startPoint, true, false);
+                ctx.ArcTo(endPoint, new System.Windows.Size(rx, ry), 0, sweepAngle > 180, SweepDirection.Clockwise, true, false);
+                ctx.LineTo(new System.Windows.Point(cx, cy), true, false);
                 ctx.Close();
             }
-            return geo;
+            return geometry;
         }
 
         private StreamGeometry CreateDonutGeometry(double cx, double cy, double outerR, double innerR, double startAngle, double sweepAngle)
         {
-            var geo = new StreamGeometry();
-            using (var ctx = geo.Open())
+            var geometry = new StreamGeometry();
+            using (var ctx = geometry.Open())
             {
-                double startRad = startAngle * Math.PI / 180, endRad = (startAngle + sweepAngle) * Math.PI / 180;
-                var outerStart = new WpfPoint(cx + outerR * Math.Cos(startRad), cy + outerR * Math.Sin(startRad));
-                var outerEnd = new WpfPoint(cx + outerR * Math.Cos(endRad), cy + outerR * Math.Sin(endRad));
-                var innerStart = new WpfPoint(cx + innerR * Math.Cos(startRad), cy + innerR * Math.Sin(startRad));
-                var innerEnd = new WpfPoint(cx + innerR * Math.Cos(endRad), cy + innerR * Math.Sin(endRad));
-
+                double startRad = startAngle * Math.PI / 180;
+                double endRad = (startAngle + sweepAngle) * Math.PI / 180;
+                
+                var outerStart = new System.Windows.Point(cx + outerR * Math.Cos(startRad), cy + outerR * Math.Sin(startRad));
+                var outerEnd = new System.Windows.Point(cx + outerR * Math.Cos(endRad), cy + outerR * Math.Sin(endRad));
+                var innerStart = new System.Windows.Point(cx + innerR * Math.Cos(startRad), cy + innerR * Math.Sin(startRad));
+                var innerEnd = new System.Windows.Point(cx + innerR * Math.Cos(endRad), cy + innerR * Math.Sin(endRad));
+                
                 ctx.BeginFigure(outerStart, false, false);
-                ctx.ArcTo(outerEnd, new WpfSize(outerR, outerR), 0, sweepAngle > 180, SweepDirection.Clockwise, true, false);
+                ctx.ArcTo(outerEnd, new System.Windows.Size(outerR, outerR), 0, sweepAngle > 180, SweepDirection.Clockwise, true, false);
                 ctx.LineTo(innerEnd, true, false);
-                ctx.ArcTo(innerStart, new WpfSize(innerR, innerR), 0, sweepAngle > 180, SweepDirection.Counterclockwise, true, false);
+                ctx.ArcTo(innerStart, new System.Windows.Size(innerR, innerR), 0, sweepAngle > 180, SweepDirection.Counterclockwise, true, false);
                 ctx.Close();
             }
-            return geo;
+            return geometry;
         }
 
-        private List<SolidColorBrush> GetChartColors() => new List<SolidColorBrush>
+        private List<Brush> GetChartColors()
         {
-            new SolidColorBrush(WpfColor.FromRgb(64, 158, 255)),
-            new SolidColorBrush(WpfColor.FromRgb(101, 189, 77)),
-            new SolidColorBrush(WpfColor.FromRgb(245, 166, 35)),
-            new SolidColorBrush(WpfColor.FromRgb(247, 100, 96)),
-            new SolidColorBrush(WpfColor.FromRgb(155, 121, 222)),
-            new SolidColorBrush(WpfColor.FromRgb(25, 190, 208)),
-            new SolidColorBrush(WpfColor.FromRgb(250, 135, 0)),
-            new SolidColorBrush(WpfColor.FromRgb(234, 106, 227))
-        };
+            return new List<Brush>
+            {
+                (Brush)FindResource("PrimaryBrush"),
+                (Brush)FindResource("SuccessBrush"),
+                (Brush)FindResource("WarningBrush"),
+                (Brush)FindResource("ErrorBrush"),
+                (Brush)FindResource("InfoBrush"),
+                (Brush)FindResource("PurpleBrush"),
+                (Brush)FindResource("CyanBrush"),
+                (Brush)FindResource("OrangeBrush")
+            };
+        }
+
+        private void OnChartMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!ShowTooltip || _chartCanvas == null) return;
+            
+            var position = e.GetPosition(_chartCanvas);
+            var hitElement = _chartCanvas.InputHitTest(position) as FrameworkElement;
+            
+            if (hitElement?.Tag is ChartDataItem dataItem)
+            {
+                var args = new RoutedEventArgs(TooltipShowingEvent, this);
+                RaiseEvent(args);
+                
+                _tooltip!.Content = $"{dataItem.Label}: {dataItem.Value}";
+                _tooltip.IsOpen = true;
+            }
+            else
+            {
+                _tooltip!.IsOpen = false;
+            }
+        }
+
+        private void OnChartMouseLeave(object sender, MouseEventArgs e)
+        {
+            _tooltip!.IsOpen = false;
+        }
     }
 
-    public enum ChartType { Line, Bar, Pie, Donut, Area }
+    /// <summary>
+    /// 图表类型枚举
+    /// </summary>
+    public enum ChartType
+    {
+        Line,
+        Bar,
+        Pie,
+        Donut,
+        Area
+    }
+
+    /// <summary>
+    /// 图表数据项
+    /// </summary>
+    public class ChartDataItem
+    {
+        public string Label { get; set; } = string.Empty;
+        public double Value { get; set; }
+        public object? Tag { get; set; }
+    }
 }

@@ -16,14 +16,14 @@ namespace FlatUI.Library.Controls
     /// <summary>
     /// 拖拽上传控件
     /// </summary>
-    public class DragDropUpload : ContentControl
+    public class FlatDragDropUpload : ContentControl
     {
-        static DragDropUpload()
+        static FlatDragDropUpload()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DragDropUpload), new FrameworkPropertyMetadata(typeof(DragDropUpload)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatDragDropUpload), new FrameworkPropertyMetadata(typeof(FlatDragDropUpload)));
         }
 
-        public DragDropUpload()
+        public FlatDragDropUpload()
         {
             AllowDrop = true;
             
@@ -40,7 +40,7 @@ namespace FlatUI.Library.Controls
         /// 允许的文件类型
         /// </summary>
         public static readonly DependencyProperty AllowedFileTypesProperty =
-            DependencyProperty.Register("AllowedFileTypes", typeof(string), typeof(DragDropUpload), 
+            DependencyProperty.Register("AllowedFileTypes", typeof(string), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata("*.*", FrameworkPropertyMetadataOptions.AffectsRender));
 
         public string AllowedFileTypes
@@ -53,7 +53,7 @@ namespace FlatUI.Library.Controls
         /// 最大文件大小（字节）
         /// </summary>
         public static readonly DependencyProperty MaxFileSizeProperty =
-            DependencyProperty.Register("MaxFileSize", typeof(long), typeof(DragDropUpload), 
+            DependencyProperty.Register("MaxFileSize", typeof(long), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(10L * 1024 * 1024, FrameworkPropertyMetadataOptions.AffectsRender)); // 10MB
 
         public long MaxFileSize
@@ -66,7 +66,7 @@ namespace FlatUI.Library.Controls
         /// 是否允许多文件上传
         /// </summary>
         public static readonly DependencyProperty AllowMultipleFilesProperty =
-            DependencyProperty.Register("AllowMultipleFiles", typeof(bool), typeof(DragDropUpload), 
+            DependencyProperty.Register("AllowMultipleFiles", typeof(bool), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public bool AllowMultipleFiles
@@ -79,7 +79,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽区域背景色
         /// </summary>
         public static readonly DependencyProperty DragAreaBackgroundProperty =
-            DependencyProperty.Register("DragAreaBackground", typeof(Brush), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragAreaBackground", typeof(Brush), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public Brush DragAreaBackground
@@ -92,7 +92,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽区域边框色
         /// </summary>
         public static readonly DependencyProperty DragAreaBorderBrushProperty =
-            DependencyProperty.Register("DragAreaBorderBrush", typeof(Brush), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragAreaBorderBrush", typeof(Brush), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public Brush DragAreaBorderBrush
@@ -105,7 +105,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽区域边框厚度
         /// </summary>
         public static readonly DependencyProperty DragAreaBorderThicknessProperty =
-            DependencyProperty.Register("DragAreaBorderThickness", typeof(Thickness), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragAreaBorderThickness", typeof(Thickness), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(new Thickness(2), FrameworkPropertyMetadataOptions.AffectsRender));
 
         public Thickness DragAreaBorderThickness
@@ -118,7 +118,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽区域圆角半径
         /// </summary>
         public static readonly DependencyProperty DragAreaCornerRadiusProperty =
-            DependencyProperty.Register("DragAreaCornerRadius", typeof(CornerRadius), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragAreaCornerRadius", typeof(CornerRadius), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(new CornerRadius(8), FrameworkPropertyMetadataOptions.AffectsRender));
 
         public CornerRadius DragAreaCornerRadius
@@ -131,7 +131,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽提示文本
         /// </summary>
         public static readonly DependencyProperty DragHintTextProperty =
-            DependencyProperty.Register("DragHintText", typeof(string), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragHintText", typeof(string), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata("拖拽文件到此处上传", FrameworkPropertyMetadataOptions.AffectsRender));
 
         public string DragHintText
@@ -144,7 +144,7 @@ namespace FlatUI.Library.Controls
         /// 拖拽中提示文本
         /// </summary>
         public static readonly DependencyProperty DragOverHintTextProperty =
-            DependencyProperty.Register("DragOverHintText", typeof(string), typeof(DragDropUpload), 
+            DependencyProperty.Register("DragOverHintText", typeof(string), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata("释放文件以上传", FrameworkPropertyMetadataOptions.AffectsRender));
 
         public string DragOverHintText
@@ -157,7 +157,7 @@ namespace FlatUI.Library.Controls
         /// 是否显示拖拽区域
         /// </summary>
         public static readonly DependencyProperty ShowDragAreaProperty =
-            DependencyProperty.Register("ShowDragArea", typeof(bool), typeof(DragDropUpload), 
+            DependencyProperty.Register("ShowDragArea", typeof(bool), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public bool ShowDragArea
@@ -170,7 +170,7 @@ namespace FlatUI.Library.Controls
         /// 是否正在拖拽
         /// </summary>
         public static readonly DependencyProperty IsDragOverProperty =
-            DependencyProperty.Register("IsDragOver", typeof(bool), typeof(DragDropUpload), 
+            DependencyProperty.Register("IsDragOver", typeof(bool), typeof(FlatDragDropUpload), 
                 new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public bool IsDragOver
@@ -188,7 +188,7 @@ namespace FlatUI.Library.Controls
         /// </summary>
         public static readonly RoutedEvent FilesUploadedEvent =
             EventManager.RegisterRoutedEvent("FilesUploaded", RoutingStrategy.Bubble, 
-                typeof(EventHandler<FilesUploadedEventArgs>), typeof(DragDropUpload));
+                typeof(EventHandler<FilesUploadedEventArgs>), typeof(FlatDragDropUpload));
 
         public event EventHandler<FilesUploadedEventArgs> FilesUploaded
         {
@@ -201,7 +201,7 @@ namespace FlatUI.Library.Controls
         /// </summary>
         public static readonly RoutedEvent FileValidationFailedEvent =
             EventManager.RegisterRoutedEvent("FileValidationFailed", RoutingStrategy.Bubble, 
-                typeof(EventHandler<FileValidationFailedEventArgs>), typeof(DragDropUpload));
+                typeof(EventHandler<FileValidationFailedEventArgs>), typeof(FlatDragDropUpload));
 
         public event EventHandler<FileValidationFailedEventArgs> FileValidationFailed
         {

@@ -9,7 +9,7 @@
     <!-- Avatar 头像控件样式 -->
     
     <!-- 默认圆形头像样式 -->
-    <Style x:Key="DefaultAvatarStyle" TargetType="{x:Type controls:Avatar}">
+    <Style x:Key="DefaultAvatarStyle" TargetType="{x:Type controls:FlatAvatar}">
         <Setter Property="Width" Value="{Binding Size, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Height" Value="{Binding Size, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="AvatarBackground" Value="{DynamicResource PrimaryBrush}"/>
@@ -19,7 +19,7 @@
         <Setter Property="ShowBorder" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Avatar}">
+                <ControlTemplate TargetType="{x:Type controls:FlatAvatar}">
                     <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <!-- 背景容器 -->
                         <Border x:Name="border"
@@ -95,30 +95,30 @@
     </Style>
     
     <!-- 小尺寸头像 -->
-    <Style x:Key="SmallAvatarStyle" TargetType="{x:Type controls:Avatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
+    <Style x:Key="SmallAvatarStyle" TargetType="{x:Type controls:FlatAvatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
         <Setter Property="Size" Value="32"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
     
     <!-- 中尺寸头像 -->
-    <Style x:Key="MediumAvatarStyle" TargetType="{x:Type controls:Avatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
+    <Style x:Key="MediumAvatarStyle" TargetType="{x:Type controls:FlatAvatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
         <Setter Property="Size" Value="40"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- 大尺寸头像 -->
+    <Style x:Key="LargeAvatarStyle" TargetType="{x:Type controls:FlatAvatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
+        <Setter Property="Size" Value="48"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
-    
-    <!-- 大尺寸头像 -->
-    <Style x:Key="LargeAvatarStyle" TargetType="{x:Type controls:Avatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
-        <Setter Property="Size" Value="64"/>
-        <Setter Property="FontSize" Value="24"/>
-    </Style>
-    
+
     <!-- 超大尺寸头像 -->
-    <Style x:Key="ExtraLargeAvatarStyle" TargetType="{x:Type controls:Avatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
-        <Setter Property="Size" Value="96"/>
-        <Setter Property="FontSize" Value="36"/>
+    <Style x:Key="ExtraLargeAvatarStyle" TargetType="{x:Type controls:FlatAvatar}" BasedOn="{StaticResource DefaultAvatarStyle}">
+        <Setter Property="Size" Value="64"/>
+        <Setter Property="FontSize" Value="20"/>
     </Style>
     
     <!-- 默认样式 -->
-    <Style TargetType="{x:Type controls:Avatar}" BasedOn="{StaticResource DefaultAvatarStyle}"/>
+    <Style TargetType="{x:Type controls:FlatAvatar}" BasedOn="{StaticResource DefaultAvatarStyle}"/>
 
 </ResourceDictionary>

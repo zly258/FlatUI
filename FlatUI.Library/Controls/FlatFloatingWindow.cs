@@ -3,14 +3,17 @@ using System.Windows.Input;
 
 namespace FlatUI.Library.Controls
 {
-    public class FloatingWindow : Window
+    /// <summary>
+    /// 浮动窗口控件
+    /// </summary>
+    public class FlatFloatingWindow : Window
     {
-        static FloatingWindow()
+        static FlatFloatingWindow()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FloatingWindow), new FrameworkPropertyMetadata(typeof(FloatingWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatFloatingWindow), new FrameworkPropertyMetadata(typeof(FlatFloatingWindow)));
         }
 
-        public FloatingWindow()
+        public FlatFloatingWindow()
         {
             WindowStyle = WindowStyle.None;
             AllowsTransparency = true;
@@ -22,7 +25,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty IconPathDataProperty =
-            DependencyProperty.Register("IconPathData", typeof(string), typeof(FloatingWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("IconPathData", typeof(string), typeof(FlatFloatingWindow), new PropertyMetadata(null));
 
         public string IconPathData
         {

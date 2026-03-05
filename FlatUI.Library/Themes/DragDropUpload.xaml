@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- 拖拽上传控件样式 -->
-    <Style TargetType="controls:DragDropUpload">
+    <Style TargetType="controls:FlatDragDropUpload">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
@@ -18,7 +18,7 @@
         <Setter Property="MinHeight" Value="120"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:DragDropUpload">
+                <ControlTemplate TargetType="controls:FlatDragDropUpload">
                     <Grid x:Name="Root">
                         
                         <!-- 拖拽区域 -->

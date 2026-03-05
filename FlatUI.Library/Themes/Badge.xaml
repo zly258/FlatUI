@@ -8,7 +8,7 @@
 
     <!-- Badge 徽标控件样式 -->
     
-    <Style x:Key="DefaultBadgeStyle" TargetType="{x:Type controls:Badge}">
+    <Style x:Key="DefaultBadgeStyle" TargetType="{x:Type controls:FlatBadge}">
         <Setter Property="MinWidth" Value="20"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Padding" Value="6,0"/>
@@ -20,7 +20,7 @@
         <Setter Property="IsDot" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Badge}">
+                <ControlTemplate TargetType="{x:Type controls:FlatBadge}">
                     <Grid>
                         <!-- 内容区域 -->
                         <ContentPresenter x:Name="contentPresenter" 
@@ -104,17 +104,17 @@
     </Style>
     
     <!-- 计数徽标样式 -->
-    <Style x:Key="CountBadgeStyle" TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource DefaultBadgeStyle}">
+    <Style x:Key="CountBadgeStyle" TargetType="{x:Type controls:FlatBadge}" BasedOn="{StaticResource DefaultBadgeStyle}">
         <Setter Property="BadgeType" Value="Count"/>
     </Style>
-    
+
     <!-- 状态徽标样式 -->
-    <Style x:Key="StatusBadgeStyle" TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource DefaultBadgeStyle}">
+    <Style x:Key="StatusBadgeStyle" TargetType="{x:Type controls:FlatBadge}" BasedOn="{StaticResource DefaultBadgeStyle}">
         <Setter Property="BadgeType" Value="Status"/>
         <Setter Property="IsDot" Value="True"/>
     </Style>
     
     <!-- 默认样式 -->
-    <Style TargetType="{x:Type controls:Badge}" BasedOn="{StaticResource DefaultBadgeStyle}"/>
+    <Style TargetType="{x:Type controls:FlatBadge}" BasedOn="{StaticResource DefaultBadgeStyle}"/>
 
 </ResourceDictionary>

@@ -14,7 +14,20 @@ namespace FlatUI.Demo.Views
 
         private void LoadChartData()
         {
-            var data = new List<double> { 12, 45, 23, 89, 56, 72, 34, 61, 95, 28 };
+            var data = new System.Collections.ObjectModel.ObservableCollection<ChartDataItem>
+            {
+                new() { Label = "第1天", Value = 12 },
+                new() { Label = "第2天", Value = 45 },
+                new() { Label = "第3天", Value = 23 },
+                new() { Label = "第4天", Value = 89 },
+                new() { Label = "第5天", Value = 56 },
+                new() { Label = "第6天", Value = 72 },
+                new() { Label = "第7天", Value = 34 },
+                new() { Label = "第8天", Value = 61 },
+                new() { Label = "第9天", Value = 95 },
+                new() { Label = "第10天", Value = 28 }
+            };
+            
             LineChart.ItemsSource = data;
             BarChart.ItemsSource = data;
         }

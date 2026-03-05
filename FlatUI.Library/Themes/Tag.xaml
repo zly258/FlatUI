@@ -8,7 +8,7 @@
 
     <!-- Tag 标签控件样式 -->
     
-    <Style x:Key="DefaultTagStyle" TargetType="{x:Type controls:Tag}">
+    <Style x:Key="DefaultTagStyle" TargetType="{x:Type controls:FlatTag}">
         <Setter Property="Padding" Value="10,4"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="TagBackground" Value="{DynamicResource RegionBrush}"/>
@@ -20,7 +20,7 @@
         <Setter Property="Cursor" Value="Arrow"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Tag}">
+                <ControlTemplate TargetType="{x:Type controls:FlatTag}">
                     <Border x:Name="border"
                             Background="{TemplateBinding TagBackground}"
                             BorderBrush="{TemplateBinding BorderColor}"
@@ -102,7 +102,7 @@
                         </Trigger>
                         
                         <!-- 关闭按钮显示 -->
-                        <Trigger Property="Closable" Value="True">
+                        <Trigger Property="IsClosable" Value="True">
                             <Setter TargetName="closeButton" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         
@@ -157,7 +157,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
-                                <Condition Property="Selectable" Value="True"/>
+                                <Condition Property="IsSelectable" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="border" Property="Opacity" Value="0.8"/>
                         </MultiTrigger>
@@ -168,6 +168,6 @@
     </Style>
     
     <!-- 默认样式 -->
-    <Style TargetType="{x:Type controls:Tag}" BasedOn="{StaticResource DefaultTagStyle}"/>
+    <Style TargetType="{x:Type controls:FlatTag}" BasedOn="{StaticResource DefaultTagStyle}"/>
 
 </ResourceDictionary>

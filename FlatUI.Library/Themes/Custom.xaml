@@ -15,10 +15,10 @@
     <converters:EqualityConverter x:Key="EqualityConverter"/>
     <converters:LocalizeConverter x:Key="LocalizeConverter"/>
 
-    <Style TargetType="{x:Type controls:ImageCropper}">
+    <Style TargetType="{x:Type controls:FlatImageCropper}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImageCropper}">
+                <ControlTemplate TargetType="{x:Type controls:FlatImageCropper}">
                     <Canvas x:Name="PART_Canvas" Background="Transparent" ClipToBounds="True">
                         <Image x:Name="PART_Image" Source="{TemplateBinding Source}" 
                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
@@ -36,12 +36,12 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:FloatingWindow}">
+    <Style TargetType="{x:Type controls:FlatFloatingWindow}">
         <Setter Property="Width" Value="50"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:FloatingWindow}">
+                <ControlTemplate TargetType="{x:Type controls:FlatFloatingWindow}">
                     <Grid>
                         <Ellipse x:Name="border"
                                  Fill="{DynamicResource PrimaryBrush}"
@@ -69,13 +69,13 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:LedText}">
+    <Style TargetType="{x:Type controls:FlatLedText}">
         <Setter Property="Background" Value="#1A1A1A"/>
         <Setter Property="Padding" Value="10,5"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:LedText}">
+                <ControlTemplate TargetType="{x:Type controls:FlatLedText}">
                     <Border Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="2"
@@ -97,10 +97,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:Drawer}">
+    <Style TargetType="{x:Type controls:FlatDrawer}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Drawer}">
+                <ControlTemplate TargetType="{x:Type controls:FlatDrawer}">
                     <Grid x:Name="PART_Root" Visibility="Collapsed" Background="Transparent">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="DrawerStates">
@@ -163,10 +163,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:Pagination}">
+    <Style TargetType="{x:Type controls:FlatPagination}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Pagination}">
+                <ControlTemplate TargetType="{x:Type controls:FlatPagination}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock VerticalAlignment="Center" Margin="0,0,10,0" Foreground="{DynamicResource TextSecondaryBrush}"
                                    Visibility="{TemplateBinding ShowTotal, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -249,7 +249,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:NumericUpDown}">
+    <Style TargetType="{x:Type controls:FlatNumericUpDown}">
         <Setter Property="Height" Value="32"/>
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
@@ -258,7 +258,7 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:NumericUpDown}">
+                <ControlTemplate TargetType="{x:Type controls:FlatNumericUpDown}">
                     <Border x:Name="RootBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -307,9 +307,10 @@
                                             Style="{DynamicResource FlatButton}">
                                         <Path Data="M7 10l5 5 5-5z" 
                                               Fill="{StaticResource TextSecondaryBrush}" 
-                                              Width="8" Height="8" 
+                                              Width="10" Height="10" 
                                               Stretch="Uniform" 
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
                                     </Button>
                                     
                                     <!-- 下按钮 -->
@@ -323,9 +324,10 @@
                                             Style="{DynamicResource FlatButton}">
                                         <Path Data="M7 14l5-5 5 5z" 
                                               Fill="{StaticResource TextSecondaryBrush}" 
-                                              Width="8" Height="8" 
+                                              Width="10" Height="10" 
                                               Stretch="Uniform" 
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
                                     </Button>
                                 </Grid>
                             </Border>
@@ -376,21 +378,21 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:Form}">
+    <Style TargetType="{x:Type controls:FlatForm}">
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Form}">
+                <ControlTemplate TargetType="{x:Type controls:FlatForm}">
                     <ItemsPresenter Margin="{TemplateBinding Padding}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:DropdownGrid}" BasedOn="{StaticResource FlatComboBox}">
+    <Style TargetType="{x:Type controls:FlatDropdownGrid}" BasedOn="{StaticResource FlatComboBox}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:DropdownGrid}">
+                <ControlTemplate TargetType="{x:Type controls:FlatDropdownGrid}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="True"

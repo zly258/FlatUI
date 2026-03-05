@@ -10,10 +10,10 @@
             <HeaderedContentControl Header="不同尺寸" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
                 <StackPanel Margin="10">
                     <WrapPanel>
-                        <flat:Avatar Size="32" Text="小" Margin="0,0,20,0"/>
-                        <flat:Avatar Size="40" Text="中" Margin="0,0,20,0"/>
-                        <flat:Avatar Size="64" Text="大" Margin="0,0,20,0"/>
-                        <flat:Avatar Size="96" Text="超大"/>
+                        <flat:FlatAvatar Size="32" Text="小" Margin="0,0,20,0"/>
+                        <flat:FlatAvatar Size="40" Text="中" Margin="0,0,20,0"/>
+                        <flat:FlatAvatar Size="64" Text="大" Margin="0,0,20,0"/>
+                        <flat:FlatAvatar Size="96" Text="超大"/>
                     </WrapPanel>
                 </StackPanel>
             </HeaderedContentControl>

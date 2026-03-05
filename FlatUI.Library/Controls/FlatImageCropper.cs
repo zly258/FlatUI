@@ -8,20 +8,22 @@ using System.Windows.Shapes;
 
 namespace FlatUI.Library.Controls
 {
-    public class ImageCropper : System.Windows.Controls.Control
+    /// <summary>
+    /// 图片裁剪控件
+    /// </summary>
+    public class FlatImageCropper : System.Windows.Controls.Control
     {
         private Canvas? _canvas;
         private System.Windows.Shapes.Rectangle? _selectionRect;
         private System.Windows.Controls.Image? _image;
         private System.Windows.Point _startPoint;
 
-        static ImageCropper()
+        static FlatImageCropper()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageCropper), new FrameworkPropertyMetadata(typeof(ImageCropper)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatImageCropper), new FrameworkPropertyMetadata(typeof(FlatImageCropper)));
         }
 
-        public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(ImageSource), typeof(ImageCropper), new PropertyMetadata(null));
+        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(ImageSource), typeof(FlatImageCropper), new PropertyMetadata(null));
 
         public ImageSource Source
         {

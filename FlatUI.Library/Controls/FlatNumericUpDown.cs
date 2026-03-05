@@ -3,11 +3,14 @@ using System.Windows.Controls;
 
 namespace FlatUI.Library.Controls
 {
-    public class NumericUpDown : System.Windows.Controls.Control
+    /// <summary>
+    /// 数字输入控件
+    /// </summary>
+    public class FlatNumericUpDown : System.Windows.Controls.Control
     {
-        static NumericUpDown()
+        static FlatNumericUpDown()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatNumericUpDown), new FrameworkPropertyMetadata(typeof(FlatNumericUpDown)));
         }
 
         public static readonly DependencyProperty ValueProperty =

@@ -8,11 +8,11 @@ namespace FlatUI.Library.Controls
     /// <summary>
     /// 气泡卡片控件 - 用于对话、评论等场景
     /// </summary>
-    public class Bubble : ContentControl
+    public class FlatBubble : ContentControl
     {
-        static Bubble()
+        static FlatBubble()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Bubble), new FrameworkPropertyMetadata(typeof(Bubble)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatBubble), new FrameworkPropertyMetadata(typeof(FlatBubble)));
         }
 
         #region 属性
@@ -21,7 +21,7 @@ namespace FlatUI.Library.Controls
         /// 头像图片源
         /// </summary>
         public static readonly DependencyProperty AvatarSourceProperty =
-            DependencyProperty.Register("AvatarSource", typeof(ImageSource), typeof(Bubble), new PropertyMetadata(null));
+            DependencyProperty.Register("AvatarSource", typeof(ImageSource), typeof(FlatBubble), new PropertyMetadata(null));
 
         public ImageSource AvatarSource
         {
@@ -33,7 +33,7 @@ namespace FlatUI.Library.Controls
         /// 头像文字（无图片时显示）
         /// </summary>
         public static readonly DependencyProperty AvatarTextProperty =
-            DependencyProperty.Register("AvatarText", typeof(string), typeof(Bubble), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("AvatarText", typeof(string), typeof(FlatBubble), new PropertyMetadata(string.Empty));
 
         public string AvatarText
         {
@@ -45,7 +45,7 @@ namespace FlatUI.Library.Controls
         /// 发送者名称
         /// </summary>
         public static readonly DependencyProperty SenderNameProperty =
-            DependencyProperty.Register("SenderName", typeof(string), typeof(Bubble), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("SenderName", typeof(string), typeof(FlatBubble), new PropertyMetadata(string.Empty));
 
         public string SenderName
         {
@@ -57,7 +57,7 @@ namespace FlatUI.Library.Controls
         /// 时间戳
         /// </summary>
         public static readonly DependencyProperty TimestampProperty =
-            DependencyProperty.Register("Timestamp", typeof(DateTime), typeof(Bubble), new PropertyMetadata(DateTime.Now));
+            DependencyProperty.Register("Timestamp", typeof(DateTime), typeof(FlatBubble), new PropertyMetadata(DateTime.Now));
 
         public DateTime Timestamp
         {
@@ -69,7 +69,7 @@ namespace FlatUI.Library.Controls
         /// 是否显示时间戳
         /// </summary>
         public static readonly DependencyProperty ShowTimestampProperty =
-            DependencyProperty.Register("ShowTimestamp", typeof(bool), typeof(Bubble), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowTimestamp", typeof(bool), typeof(FlatBubble), new PropertyMetadata(true));
 
         public bool ShowTimestamp
         {
@@ -81,7 +81,7 @@ namespace FlatUI.Library.Controls
         /// 是否显示发送者名称
         /// </summary>
         public static readonly DependencyProperty ShowSenderNameProperty =
-            DependencyProperty.Register("ShowSenderName", typeof(bool), typeof(Bubble), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowSenderName", typeof(bool), typeof(FlatBubble), new PropertyMetadata(true));
 
         public bool ShowSenderName
         {
@@ -93,7 +93,7 @@ namespace FlatUI.Library.Controls
         /// 是否显示头像
         /// </summary>
         public static readonly DependencyProperty ShowAvatarProperty =
-            DependencyProperty.Register("ShowAvatar", typeof(bool), typeof(Bubble), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowAvatar", typeof(bool), typeof(FlatBubble), new PropertyMetadata(true));
 
         public bool ShowAvatar
         {
@@ -105,7 +105,7 @@ namespace FlatUI.Library.Controls
         /// 气泡位置（左/右）
         /// </summary>
         public static readonly DependencyProperty PositionProperty =
-            DependencyProperty.Register("Position", typeof(BubblePosition), typeof(Bubble), new PropertyMetadata(BubblePosition.Left));
+            DependencyProperty.Register("Position", typeof(BubblePosition), typeof(FlatBubble), new PropertyMetadata(BubblePosition.Left));
 
         public BubblePosition Position
         {
@@ -117,7 +117,7 @@ namespace FlatUI.Library.Controls
         /// 气泡类型
         /// </summary>
         public static readonly DependencyProperty BubbleTypeProperty =
-            DependencyProperty.Register("BubbleType", typeof(BubbleType), typeof(Bubble), new PropertyMetadata(BubbleType.Default));
+            DependencyProperty.Register("BubbleType", typeof(BubbleType), typeof(FlatBubble), new PropertyMetadata(BubbleType.Default));
 
         public BubbleType BubbleType
         {
@@ -129,7 +129,7 @@ namespace FlatUI.Library.Controls
         /// 背景画刷
         /// </summary>
         public static readonly DependencyProperty BubbleBackgroundProperty =
-            DependencyProperty.Register("BubbleBackground", typeof(System.Windows.Media.Brush), typeof(Bubble), new PropertyMetadata(null));
+            DependencyProperty.Register("BubbleBackground", typeof(System.Windows.Media.Brush), typeof(FlatBubble), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BubbleBackground
         {
@@ -141,7 +141,7 @@ namespace FlatUI.Library.Controls
         /// 前景色
         /// </summary>
         public static readonly DependencyProperty BubbleForegroundProperty =
-            DependencyProperty.Register("BubbleForeground", typeof(System.Windows.Media.Brush), typeof(Bubble), new PropertyMetadata(null));
+            DependencyProperty.Register("BubbleForeground", typeof(System.Windows.Media.Brush), typeof(FlatBubble), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BubbleForeground
         {
@@ -153,7 +153,7 @@ namespace FlatUI.Library.Controls
         /// 最大宽度
         /// </summary>
         public new static readonly DependencyProperty MaxWidthProperty =
-            DependencyProperty.Register("MaxWidth", typeof(double), typeof(Bubble), new PropertyMetadata(400.0));
+            DependencyProperty.Register("MaxWidth", typeof(double), typeof(FlatBubble), new PropertyMetadata(400.0));
 
         public new double MaxWidth
         {
@@ -165,7 +165,7 @@ namespace FlatUI.Library.Controls
         /// 圆角半径
         /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Bubble), new PropertyMetadata(new CornerRadius(8)));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(FlatBubble), new PropertyMetadata(new CornerRadius(8)));
 
         public CornerRadius CornerRadius
         {
@@ -177,7 +177,7 @@ namespace FlatUI.Library.Controls
         /// 头像大小
         /// </summary>
         public static readonly DependencyProperty AvatarSizeProperty =
-            DependencyProperty.Register("AvatarSize", typeof(double), typeof(Bubble), new PropertyMetadata(40.0));
+            DependencyProperty.Register("AvatarSize", typeof(double), typeof(FlatBubble), new PropertyMetadata(40.0));
 
         public double AvatarSize
         {

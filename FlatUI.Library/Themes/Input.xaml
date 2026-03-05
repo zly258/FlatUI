@@ -83,25 +83,25 @@
                                   Fill="{StaticResource TextSecondaryBrush}" 
                                   Width="16" Height="16" 
                                   Stretch="Uniform" 
-                                  Margin="8,0,0,0" 
+                                  Margin="12,0,0,0" 
                                   VerticalAlignment="Center"/>
                             
                             <!-- 输入区域 -->
                             <ScrollViewer Grid.Column="1" 
                                           x:Name="PART_ContentHost" 
                                           VerticalAlignment="Center" 
-                                          Margin="8,0"/>
+                                          Margin="8,0,4,0"/>
                             
                             <!-- 清除按钮（有文本时显示） -->
                             <Button x:Name="ClearButton"
                                     Grid.Column="2"
                                     Content="✕"
-                                    Width="20" Height="20"
+                                    Width="24" Height="24"
                                     Padding="0"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Foreground="{StaticResource TextSecondaryBrush}"
-                                    FontSize="10"
+                                    FontSize="12"
                                     Margin="0,0,8,0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"

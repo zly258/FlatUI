@@ -2,23 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:FlatUI.Library.Controls">
 
-    <Style TargetType="{x:Type controls:FlatChart}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:FlatChart}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}">
-                        <ContentPresenter/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!-- FlatChart组件已整合到EnhancedFlatChart中，此样式已废弃 -->
 
 </ResourceDictionary>

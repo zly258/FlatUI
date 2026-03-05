@@ -14,15 +14,18 @@ namespace FlatUI.Library.Controls
         public string Description { get; set; } = string.Empty;
     }
 
-    public class PropertyGrid : System.Windows.Controls.Control
+    /// <summary>
+    /// 属性网格控件
+    /// </summary>
+    public class FlatPropertyGrid : System.Windows.Controls.Control
     {
-        static PropertyGrid()
+        static FlatPropertyGrid()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PropertyGrid), new FrameworkPropertyMetadata(typeof(PropertyGrid)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatPropertyGrid), new FrameworkPropertyMetadata(typeof(FlatPropertyGrid)));
         }
 
         public static readonly DependencyProperty PropertiesProperty =
-            DependencyProperty.Register("Properties", typeof(ObservableCollection<PropertyItem>), typeof(PropertyGrid), 
+            DependencyProperty.Register("Properties", typeof(ObservableCollection<PropertyItem>), typeof(FlatPropertyGrid), 
                 new PropertyMetadata(null, OnPropertiesChanged));
 
         public ObservableCollection<PropertyItem> Properties
@@ -32,7 +35,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty InternalCollectionViewProperty =
-            DependencyProperty.Register("InternalCollectionView", typeof(ICollectionView), typeof(PropertyGrid), new PropertyMetadata(null));
+            DependencyProperty.Register("InternalCollectionView", typeof(ICollectionView), typeof(FlatPropertyGrid), new PropertyMetadata(null));
 
         public ICollectionView InternalCollectionView
         {
@@ -42,7 +45,7 @@ namespace FlatUI.Library.Controls
 
         private static void OnPropertiesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is PropertyGrid pg && e.NewValue is ObservableCollection<PropertyItem> items)
+            if (d is FlatPropertyGrid pg && e.NewValue is ObservableCollection<PropertyItem> items)
             {
                 var view = CollectionViewSource.GetDefaultView(items);
                 view.GroupDescriptions.Clear();

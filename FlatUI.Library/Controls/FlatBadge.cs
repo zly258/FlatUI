@@ -6,11 +6,11 @@ namespace FlatUI.Library.Controls
     /// <summary>
     /// 徽标控件 - 支持数字徽标和状态点
     /// </summary>
-    public class Badge : ContentControl
+    public class FlatBadge : ContentControl
     {
-        static Badge()
+        static FlatBadge()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Badge), new FrameworkPropertyMetadata(typeof(Badge)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatBadge), new FrameworkPropertyMetadata(typeof(FlatBadge)));
         }
 
         #region 属性
@@ -19,7 +19,7 @@ namespace FlatUI.Library.Controls
         /// 徽标数值
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(Badge), new PropertyMetadata(0));
+            DependencyProperty.Register("Value", typeof(int), typeof(FlatBadge), new PropertyMetadata(0));
 
         public int Value
         {
@@ -31,7 +31,7 @@ namespace FlatUI.Library.Controls
         /// 最大值（超过显示 99+）
         /// </summary>
         public static readonly DependencyProperty MaxValueProperty =
-            DependencyProperty.Register("MaxValue", typeof(int), typeof(Badge), new PropertyMetadata(99));
+            DependencyProperty.Register("MaxValue", typeof(int), typeof(FlatBadge), new PropertyMetadata(99));
 
         public int MaxValue
         {
@@ -43,7 +43,7 @@ namespace FlatUI.Library.Controls
         /// 是否只显示状态点（不显示数字）
         /// </summary>
         public static readonly DependencyProperty IsDotProperty =
-            DependencyProperty.Register("IsDot", typeof(bool), typeof(Badge), new PropertyMetadata(false));
+            DependencyProperty.Register("IsDot", typeof(bool), typeof(FlatBadge), new PropertyMetadata(false));
 
         public bool IsDot
         {
@@ -55,7 +55,7 @@ namespace FlatUI.Library.Controls
         /// 是否隐藏徽标（值为 0 时）
         /// </summary>
         public static readonly DependencyProperty HiddenWhenZeroProperty =
-            DependencyProperty.Register("HiddenWhenZero", typeof(bool), typeof(Badge), new PropertyMetadata(false));
+            DependencyProperty.Register("HiddenWhenZero", typeof(bool), typeof(FlatBadge), new PropertyMetadata(false));
 
         public bool HiddenWhenZero
         {
@@ -67,7 +67,7 @@ namespace FlatUI.Library.Controls
         /// 徽标类型（计数/状态）
         /// </summary>
         public static readonly DependencyProperty BadgeTypeProperty =
-            DependencyProperty.Register("BadgeType", typeof(BadgeType), typeof(Badge), new PropertyMetadata(BadgeType.Count));
+            DependencyProperty.Register("BadgeType", typeof(BadgeType), typeof(FlatBadge), new PropertyMetadata(BadgeType.Count));
 
         public BadgeType BadgeType
         {
@@ -79,7 +79,7 @@ namespace FlatUI.Library.Controls
         /// 状态类型（成功/警告/错误等）
         /// </summary>
         public static readonly DependencyProperty StatusProperty =
-            DependencyProperty.Register("Status", typeof(BadgeStatus), typeof(Badge), new PropertyMetadata(BadgeStatus.Default));
+            DependencyProperty.Register("Status", typeof(BadgeStatus), typeof(FlatBadge), new PropertyMetadata(BadgeStatus.Default));
 
         public BadgeStatus Status
         {
@@ -91,7 +91,7 @@ namespace FlatUI.Library.Controls
         /// 徽标大小
         /// </summary>
         public static readonly DependencyProperty BadgeSizeProperty =
-            DependencyProperty.Register("BadgeSize", typeof(BadgeSize), typeof(Badge), new PropertyMetadata(BadgeSize.Medium));
+            DependencyProperty.Register("BadgeSize", typeof(BadgeSize), typeof(FlatBadge), new PropertyMetadata(BadgeSize.Medium));
 
         public BadgeSize BadgeSize
         {
@@ -103,7 +103,7 @@ namespace FlatUI.Library.Controls
         /// 背景画刷
         /// </summary>
         public static readonly DependencyProperty BadgeBackgroundProperty =
-            DependencyProperty.Register("BadgeBackground", typeof(System.Windows.Media.Brush), typeof(Badge), new PropertyMetadata(null));
+            DependencyProperty.Register("BadgeBackground", typeof(System.Windows.Media.Brush), typeof(FlatBadge), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BadgeBackground
         {
@@ -115,7 +115,7 @@ namespace FlatUI.Library.Controls
         /// 前景色
         /// </summary>
         public static readonly DependencyProperty BadgeForegroundProperty =
-            DependencyProperty.Register("BadgeForeground", typeof(System.Windows.Media.Brush), typeof(Badge), new PropertyMetadata(null));
+            DependencyProperty.Register("BadgeForeground", typeof(System.Windows.Media.Brush), typeof(FlatBadge), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BadgeForeground
         {
@@ -127,7 +127,7 @@ namespace FlatUI.Library.Controls
         /// 相对于内容的位置偏移 X
         /// </summary>
         public static readonly DependencyProperty OffsetXProperty =
-            DependencyProperty.Register("OffsetX", typeof(double), typeof(Badge), new PropertyMetadata(0.0));
+            DependencyProperty.Register("OffsetX", typeof(double), typeof(FlatBadge), new PropertyMetadata(0.0));
 
         public double OffsetX
         {
@@ -139,7 +139,7 @@ namespace FlatUI.Library.Controls
         /// 相对于内容的位置偏移 Y
         /// </summary>
         public static readonly DependencyProperty OffsetYProperty =
-            DependencyProperty.Register("OffsetY", typeof(double), typeof(Badge), new PropertyMetadata(0.0));
+            DependencyProperty.Register("OffsetY", typeof(double), typeof(FlatBadge), new PropertyMetadata(0.0));
 
         public double OffsetY
         {
@@ -151,7 +151,7 @@ namespace FlatUI.Library.Controls
         /// 显示的文本（自定义）
         /// </summary>
         public static readonly DependencyProperty DisplayTextProperty =
-            DependencyProperty.Register("DisplayText", typeof(string), typeof(Badge), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("DisplayText", typeof(string), typeof(FlatBadge), new PropertyMetadata(string.Empty));
 
         public string DisplayText
         {

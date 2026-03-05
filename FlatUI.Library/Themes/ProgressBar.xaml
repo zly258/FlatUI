@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- 进度条控件样式 -->
-    <Style TargetType="controls:ProgressBar">
+    <Style TargetType="controls:FlatProgressBar">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
@@ -18,7 +18,7 @@
         <Setter Property="MinHeight" Value="8"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:ProgressBar">
+                <ControlTemplate TargetType="controls:FlatProgressBar">
                     <Grid x:Name="Root">
                         
                         <!-- 线性进度条 -->

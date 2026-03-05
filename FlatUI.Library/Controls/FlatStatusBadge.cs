@@ -13,15 +13,15 @@ namespace FlatUI.Library.Controls
         Info
     }
 
-    public class StatusBadge : System.Windows.Controls.Control
+    public class FlatStatusBadge : System.Windows.Controls.Control
     {
-        static StatusBadge()
+        static FlatStatusBadge()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(StatusBadge), new FrameworkPropertyMetadata(typeof(StatusBadge)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatStatusBadge), new FrameworkPropertyMetadata(typeof(FlatStatusBadge)));
         }
 
         public static readonly DependencyProperty StatusProperty =
-            DependencyProperty.Register("Status", typeof(StatusType), typeof(StatusBadge), new PropertyMetadata(StatusType.Default));
+            DependencyProperty.Register("Status", typeof(StatusType), typeof(FlatStatusBadge), new PropertyMetadata(StatusType.Default));
 
         public StatusType Status
         {
@@ -30,7 +30,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(StatusBadge), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Text", typeof(string), typeof(FlatStatusBadge), new PropertyMetadata(string.Empty));
 
         public string Text
         {

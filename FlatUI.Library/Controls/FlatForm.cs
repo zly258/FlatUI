@@ -11,11 +11,14 @@ namespace FlatUI.Library.Controls
         }
     }
 
-    public class Form : ItemsControl
+    /// <summary>
+    /// 表单控件
+    /// </summary>
+    public class FlatForm : ItemsControl
     {
-        static Form()
+        static FlatForm()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Form), new FrameworkPropertyMetadata(typeof(Form)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatForm), new FrameworkPropertyMetadata(typeof(FlatForm)));
         }
     }
 }

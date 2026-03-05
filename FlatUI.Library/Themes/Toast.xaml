@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FlatUI.Library.Controls">
+    
+    <Style TargetType="{x:Type controls:FlatToast}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="Padding" Value="15"/>
+        <!-- CornerRadius 属性将在模板中设置 -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:FlatToast}">
+                    <Border x:Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        
+                        <!-- 阴影效果 -->
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="#40000000"/>
+                        </Border.Effect>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- 图标 -->
+                            <Path x:Name="Icon"
+                                  Grid.Column="0"
+                                  Data="{Binding Type, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToastTypeToIconConverter}}"
+                                  Fill="{Binding Type, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToastTypeToColorConverter}}"
+                                  Width="20" Height="20"
+                                  Stretch="Uniform"
+                                  Margin="0,0,10,0"
+                                  VerticalAlignment="Center"
+                                  Visibility="{TemplateBinding ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            
+                            <!-- 内容 -->
+                            <ContentPresenter Grid.Column="1"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              VerticalAlignment="Center"/>
+                            
+                            <!-- 关闭按钮 -->
+                            <Button x:Name="PART_CloseButton"
+                                    Grid.Column="2"
+                                    Content="✕"
+                                    Width="20" Height="20"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="{DynamicResource TextSecondaryBrush}"
+                                    FontSize="12"
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Visibility="{TemplateBinding ShowCloseButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="Transparent" CornerRadius="10">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource RegionHoverBrush}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <!-- 根据类型设置背景色 -->
+                        <Trigger Property="Type" Value="{x:Static controls:ToastType.Success}">
+                            <Setter TargetName="RootBorder" Property="Background" Value="{DynamicResource SuccessLightBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                        </Trigger>
+                        <Trigger Property="Type" Value="{x:Static controls:ToastType.Warning}">
+                            <Setter TargetName="RootBorder" Property="Background" Value="{DynamicResource WarningLightBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderBrush" Value="{DynamicResource WarningBrush}"/>
+                        </Trigger>
+                        <Trigger Property="Type" Value="{x:Static controls:ToastType.Error}">
+                            <Setter TargetName="RootBorder" Property="Background" Value="{DynamicResource ErrorLightBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderBrush" Value="{DynamicResource ErrorBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

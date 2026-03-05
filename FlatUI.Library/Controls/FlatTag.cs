@@ -9,11 +9,11 @@ namespace FlatUI.Library.Controls
     /// <summary>
     /// 标签控件 - 支持可关闭、可编辑、可选择
     /// </summary>
-    public class Tag : ContentControl
+    public class FlatTag : ContentControl
     {
-        static Tag()
+        static FlatTag()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Tag), new FrameworkPropertyMetadata(typeof(Tag)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatTag), new FrameworkPropertyMetadata(typeof(FlatTag)));
         }
 
         #region 事件
@@ -28,7 +28,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly RoutedEvent CloseClickEvent =
-            EventManager.RegisterRoutedEvent("CloseClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Tag));
+            EventManager.RegisterRoutedEvent("CloseClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FlatTag));
 
         /// <summary>
         /// 编辑完成事件
@@ -40,7 +40,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly RoutedEvent EditCompleteEvent =
-            EventManager.RegisterRoutedEvent("EditComplete", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Tag));
+            EventManager.RegisterRoutedEvent("EditComplete", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FlatTag));
 
         #endregion
 
@@ -49,44 +49,40 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 是否显示关闭按钮
         /// </summary>
-        public static readonly DependencyProperty ClosableProperty =
-            DependencyProperty.Register("Closable", typeof(bool), typeof(Tag), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register("IsClosable", typeof(bool), typeof(FlatTag), new PropertyMetadata(false));
 
-        public bool Closable
+        public bool IsClosable
         {
-            get => (bool)GetValue(ClosableProperty);
-            set => SetValue(ClosableProperty, value);
+            get => (bool)GetValue(IsClosableProperty);
+            set => SetValue(IsClosableProperty, value);
         }
 
         /// <summary>
         /// 是否可编辑
         /// </summary>
-        public static readonly DependencyProperty EditableProperty =
-            DependencyProperty.Register("Editable", typeof(bool), typeof(Tag), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsEditableProperty = DependencyProperty.Register("IsEditable", typeof(bool), typeof(FlatTag), new PropertyMetadata(false));
 
-        public bool Editable
+        public bool IsEditable
         {
-            get => (bool)GetValue(EditableProperty);
-            set => SetValue(EditableProperty, value);
+            get => (bool)GetValue(IsEditableProperty);
+            set => SetValue(IsEditableProperty, value);
         }
 
         /// <summary>
         /// 是否可选中
         /// </summary>
-        public static readonly DependencyProperty SelectableProperty =
-            DependencyProperty.Register("Selectable", typeof(bool), typeof(Tag), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsSelectableProperty = DependencyProperty.Register("IsSelectable", typeof(bool), typeof(FlatTag), new PropertyMetadata(false));
 
-        public bool Selectable
+        public bool IsSelectable
         {
-            get => (bool)GetValue(SelectableProperty);
-            set => SetValue(SelectableProperty, value);
+            get => (bool)GetValue(IsSelectableProperty);
+            set => SetValue(IsSelectableProperty, value);
         }
 
         /// <summary>
         /// 是否被选中
         /// </summary>
-        public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(Tag), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(FlatTag), new PropertyMetadata(false));
 
         public bool IsSelected
         {
@@ -98,7 +94,7 @@ namespace FlatUI.Library.Controls
         /// 是否正在编辑
         /// </summary>
         public static readonly DependencyProperty IsEditingProperty =
-            DependencyProperty.Register("IsEditing", typeof(bool), typeof(Tag), new PropertyMetadata(false));
+            DependencyProperty.Register("IsEditing", typeof(bool), typeof(FlatTag), new PropertyMetadata(false));
 
         public bool IsEditing
         {
@@ -110,7 +106,7 @@ namespace FlatUI.Library.Controls
         /// 标签类型（样式）
         /// </summary>
         public static readonly DependencyProperty TagTypeProperty =
-            DependencyProperty.Register("TagType", typeof(TagType), typeof(Tag), new PropertyMetadata(TagType.Default));
+            DependencyProperty.Register("TagType", typeof(TagType), typeof(FlatTag), new PropertyMetadata(TagType.Default));
 
         public TagType TagType
         {
@@ -122,7 +118,7 @@ namespace FlatUI.Library.Controls
         /// 图标
         /// </summary>
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Geometry), typeof(Tag), new PropertyMetadata(null));
+            DependencyProperty.Register("Icon", typeof(Geometry), typeof(FlatTag), new PropertyMetadata(null));
 
         public Geometry Icon
         {
@@ -134,7 +130,7 @@ namespace FlatUI.Library.Controls
         /// 背景画刷
         /// </summary>
         public static readonly DependencyProperty TagBackgroundProperty =
-            DependencyProperty.Register("TagBackground", typeof(System.Windows.Media.Brush), typeof(Tag), new PropertyMetadata(null));
+            DependencyProperty.Register("TagBackground", typeof(System.Windows.Media.Brush), typeof(FlatTag), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush TagBackground
         {
@@ -146,7 +142,7 @@ namespace FlatUI.Library.Controls
         /// 前景色
         /// </summary>
         public static readonly DependencyProperty TagForegroundProperty =
-            DependencyProperty.Register("TagForeground", typeof(System.Windows.Media.Brush), typeof(Tag), new PropertyMetadata(null));
+            DependencyProperty.Register("TagForeground", typeof(System.Windows.Media.Brush), typeof(FlatTag), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush TagForeground
         {
@@ -158,7 +154,7 @@ namespace FlatUI.Library.Controls
         /// 边框颜色
         /// </summary>
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register("BorderColor", typeof(System.Windows.Media.Brush), typeof(Tag), new PropertyMetadata(null));
+            DependencyProperty.Register("BorderColor", typeof(System.Windows.Media.Brush), typeof(FlatTag), new PropertyMetadata(null));
 
         public System.Windows.Media.Brush BorderColor
         {
@@ -170,7 +166,7 @@ namespace FlatUI.Library.Controls
         /// 标签大小
         /// </summary>
         public static readonly DependencyProperty TagSizeProperty =
-            DependencyProperty.Register("TagSize", typeof(TagSize), typeof(Tag), new PropertyMetadata(TagSize.Medium));
+            DependencyProperty.Register("TagSize", typeof(TagSize), typeof(FlatTag), new PropertyMetadata(TagSize.Medium));
 
         public TagSize TagSize
         {
@@ -182,7 +178,7 @@ namespace FlatUI.Library.Controls
         /// 圆角半径
         /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Tag), new PropertyMetadata(new CornerRadius(4)));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(FlatTag), new PropertyMetadata(new CornerRadius(4)));
 
         public CornerRadius CornerRadius
         {
@@ -198,12 +194,12 @@ namespace FlatUI.Library.Controls
         {
             base.OnMouseLeftButtonDown(e);
             
-            if (Selectable)
+            if (IsSelectable)
             {
                 IsSelected = !IsSelected;
             }
 
-            if (Editable && !IsEditing)
+            if (IsEditable && !IsEditing)
             {
                 StartEditing();
             }

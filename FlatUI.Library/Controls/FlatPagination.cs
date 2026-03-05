@@ -6,15 +6,18 @@ using System.Windows.Input;
 
 namespace FlatUI.Library.Controls
 {
-    public class Pagination : System.Windows.Controls.Control
+    /// <summary>
+    /// 分页控件
+    /// </summary>
+    public class FlatPagination : System.Windows.Controls.Control
     {
-        static Pagination()
+        static FlatPagination()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Pagination), new FrameworkPropertyMetadata(typeof(Pagination)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlatPagination), new FrameworkPropertyMetadata(typeof(FlatPagination)));
         }
 
         public static readonly DependencyProperty PageIndexProperty =
-            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPageIndexChanged));
+            DependencyProperty.Register("PageIndex", typeof(int), typeof(FlatPagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPageIndexChanged));
 
         public int PageIndex
         {
@@ -23,7 +26,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty TotalCountProperty =
-            DependencyProperty.Register("TotalCount", typeof(int), typeof(Pagination), new PropertyMetadata(0, OnTotalCountChanged));
+            DependencyProperty.Register("TotalCount", typeof(int), typeof(FlatPagination), new PropertyMetadata(0, OnTotalCountChanged));
 
         public int TotalCount
         {
@@ -32,7 +35,7 @@ namespace FlatUI.Library.Controls
         }
 
         public static readonly DependencyProperty PageSizeProperty =
-            DependencyProperty.Register("PageSize", typeof(int), typeof(Pagination), new PropertyMetadata(10, OnTotalCountChanged));
+            DependencyProperty.Register("PageSize", typeof(int), typeof(FlatPagination), new PropertyMetadata(10, OnTotalCountChanged));
 
         public int PageSize
         {
@@ -43,7 +46,7 @@ namespace FlatUI.Library.Controls
         public int TotalPages => TotalCount <= 0 ? 1 : (int)Math.Ceiling((double)TotalCount / PageSize);
 
         public static readonly DependencyProperty ShowTotalProperty =
-            DependencyProperty.Register("ShowTotal", typeof(bool), typeof(Pagination), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowTotal", typeof(bool), typeof(FlatPagination), new PropertyMetadata(true));
 
         public bool ShowTotal
         {
@@ -51,23 +54,31 @@ namespace FlatUI.Library.Controls
             set { SetValue(ShowTotalProperty, value); }
         }
 
-        public static readonly DependencyProperty ShowJumpProperty =
-            DependencyProperty.Register("ShowJump", typeof(bool), typeof(Pagination), new PropertyMetadata(true));
+        public static readonly DependencyProperty ShowQuickJumperProperty =
+            DependencyProperty.Register("ShowQuickJumper", typeof(bool), typeof(FlatPagination), new PropertyMetadata(false));
 
-        public bool ShowJump
+        public static readonly DependencyProperty ShowSizeChangerProperty = DependencyProperty.Register("ShowSizeChanger", typeof(bool), typeof(FlatPagination), new PropertyMetadata(false));
+
+        public bool ShowSizeChanger
         {
-            get { return (bool)GetValue(ShowJumpProperty); }
-            set { SetValue(ShowJumpProperty, value); }
+            get => (bool)GetValue(ShowSizeChangerProperty);
+            set => SetValue(ShowSizeChangerProperty, value);
+        }
+
+        public bool ShowQuickJumper
+        {
+            get => (bool)GetValue(ShowQuickJumperProperty);
+            set => SetValue(ShowQuickJumperProperty, value);
         }
 
         private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Pagination p) p.UpdatePages();
+            if (d is FlatPagination p) p.UpdatePages();
         }
 
         private static void OnTotalCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Pagination p) p.UpdatePages();
+            if (d is FlatPagination p) p.UpdatePages();
         }
 
         public ObservableCollection<int> Pages { get; } = new ObservableCollection<int>();
