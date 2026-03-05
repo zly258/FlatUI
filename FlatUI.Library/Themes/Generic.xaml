@@ -26,6 +26,7 @@
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Badge.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Tag.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Bubble.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/FlatIcon.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

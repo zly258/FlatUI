@@ -126,6 +126,12 @@
   <data name="Pagination_Total" xml:space="preserve">
     <value>共 {0} 条</value>
   </data>
+  <data name="Pagination_GoTo" xml:space="preserve">
+    <value>跳转</value>
+  </data>
+  <data name="Pagination_OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
   
   <!-- 消息提示 -->
   <data name="Msg_Success" xml:space="preserve">

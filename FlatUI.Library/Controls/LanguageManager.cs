@@ -5,6 +5,7 @@ using System.Resources;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using Application = System.Windows.Application;
 
 namespace FlatUI.Library.Controls
 {

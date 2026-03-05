@@ -15,9 +15,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Control">
                     <Grid>
-                        <Ellipse Stroke="{StaticResource BorderBrush}" StrokeThickness="3"/>
-                        <Path x:Name="PART_Path" Stroke="{StaticResource PrimaryBrush}" StrokeThickness="3" 
-                              Data="M 16,0 A 16,16 0 0 1 32,16" 
+                        <!-- 现代圆形加载动画 -->
+                        <Ellipse x:Name="BackgroundCircle" 
+                                 Stroke="{StaticResource BorderBrush}" 
+                                 StrokeThickness="2" 
+                                 Opacity="0.3"/>
+                        
+                        <!-- 主加载弧线 -->
+                        <Path x:Name="MainArc" 
+                              Stroke="{StaticResource PrimaryBrush}" 
+                              StrokeThickness="3" 
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              Data="M 16,2 A 14,14 0 0 1 30,16" 
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <RotateTransform Angle="0"/>
@@ -33,6 +43,111 @@
                                 </EventTrigger>
                             </Path.Triggers>
                         </Path>
+                        
+                        <!-- 辅助加载弧线（反向旋转） -->
+                        <Path x:Name="SecondaryArc" 
+                              Stroke="{StaticResource PrimaryLightBrush}" 
+                              StrokeThickness="2" 
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              Data="M 16,2 A 14,14 0 0 0 2,16" 
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="0"/>
+                            </Path.RenderTransform>
+                            <Path.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" 
+                                                             From="0" To="-360" Duration="0:0:1.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Path.Triggers>
+                        </Path>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 小尺寸Spinner -->
+    <Style x:Key="FlatSpinnerSmall" TargetType="Control" BasedOn="{StaticResource FlatSpinner}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+    </Style>
+
+    <!-- 大尺寸Spinner -->
+    <Style x:Key="FlatSpinnerLarge" TargetType="Control" BasedOn="{StaticResource FlatSpinner}">
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+    </Style>
+
+    <!-- 点状Spinner -->
+    <Style x:Key="FlatSpinnerDots" TargetType="Control">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid>
+                        <!-- 三个点状加载动画 -->
+                        <Ellipse x:Name="Dot1" 
+                                 Fill="{StaticResource PrimaryBrush}" 
+                                 Width="4" Height="4" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Top" 
+                                 Margin="0,4,0,0">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                             From="0.3" To="1" Duration="0:0:0.6" 
+                                                             AutoReverse="True" BeginTime="0:0:0"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                        </Ellipse>
+                        
+                        <Ellipse x:Name="Dot2" 
+                                 Fill="{StaticResource PrimaryBrush}" 
+                                 Width="4" Height="4" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                             From="0.3" To="1" Duration="0:0:0.6" 
+                                                             AutoReverse="True" BeginTime="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                        </Ellipse>
+                        
+                        <Ellipse x:Name="Dot3" 
+                                 Fill="{StaticResource PrimaryBrush}" 
+                                 Width="4" Height="4" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Bottom" 
+                                 Margin="0,0,0,4">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                             From="0.3" To="1" Duration="0:0:0.6" 
+                                                             AutoReverse="True" BeginTime="0:0:0.4"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                        </Ellipse>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

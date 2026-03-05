@@ -26,6 +26,7 @@
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{DynamicResource TextSecondaryColor}"/>
     <SolidColorBrush x:Key="TextDisabledBrush" Color="{DynamicResource TextDisabledColor}"/>
     <SolidColorBrush x:Key="WhiteTextBrush" Color="{DynamicResource WhiteTextColor}"/>
+    <SolidColorBrush x:Key="TextOnPrimaryBrush" Color="{DynamicResource WhiteTextColor}"/>
     
     <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
     <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>

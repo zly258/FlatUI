@@ -65,27 +65,98 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="border"
+                    <Border x:Name="RootBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{StaticResource ControlCornerRadius}">
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Margin="5,0"/>
-                            <Path Grid.Column="1" Data="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                                  Fill="{StaticResource TextSecondaryBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                            
+                            <!-- 搜索图标 -->
+                            <Path Grid.Column="0" 
+                                  Data="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                                  Fill="{StaticResource TextSecondaryBrush}" 
+                                  Width="16" Height="16" 
+                                  Stretch="Uniform" 
+                                  Margin="8,0,0,0" 
+                                  VerticalAlignment="Center"/>
+                            
+                            <!-- 输入区域 -->
+                            <ScrollViewer Grid.Column="1" 
+                                          x:Name="PART_ContentHost" 
+                                          VerticalAlignment="Center" 
+                                          Margin="8,0"/>
+                            
+                            <!-- 清除按钮（有文本时显示） -->
+                            <Button x:Name="ClearButton"
+                                    Grid.Column="2"
+                                    Content="✕"
+                                    Width="20" Height="20"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="{StaticResource TextSecondaryBrush}"
+                                    FontSize="10"
+                                    Margin="0,0,8,0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Visibility="Collapsed">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="Transparent" CornerRadius="10">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource RegionHoverBrush}"/>
+                                                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </Grid>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
+                        <!-- 鼠标悬停效果 -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
                         </Trigger>
+                        
+                        <!-- 焦点效果 -->
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="RootBorder" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                        
+                        <!-- 有文本时显示清除按钮 -->
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value=""/>
+                                <Condition Property="Text" Value="{x:Null}"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed"/>
+                        </MultiTrigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

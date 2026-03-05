@@ -46,18 +46,46 @@
                                     <TextBlock Text="{TemplateBinding Title}" 
                                                VerticalAlignment="Center" 
                                                FontWeight="Bold"
-                                               Foreground="White"/>
+                                               Foreground="{DynamicResource TextOnPrimaryBrush}"/>
                                 </StackPanel>
                                 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
-                                      <Button Content="0" FontFamily="Marlett" Style="{DynamicResource FlatButton}" Width="46" BorderThickness="0" 
-                                              Command="SystemCommands.MinimizeWindowCommand"/>
-                                      <Button x:Name="MaximizeButton" Content="1" FontFamily="Marlett" Style="{DynamicResource FlatButton}" Width="46" BorderThickness="0"
-                                              Command="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:WindowStateToCommandConverter.Instance}}"/>
+                                      <Button Content="0" FontFamily="Marlett" Width="46" BorderThickness="0" 
+                                              Command="SystemCommands.MinimizeWindowCommand">
+                                          <Button.Style>
+                                               <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                                   <Setter Property="Background" Value="Transparent"/>
+                                                   <Setter Property="Foreground" Value="{DynamicResource TextOnPrimaryBrush}"/>
+                                                   <Style.Triggers>
+                                                       <Trigger Property="IsMouseOver" Value="True">
+                                                           <Setter Property="Background" Value="{DynamicResource PrimaryHoverBrush}"/>
+                                                           <Setter Property="Foreground" Value="{DynamicResource TextOnPrimaryBrush}"/>
+                                                       </Trigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                           </Button.Style>
+                                      </Button>
+                                      <Button x:Name="MaximizeButton" Content="1" FontFamily="Marlett" Width="46" BorderThickness="0"
+                                              Command="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:WindowStateToCommandConverter.Instance}}">
+                                          <Button.Style>
+                                               <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                                   <Setter Property="Background" Value="Transparent"/>
+                                                   <Setter Property="Foreground" Value="{DynamicResource TextOnPrimaryBrush}"/>
+                                                   <Style.Triggers>
+                                                       <Trigger Property="IsMouseOver" Value="True">
+                                                           <Setter Property="Background" Value="{DynamicResource PrimaryHoverBrush}"/>
+                                                           <Setter Property="Foreground" Value="{DynamicResource TextOnPrimaryBrush}"/>
+                                                       </Trigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                           </Button.Style>
+                                      </Button>
                                       <Button Content="r" FontFamily="Marlett" Width="46" BorderThickness="0"
                                               Command="SystemCommands.CloseWindowCommand">
                                           <Button.Style>
                                                <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
+                                                   <Setter Property="Background" Value="Transparent"/>
+                                                   <Setter Property="Foreground" Value="{DynamicResource TextOnPrimaryBrush}"/>
                                                    <Style.Triggers>
                                                        <Trigger Property="IsMouseOver" Value="True">
                                                            <Setter Property="Background" Value="#E81123"/>

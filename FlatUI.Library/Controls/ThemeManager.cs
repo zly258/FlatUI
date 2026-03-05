@@ -74,10 +74,20 @@ namespace FlatUI.Library.Controls
 
             foreach (Window window in System.Windows.Application.Current.Windows)
             {
+                // 强制刷新窗口资源
                 window.Resources["PrimaryBrush"] = System.Windows.Application.Current.FindResource("PrimaryBrush");
                 window.Resources["PrimaryHoverBrush"] = System.Windows.Application.Current.FindResource("PrimaryHoverBrush");
                 window.Resources["PrimaryPressedBrush"] = System.Windows.Application.Current.FindResource("PrimaryPressedBrush");
                 window.Resources["PrimaryLightBrush"] = System.Windows.Application.Current.FindResource("PrimaryLightBrush");
+                
+                // 强制刷新窗口标题栏背景色
+                if (window is FlatWindow flatWindow)
+                {
+                    // 强制重新应用窗口模板
+                    var template = flatWindow.Template;
+                    flatWindow.Template = null;
+                    flatWindow.Template = template;
+                }
             }
         }
     }

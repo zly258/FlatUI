@@ -126,6 +126,12 @@
   <data name="Pagination_Total" xml:space="preserve">
     <value>Total {0} items</value>
   </data>
+  <data name="Pagination_GoTo" xml:space="preserve">
+    <value>Go to</value>
+  </data>
+  <data name="Pagination_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
   
   <!-- Messages -->
   <data name="Msg_Success" xml:space="preserve">
