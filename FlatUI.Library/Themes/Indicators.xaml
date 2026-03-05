@@ -47,4 +47,42 @@
         </Style.Resources>
     </Style>
 
+    <!-- Tag Style -->
+    <Style x:Key="FlatTag" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="Margin" Value="0,0,8,8"/>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="PrimaryTag" TargetType="Border" BasedOn="{StaticResource FlatTag}">
+        <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="SuccessTag" TargetType="Border" BasedOn="{StaticResource FlatTag}">
+        <Setter Property="Background" Value="{StaticResource SuccessLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SuccessBrush}"/>
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
 </ResourceDictionary>

@@ -13,17 +13,27 @@
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
+        <!-- 开启虚拟化 -->
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TreeView">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer Focusable="False" CanContentScroll="False">
+                        <ScrollViewer Focusable="False" CanContentScroll="True">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </Border>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
     </Style>

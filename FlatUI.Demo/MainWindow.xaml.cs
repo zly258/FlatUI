@@ -1,147 +1,164 @@
-using System.Text;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using FlatUI.Library.Controls;
+using FlatUI.Demo.Views;
 
-using System.Collections.ObjectModel;
- using FlatUI.Library.Controls;
-
- namespace FlatUI.Demo;
-
- public partial class MainWindow : FlatWindow
+namespace FlatUI.Demo
+{
+    public partial class MainWindow : FlatWindow
     {
-     public ObservableCollection<DemoItem> Items { get; set; }
-     public ObservableCollection<PropertyItem> PropertyList { get; set; }
-     public ObservableCollection<CardItem> CardItems { get; set; }
-     public List<double> ChartData { get; set; } = new List<double> { 10, 25, 15, 40, 20, 35, 30 };
+        public MainWindow()
+        {
+            InitializeComponent();
+            
+            DataContext = this;
+            Loaded += (s, e) => {
+                NotificationService.RegisterHost(this);
+                TrayManager.Initialize("FlatUI Demo", System.Drawing.SystemIcons.Application);
+                 
+                 var menu = new System.Windows.Forms.ContextMenuStrip();
+                 menu.Items.Add("Show MainWindow", null, (s, e) => {
+                     this.Show();
+                     this.WindowState = WindowState.Normal;
+                     this.Activate();
+                 });
+                 menu.Items.Add("Exit", null, (s, e) => Application.Current.Shutdown());
+                 TrayManager.SetContextMenu(menu);
 
-     public MainWindow()
-     {
-         InitializeComponent();
-         
-         Items = new ObservableCollection<DemoItem>
-         {
-             new DemoItem { Id = 1, Name = "Sensor Alpha", Status = "Online", Value = 45.2 },
-             new DemoItem { Id = 2, Name = "Sensor Beta", Status = "Offline", Value = 0.0 },
-             new DemoItem { Id = 3, Name = "Sensor Gamma", Status = "Online", Value = 12.8 },
-             new DemoItem { Id = 4, Name = "Sensor Delta", Status = "Warning", Value = 88.5 },
-         };
+                 // 初始化默认视图
+                 MainContent.Content = new DashboardView();
+             };
+            
+            Closed += (s, e) => TrayManager.Dispose();
+        }
 
-         PropertyList = new ObservableCollection<PropertyItem>
-         {
-             new PropertyItem { Category = "Device", Name = "Model", Value = "S-2000" },
-             new PropertyItem { Category = "Device", Name = "Firmware", Value = "1.2.4" },
-             new PropertyItem { Category = "Network", Name = "IP Address", Value = "192.168.1.50" },
-             new PropertyItem { Category = "Network", Name = "Port", Value = 8080 },
-         };
+        private void NavList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (NavList?.SelectedItem is not ListBoxItem item || MainContent == null)
+                return;
+                
+            var tag = item.Tag?.ToString();
+            if (ViewTitle != null) ViewTitle.Text = GetViewTitle(tag);
+            
+            switch (tag)
+            {
+                case "Dashboard":
+                    MainContent.Content = new DashboardView();
+                    break;
+                case "Chart":
+                    MainContent.Content = new ChartView();
+                    break;
+                case "Avatar":
+                    MainContent.Content = new AvatarView();
+                    break;
+                case "Badge":
+                    MainContent.Content = new BadgeView();
+                    break;
+                case "Tag":
+                    MainContent.Content = new TagView();
+                    break;
+                case "Bubble":
+                    MainContent.Content = new BubbleView();
+                    break;
+                case "Settings":
+                    MainContent.Content = new SettingsView();
+                    break;
+            }
+        }
 
-         CardItems = new ObservableCollection<CardItem>
-         {
-             new CardItem { Title = "Storage A", Subtitle = "Local SSD", Description = "Capacity: 1TB, Used: 450GB", Progress = 45 },
-             new CardItem { Title = "Storage B", Subtitle = "NAS Storage", Description = "Capacity: 10TB, Used: 8.2TB", Progress = 82 },
-             new CardItem { Title = "Cloud Cache", Subtitle = "Azure Cache", Description = "Capacity: 500GB, Used: 120GB", Progress = 24 },
-         };
-         
-         DataContext = this;
-         Loaded += (s, e) => {
-             NotificationService.RegisterHost(this);
-             TrayManager.Initialize("FlatUI Demo", System.Drawing.SystemIcons.Application);
-              
-              var menu = new System.Windows.Forms.ContextMenuStrip();
-              menu.Items.Add("Show MainWindow", null, (s, e) => {
-                  this.Show();
-                  this.WindowState = WindowState.Normal;
-                  this.Activate();
-              });
-              menu.Items.Add("Exit", null, (s, e) => Application.Current.Shutdown());
-              TrayManager.SetContextMenu(menu);
-          };
-         
-         Closed += (s, e) => TrayManager.Dispose();
-      }
+        private string GetViewTitle(string? tag)
+        {
+            // 使用 LanguageManager 获取本地化的标题
+            if (string.IsNullOrEmpty(tag)) return "";
+            
+            switch (tag)
+            {
+                case "Dashboard": return LanguageManager.Instance.GetString("Nav_Dashboard");
+                case "Chart": return LanguageManager.Instance.GetString("Nav_Chart");
+                case "Avatar": return LanguageManager.Instance.GetString("Nav_Avatar");
+                case "Badge": return LanguageManager.Instance.GetString("Nav_Badge");
+                case "Tag": return LanguageManager.Instance.GetString("Nav_Tag");
+                case "Bubble": return LanguageManager.Instance.GetString("Nav_Bubble");
+                case "Settings": return LanguageManager.Instance.GetString("Nav_Settings");
+                default: return tag ?? "";
+            }
+        }
 
-      private void TestDialog_Click(object sender, RoutedEventArgs e)
-      {
-          FlatMessageBox.Show("This is a custom flat message box for industrial software applications.", "System Notice", this);
-      }
+        private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LanguageSelector.SelectedItem is ComboBoxItem item)
+            {
+                var lang = item.Tag?.ToString();
+                if (!string.IsNullOrEmpty(lang))
+                {
+                    // 切换语言
+                    if (lang == "zh-CN")
+                    {
+                        LanguageManager.Instance.SwitchToChinese();
+                        // 更新当前选中项的显示文本
+                        item.Content = "简体中文";
+                    }
+                    else if (lang == "en-US")
+                    {
+                        LanguageManager.Instance.SwitchToEnglish();
+                        // 更新当前选中项的显示文本
+                        item.Content = "English";
+                    }
+                    
+                    // 刷新当前视图标题
+                    if (NavList.SelectedItem is ListBoxItem selected)
+                    {
+                        var tag = selected.Tag?.ToString();
+                        if (ViewTitle != null) ViewTitle.Text = GetViewTitle(tag);
+                    }
+                }
+            }
+        }
 
-      private void Notify_Click(object sender, RoutedEventArgs e)
-      {
-          var types = new[] { StatusType.Info, StatusType.Success, StatusType.Warning, StatusType.Error };
-          var random = new Random();
-          var type = types[random.Next(types.Length)];
-          NotificationService.Show($"Event of type '{type}'", "This is a notification message that will disappear automatically.", type);
-      }
+        private bool _isCollapsed = false;
+        private void CollapseNav_Click(object sender, RoutedEventArgs e)
+        {
+            _isCollapsed = !_isCollapsed;
+            SideColumn.Width = _isCollapsed ? new GridLength(60) : new GridLength(220);
+            LogoText.Visibility = _isCollapsed ? Visibility.Collapsed : Visibility.Visible;
+            if (sender is Button btn)
+            {
+                btn.Content = _isCollapsed ? ">" : "Collapse";
+            }
+        }
 
-      private void OpenDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = true;
-      private void CloseDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = false;
+        private void Notify_Click(object sender, RoutedEventArgs e)
+        {
+            NotificationService.Show("System Notification", "You have a new message from the dashboard.", StatusType.Info);
+        }
 
-      private void SetLightMode_Click(object sender, RoutedEventArgs e) => ThemeManager.ChangeTheme(ThemeMode.Light);
-      private void SetDarkMode_Click(object sender, RoutedEventArgs e) => ThemeManager.ChangeTheme(ThemeMode.Dark);
+        private void Screenshot_Click(object sender, RoutedEventArgs e)
+        {
+            var bmp = ScreenshotService.CaptureScreen();
+            NotificationService.Show("Screenshot", "Screen captured successfully!", StatusType.Success);
+        }
 
-      private void Screenshot_Click(object sender, RoutedEventArgs e)
-      {
-          var bmp = ScreenshotService.CaptureScreen();
-          ScreenshotImage.Source = bmp;
-          NotificationService.Show("Screenshot Captured", "Current screen has been captured and displayed below.", StatusType.Success);
-      }
+        private void FlashTray_v2_Click(object sender, RoutedEventArgs e) => TrayManager.StartFlashing();
+        private void SystemNotify_v2_Click(object sender, RoutedEventArgs e) => NotificationService.ShowSystem("FlatUI", "System notification sent!");
+        private void CloseDrawer_Click(object sender, RoutedEventArgs e) => SideDrawer.IsOpen = false;
+    }
 
-      private void Crop_Click(object sender, RoutedEventArgs e)
-      {
-          var cropped = Cropper.GetCroppedImage();
-          if (cropped != null)
-          {
-              ScreenshotImage.Source = cropped;
-              NotificationService.Show("Image Cropped", "Selected area has been cropped.", StatusType.Success);
-          }
-      }
+    public class DemoItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public double Value { get; set; }
+    }
 
-      private void OpenFloatingWindow_Click(object sender, RoutedEventArgs e)
-      {
-          var fw = new FloatingWindow
-          {
-              IconPathData = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z",
-              Content = new TextBlock { Text = "42", Foreground = (Brush)FindResource("WhiteTextBrush"), FontSize = 20, FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center }
-          };
-          fw.Show();
-      }
-
-      private void FlashTray_Click(object sender, RoutedEventArgs e)
-      {
-          TrayManager.StartFlashing();
-          NotificationService.Show("Tray Flashing", "The tray icon is now flashing.", StatusType.Info);
-      }
-
-      private void StopFlash_Click(object sender, RoutedEventArgs e)
-      {
-          TrayManager.StopFlashing();
-          NotificationService.Show("Flash Stopped", "The tray icon stopped flashing.", StatusType.Success);
-      }
-
-      private void ShowSystemNotify_Click(object sender, RoutedEventArgs e)
-      {
-          NotificationService.ShowSystem("FlatUI System Notify", "This is a native Windows balloon tip notification!");
-      }
-  }
-
-public class DemoItem
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
-    public double Value { get; set; }
-}
-
-public class CardItem
-{
-    public string Title { get; set; } = string.Empty;
-    public string Subtitle { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public int Progress { get; set; }
+    public class CardItem
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Subtitle { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int Progress { get; set; }
+    }
 }

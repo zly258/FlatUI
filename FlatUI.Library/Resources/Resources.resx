@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- 通用文本 -->
+  <data name="OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>暂无数据</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  
+  <!-- 导航菜单 -->
+  <data name="Nav_Dashboard" xml:space="preserve">
+    <value>仪表台</value>
+  </data>
+  <data name="Nav_Components" xml:space="preserve">
+    <value>组件</value>
+  </data>
+  <data name="Nav_DataDisplay" xml:space="preserve">
+    <value>数据展示</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Nav_Chart" xml:space="preserve">
+    <value>图表组件</value>
+  </data>
+  <data name="Nav_Avatar" xml:space="preserve">
+    <value>头像组件</value>
+  </data>
+  <data name="Nav_Badge" xml:space="preserve">
+    <value>徽标组件</value>
+  </data>
+  <data name="Nav_Tag" xml:space="preserve">
+    <value>标签组件</value>
+  </data>
+  <data name="Nav_Bubble" xml:space="preserve">
+    <value>气泡卡片</value>
+  </data>
+  
+  <!-- 组件默认文本 -->
+  <data name="Avatar_DefaultText" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Tag_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Tag_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Bubble_Sender" xml:space="preserve">
+    <value>发送者</value>
+  </data>
+  <data name="Pagination_Previous" xml:space="preserve">
+    <value>上一页</value>
+  </data>
+  <data name="Pagination_Next" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Pagination_Page" xml:space="preserve">
+    <value>页</value>
+  </data>
+  <data name="Pagination_Total" xml:space="preserve">
+    <value>共 {0} 条</value>
+  </data>
+  
+  <!-- 消息提示 -->
+  <data name="Msg_Success" xml:space="preserve">
+    <value>操作成功</value>
+  </data>
+  <data name="Msg_Error" xml:space="preserve">
+    <value>操作失败</value>
+  </data>
+  <data name="Msg_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Msg_Info" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="Msg_ConfirmDelete" xml:space="preserve">
+    <value>确定要删除吗？</value>
+  </data>
+  <data name="Msg_ConfirmSave" xml:space="preserve">
+    <value>确定要保存吗？</value>
+  </data>
+  
+  <!-- 设置 -->
+  <data name="Settings_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_Language_Chinese" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="Settings_Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+</root>

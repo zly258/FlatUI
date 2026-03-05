@@ -17,11 +17,15 @@
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Indicators.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Feedback.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Media.xaml"/>
-        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Charts.xaml"/>
+        <!-- <ResourceDictionary Source="/FlatUI.Library;component/Themes/Charts.xaml"/> -->
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/TreeGrid.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Custom.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Navigation.xaml"/>
         <ResourceDictionary Source="/FlatUI.Library;component/Themes/Window.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Avatar.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Badge.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Tag.xaml"/>
+        <ResourceDictionary Source="/FlatUI.Library;component/Themes/Bubble.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FlatUI.Library.Controls">
     
     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
     <Thickness x:Key="ControlBorderThickness">1</Thickness>
@@ -10,4 +11,13 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
     </Style>
+    
+    <!-- 转换器 -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <controls:ShapeToCornerRadiusConverter x:Key="ShapeToCornerRadiusConverter"/>
+    <controls:WidthToClipConverter x:Key="WidthToClipConverter"/>
+    <controls:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    <controls:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    <controls:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <controls:DoubleToHalfConverter x:Key="DoubleToHalfConverter"/>
 </ResourceDictionary>

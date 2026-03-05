@@ -45,14 +45,11 @@
                                 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
                                       <Button Content="0" FontFamily="Marlett" Style="{DynamicResource FlatButton}" Width="46" BorderThickness="0" 
-                                              Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SystemCommands.MinimizeWindowCommand}"
-                                              CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                              Command="SystemCommands.MinimizeWindowCommand"/>
                                       <Button x:Name="MaximizeButton" Content="1" FontFamily="Marlett" Style="{DynamicResource FlatButton}" Width="46" BorderThickness="0"
-                                              Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SystemCommands.MaximizeWindowCommand}"
-                                              CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                              Command="SystemCommands.MaximizeWindowCommand"/>
                                       <Button Content="r" FontFamily="Marlett" Width="46" BorderThickness="0"
-                                              Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SystemCommands.CloseWindowCommand}"
-                                              CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                                              Command="SystemCommands.CloseWindowCommand">
                                           <Button.Style>
                                                <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
                                                    <Style.Triggers>

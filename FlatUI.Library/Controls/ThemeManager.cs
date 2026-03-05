@@ -14,15 +14,11 @@ namespace FlatUI.Library.Controls
     {
         public static void ChangeTheme(ThemeMode mode)
         {
-            var brushesDict = System.Windows.Application.Current.Resources.MergedDictionaries
+            var genericDict = System.Windows.Application.Current.Resources.MergedDictionaries
                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("FlatUI.Library;component/Themes/Generic.xaml"));
 
-            if (brushesDict == null) return;
+            if (genericDict == null) return;
 
-            // In our structure, Generic.xaml merges Brushes.xaml
-            // Brushes.xaml merges Themes.Light.xaml or Themes.Dark.xaml
-            // We need to find Brushes.xaml inside Generic.xaml
-            var genericDict = brushesDict;
             var brushesSubDict = genericDict.MergedDictionaries
                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Themes/Brushes.xaml"));
 
@@ -34,9 +30,37 @@ namespace FlatUI.Library.Controls
 
             var themeDict = new ResourceDictionary { Source = new Uri(source) };
 
-            // Replace the theme colors
             brushesSubDict.MergedDictionaries.Clear();
             brushesSubDict.MergedDictionaries.Add(themeDict);
+        }
+
+        public static void ChangeAccentColor(System.Windows.Media.Color color)
+        {
+            var genericDict = System.Windows.Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("FlatUI.Library;component/Themes/Generic.xaml"));
+
+            if (genericDict == null) return;
+
+            var brushesSubDict = genericDict.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Themes/Brushes.xaml"));
+
+            if (brushesSubDict == null) return;
+
+            // 动态修改 PrimaryColor
+            brushesSubDict["PrimaryColor"] = color;
+            
+            // 计算 Hover 和 Pressed 颜色
+            brushesSubDict["PrimaryHoverColor"] = System.Windows.Media.Color.FromArgb(
+                color.A,
+                (byte)Math.Min(255, color.R + 20),
+                (byte)Math.Min(255, color.G + 20),
+                (byte)Math.Min(255, color.B + 20));
+
+            brushesSubDict["PrimaryPressedColor"] = System.Windows.Media.Color.FromArgb(
+                color.A,
+                (byte)Math.Max(0, color.R - 20),
+                (byte)Math.Max(0, color.G - 20),
+                (byte)Math.Max(0, color.B - 20));
         }
     }
 }

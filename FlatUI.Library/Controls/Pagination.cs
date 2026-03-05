@@ -40,7 +40,25 @@ namespace FlatUI.Library.Controls
             set { SetValue(PageSizeProperty, value); }
         }
 
-        public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
+        public int TotalPages => TotalCount <= 0 ? 1 : (int)Math.Ceiling((double)TotalCount / PageSize);
+
+        public static readonly DependencyProperty ShowTotalProperty =
+            DependencyProperty.Register("ShowTotal", typeof(bool), typeof(Pagination), new PropertyMetadata(true));
+
+        public bool ShowTotal
+        {
+            get { return (bool)GetValue(ShowTotalProperty); }
+            set { SetValue(ShowTotalProperty, value); }
+        }
+
+        public static readonly DependencyProperty ShowJumpProperty =
+            DependencyProperty.Register("ShowJump", typeof(bool), typeof(Pagination), new PropertyMetadata(true));
+
+        public bool ShowJump
+        {
+            get { return (bool)GetValue(ShowJumpProperty); }
+            set { SetValue(ShowJumpProperty, value); }
+        }
 
         private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -57,8 +75,12 @@ namespace FlatUI.Library.Controls
         private void UpdatePages()
         {
             Pages.Clear();
-            int start = Math.Max(1, PageIndex - 2);
-            int end = Math.Min(TotalPages, start + 4);
+            int total = TotalPages;
+            int current = PageIndex;
+            
+            // 保持显示 5 个页码
+            int start = Math.Max(1, current - 2);
+            int end = Math.Min(total, start + 4);
             if (end - start < 4) start = Math.Max(1, end - 4);
             
             for (int i = start; i <= end; i++) Pages.Add(i);
@@ -66,6 +88,15 @@ namespace FlatUI.Library.Controls
 
         public ICommand PrevCommand => new RelayCommand(_ => PageIndex = Math.Max(1, PageIndex - 1));
         public ICommand NextCommand => new RelayCommand(_ => PageIndex = Math.Min(TotalPages, PageIndex + 1));
-        public ICommand PageCommand => new RelayCommand(p => PageIndex = (int)p!);
+        public ICommand PageCommand => new RelayCommand(p => {
+            if (p is int i) PageIndex = i;
+        });
+
+        public ICommand JumpCommand => new RelayCommand(p => {
+            if (p != null && int.TryParse(p.ToString(), out int page))
+            {
+                PageIndex = Math.Max(1, Math.Min(TotalPages, page));
+            }
+        });
     }
 }

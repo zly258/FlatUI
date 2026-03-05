@@ -1,302 +1,132 @@
 <flat:FlatWindow x:Class="FlatUI.Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FlatUI.Demo"
         xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
-        mc:Ignorable="d"
-        Title="Industrial Flat UI Demo" Height="700" Width="1100">
+        xmlns:views="clr-namespace:FlatUI.Demo.Views"
+        Title="Industrial Flat UI" Height="750" Width="1200">
     <Grid>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_New"/>
-                    <MenuItem Header="_Open"/>
-                    <MenuItem Header="_Save"/>
-                    <Separator/>
-                    <MenuItem Header="_Exit"/>
-                </MenuItem>
-                <MenuItem Header="_Edit">
-                    <MenuItem Header="_Cut"/>
-                    <MenuItem Header="_Copy"/>
-                    <MenuItem Header="_Paste"/>
-                </MenuItem>
-                <MenuItem Header="_View">
-                    <MenuItem Header="Open Drawer" Click="OpenDrawer_Click"/>
-                    <Separator/>
-                    <MenuItem Header="Light Mode" Click="SetLightMode_Click"/>
-                    <MenuItem Header="Dark Mode" Click="SetDarkMode_Click"/>
-                </MenuItem>
-                <MenuItem Header="_Help">
-                    <MenuItem Header="_About"/>
-                </MenuItem>
-            </Menu>
-            
-            <Grid Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="User Profile" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border Style="{StaticResource FlatAvatar}" Margin="0,0,10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SideColumn" Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Background="{DynamicResource RegionBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Margin="20,0" VerticalAlignment="Center">
+                    <Path Data="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" 
+                          Fill="{DynamicResource PrimaryBrush}" Width="24" Height="24" Stretch="Uniform" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="LogoText" Text="FLAT UI" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryBrush}"/>
+                </StackPanel>
+
+                <ListBox x:Name="NavList" Grid.Row="1" Style="{StaticResource SideNavStyle}" ItemContainerStyle="{StaticResource SideNavItemStyle}" SelectionChanged="NavList_SelectionChanged">
+                    <ListBoxItem Tag="Dashboard" IsSelected="True">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="仪表台"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Chart">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="图表组件"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Avatar">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="头像组件"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Badge">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="徽标组件"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Tag">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="标签组件"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Bubble">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="气泡卡片"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="Settings">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.81,11.69,4.81,12c0,0.31,0.02,0.65,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z" Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="Settings"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+
+                <Button Grid.Row="2" Content="Collapse" Style="{DynamicResource FlatButton}" Margin="10" Click="CollapseNav_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Background="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+                <Grid Margin="20,0">
+                    <TextBlock x:Name="ViewTitle" Text="Dashboard" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <!-- 语言切换按钮 -->
+                        <ComboBox x:Name="LanguageSelector" Width="120" Margin="0,0,15,0" 
+                                  SelectionChanged="LanguageSelector_SelectionChanged"
+                                  VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="简体中文" Tag="zh-CN"/>
+                            <ComboBoxItem Content="English" Tag="en-US"/>
+                        </ComboBox>
+                        
+                        <Button Style="{StaticResource IconButton}" Content="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" ToolTip="Notifications" Click="Notify_Click"/>
+                        <Border Style="{StaticResource FlatAvatar}" Margin="15,0,0,0" ToolTip="Admin User">
                             <TextBlock Text="AD"/>
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Admin User" FontWeight="Bold"/>
-                            <TextBlock Text="System Manager" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
-                        </StackPanel>
                     </StackPanel>
-
-                    <TextBlock Text="Navigation" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <ListBox Style="{StaticResource SideNavStyle}" ItemContainerStyle="{StaticResource SideNavItemStyle}">
-                        <ListBoxItem Content="Dashboard" IsSelected="True"/>
-                        <ListBoxItem Content="Monitoring"/>
-                        <ListBoxItem Content="History"/>
-                        <ListBoxItem Content="Settings"/>
-                    </ListBox>
-
-                    <TextBlock Text="Status Badges" FontWeight="Bold" Margin="0,15,0,5"/>
-                    <flat:StatusBadge Status="Success" Text="System Online" Margin="0,0,0,5"/>
-                    <flat:StatusBadge Status="Warning" Text="High Temperature" Margin="0,0,0,5"/>
-                    
-                    <TextBlock Text="Quick Actions" FontWeight="Bold" Margin="0,15,0,5"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource IconButton}" Content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" ToolTip="Add Device"/>
-                        <Button Style="{StaticResource IconButton}" Content="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ToolTip="Edit Layout" Margin="5,0"/>
-                        <Button Style="{StaticResource IconButton}" Content="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" ToolTip="Delete Selected" Margin="5,0"/>
-                    </StackPanel>
-                </StackPanel>
-                
-                <Grid Grid.Column="1" Margin="20,0,0,0">
-                    <TabControl>
-                        <TabItem Header="Data &amp; Paging">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                
-                                <Grid Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Style="{StaticResource FlatSearchBox}" Width="250" HorizontalAlignment="Left" Tag="Filter devices..."/>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <CheckBox Style="{StaticResource FlatSwitch}" IsChecked="True" VerticalAlignment="Center" Margin="0,0,10,0" ToolTip="Real-time Monitoring"/>
-                                        <TextBlock Text="Auto-refresh" VerticalAlignment="Center" FontSize="12"/>
-                                    </StackPanel>
-                                </Grid>
-
-                                <DataGrid Grid.Row="1" ItemsSource="{Binding Items}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                                        <DataGridTemplateColumn Header="Status" Width="100">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <flat:StatusBadge Status="Success" Text="{Binding Status}"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="80"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                
-                                <flat:Pagination Grid.Row="2" Margin="0,15,0,0" TotalCount="100" PageSize="10" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </TabItem>
-                        
-                        <TabItem Header="Cards &amp; Flow">
-                            <ScrollViewer>
-                                <ItemsControl ItemsSource="{Binding CardItems}" Margin="10">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <HeaderedContentControl Header="{Binding Title}" Style="{StaticResource FlatCard}" Width="250" Margin="10">
-                                                <StackPanel>
-                                                    <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
-                                                    <TextBlock Text="{Binding Description}" Margin="0,10" TextWrapping="Wrap"/>
-                                                    <ProgressBar Value="{Binding Progress}" Margin="0,5"/>
-                                                    <TextBlock Text="{Binding Progress, StringFormat={}{0}%}" FontSize="10" HorizontalAlignment="Right"/>
-                                                </StackPanel>
-                                            </HeaderedContentControl>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </TabItem>
-
-                        <TabItem Header="Advanced Forms">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <ScrollViewer Grid.Column="0">
-                                    <flat:Form>
-                                        <flat:FormItem Header="Device Name">
-                                            <TextBox Text="Main Processor"/>
-                                        </flat:FormItem>
-                                        <flat:FormItem Header="Threshold">
-                                            <flat:NumericUpDown Value="45.5" Minimum="0" Maximum="100" Increment="0.5"/>
-                                        </flat:FormItem>
-                                        <flat:FormItem Header="Selection">
-                                            <flat:DropdownGrid ItemsSource="{Binding Items}"/>
-                                        </flat:FormItem>
-                                        <flat:FormItem Header="Actions">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button Content="Save" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
-                                                <Button Content="Notify" Click="Notify_Click" Margin="0,0,10,0"/>
-                                                <Button Content="Test Dialog" Click="TestDialog_Click"/>
-                                            </StackPanel>
-                                        </flat:FormItem>
-                                        <flat:FormItem Header="Feedback">
-                                            <StackPanel>
-                                                <Control Style="{StaticResource FlatSpinner}" Margin="0,0,0,20"/>
-                                                <Control Style="{StaticResource FlatSkeleton}" Width="200" HorizontalAlignment="Left"/>
-                                            </StackPanel>
-                                        </flat:FormItem>
-                                    </flat:Form>
-                                </ScrollViewer>
-
-                                <Grid Grid.Column="1" Margin="10,0,0,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="Properties (Grouped)" FontWeight="Bold" Margin="0,0,0,10"/>
-                                    <flat:PropertyGrid Grid.Row="1" Properties="{Binding PropertyList}"/>
-                                </Grid>
-                            </Grid>
-                        </TabItem>
-                        
-                        <TabItem Header="Empty States">
-                            <HeaderedContentControl Style="{StaticResource FlatEmptyState}" Header="No data available">
-                                <Button Content="Initialize Database" Style="{StaticResource PrimaryButton}"/>
-                            </HeaderedContentControl>
-                        </TabItem>
-
-                        <TabItem Header="Tree &amp; Media">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <ScrollViewer Grid.Column="0">
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="Simple TreeGrid" FontWeight="Bold" Margin="0,0,0,10"/>
-                                        <TreeView Style="{StaticResource FlatTreeGrid}" ItemContainerStyle="{StaticResource TreeGridItem}">
-                                            <TreeViewItem Header="Production Line A">
-                                                <TreeViewItem Header="Conveyor 1 - Running"/>
-                                                <TreeViewItem Header="Robot Arm 2 - Idle"/>
-                                            </TreeViewItem>
-                                            <TreeViewItem Header="Production Line B">
-                                                <TreeViewItem Header="Conveyor 3 - Error"/>
-                                            </TreeViewItem>
-                                        </TreeView>
-                                        
-                                        <TextBlock Text="Simple Charts (Sparklines)" FontWeight="Bold" Margin="0,20,0,10"/>
-                                        <ItemsControl Style="{StaticResource FlatSparkline}" ItemsSource="{Binding ChartData}"/>
-                                    </StackPanel>
-                                </ScrollViewer>
-
-                                <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                    <TextBlock Text="Media &amp; Tools" FontWeight="Bold" Margin="0,0,0,10"/>
-                                    <Border Style="{StaticResource FlatImage}" Width="200" Height="150" HorizontalAlignment="Left" Margin="0,0,0,20">
-                                        <TextBlock Text="Image Placeholder" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}"/>
-                                    </Border>
-                                    
-                                    <TextBlock Text="QRCode Placeholder" FontSize="12" Margin="0,0,0,5"/>
-                                    <Control Style="{StaticResource FlatQRCode}" HorizontalAlignment="Left"/>
-                                </StackPanel>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="System &amp; Tools">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <DockPanel Grid.Column="0" Margin="10">
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
-                                        <Button Content="Take Screenshot" Click="Screenshot_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"/>
-                                        <Button Content="Crop Selection" Click="Crop_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
-                                        <Button Content="Show Floating Ball" Click="OpenFloatingWindow_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
-                                        <Button Content="Flash Tray" Click="FlashTray_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
-                                        <Button Content="Stop Flash" Click="StopFlash_Click" Style="{DynamicResource FlatButton}" Margin="0,0,10,0"/>
-                                        <Button Content="System Notify" Click="ShowSystemNotify_Click" Style="{DynamicResource FlatButton}"/>
-                                    </StackPanel>
-                                    
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
-                                            <flat:ImageCropper x:Name="Cropper" Source="{Binding ElementName=ScreenshotImage, Path=Source}"/>
-                                        </Border>
-                                        <Image x:Name="ScreenshotImage" Grid.Row="1" MaxHeight="200" Margin="0,10,0,0" Stretch="Uniform"/>
-                                    </Grid>
-                                </DockPanel>
-
-                                <StackPanel Grid.Column="1" Margin="10">
-                                    <TextBlock Text="Draggable List" FontWeight="Bold" Margin="0,0,0,10"/>
-                                    <ListBox ItemsSource="{Binding Items}" flat:DragDropHelper.IsEnabled="True" Height="200">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" Padding="5"/>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <TextBlock Text="* Try dragging items to reorder" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,5,0,0"/>
-
-                                    <TextBlock Text="LED Indicators" FontWeight="Bold" Margin="0,20,0,10"/>
-                                    <flat:LedText Text="23:59:59" Margin="0,0,0,10"/>
-                                    <flat:LedText Text="128.5 kW" LedColor="Orange"/>
-                                </StackPanel>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
                 </Grid>
-            </Grid>
-        </DockPanel>
-        
-        <flat:Drawer x:Name="SideDrawer" Background="{StaticResource BackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" DrawerWidth="350">
+            </Border>
+
+            <!-- Content Area -->
+            <ContentControl x:Name="MainContent" Grid.Row="1">
+                <!-- Dashboard Content (Default) -->
+                <views:DashboardView/>
+            </ContentControl>
+        </Grid>
+
+        <!-- Global Drawer -->
+        <flat:Drawer x:Name="SideDrawer" Grid.ColumnSpan="2" Background="{StaticResource BackgroundBrush}" BorderBrush="{StaticResource BorderBrush}" DrawerWidth="350">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Device Details" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+                <TextBlock Text="Quick Actions" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
                 <ScrollViewer Grid.Row="1">
                     <StackPanel>
-                        <HeaderedContentControl Header="Live Metrics" Style="{StaticResource FlatCard}" Margin="0,0,0,10">
-                            <StackPanel>
-                                <TextBlock Text="Temperature: 42.5°C"/>
-                                <TextBlock Text="Pressure: 1.2 MPa"/>
-                            </StackPanel>
-                        </HeaderedContentControl>
-                        <TextBlock Text="System Logs" FontWeight="Bold" Margin="0,10"/>
-                        <Border Background="{StaticResource RegionBrush}" Padding="10" CornerRadius="2">
-                            <TextBlock Text="[14:22:01] Connection established\n[14:22:05] Data sync complete" FontFamily="Consolas" FontSize="11"/>
-                        </Border>
+                        <Button Content="Take Screenshot" Click="Screenshot_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,10"/>
+                        <Button Content="Flash Tray Icon" Click="FlashTray_v2_Click" Style="{DynamicResource FlatButton}" Margin="0,0,0,10"/>
+                        <Button Content="System Notification" Click="SystemNotify_v2_Click" Style="{DynamicResource FlatButton}" Margin="0,0,0,10"/>
                     </StackPanel>
                 </ScrollViewer>
-                <Button Grid.Row="2" Content="Close" Click="CloseDrawer_Click" Margin="0,20,0,0"/>
+                <Button Grid.Row="2" Content="Close Drawer" Click="CloseDrawer_Click"/>
             </Grid>
         </flat:Drawer>
     </Grid>

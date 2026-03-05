@@ -32,4 +32,9 @@
     <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}"/>
     <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}"/>
 
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="#100078D4"/>
+    <SolidColorBrush x:Key="SuccessLightBrush" Color="#10107C10"/>
+    <SolidColorBrush x:Key="WarningLightBrush" Color="#10D83B01"/>
+    <SolidColorBrush x:Key="ErrorLightBrush" Color="#10A80000"/>
+
 </ResourceDictionary>

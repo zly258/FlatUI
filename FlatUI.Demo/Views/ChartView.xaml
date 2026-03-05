@@ -1,0 +1,45 @@
+<UserControl x:Class="FlatUI.Demo.Views.ChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library">
+    <ScrollViewer Margin="20">
+        <StackPanel>
+            <TextBlock Text="图表组件" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            
+            <!-- 折线图 -->
+            <HeaderedContentControl Header="折线图" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <flat:FlatChart x:Name="LineChart1" Height="300" ChartType="Line" Title="销售趋势" ShowGrid="True"/>
+                </Grid>
+            </HeaderedContentControl>
+
+            <!-- 柱状图 -->
+            <HeaderedContentControl Header="柱状图" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <flat:FlatChart x:Name="BarChart1" Height="300" ChartType="Bar" Title="月度对比" ShowGrid="True"/>
+                </Grid>
+            </HeaderedContentControl>
+
+            <!-- 面积图 -->
+            <HeaderedContentControl Header="面积图" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <flat:FlatChart x:Name="AreaChart1" Height="300" ChartType="Area" Title="流量统计" ShowGrid="True"/>
+                </Grid>
+            </HeaderedContentControl>
+
+            <!-- 饼图 -->
+            <HeaderedContentControl Header="饼图" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <flat:FlatChart x:Name="PieChart1" Height="300" ChartType="Pie" Title="市场份额"/>
+                </Grid>
+            </HeaderedContentControl>
+
+            <!-- 环形图 -->
+            <HeaderedContentControl Header="环形图" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <flat:FlatChart x:Name="DonutChart1" Height="300" ChartType="Donut" Title="用户分布"/>
+                </Grid>
+            </HeaderedContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
