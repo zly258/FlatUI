@@ -2,10 +2,33 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace FlatUI.Library.Controls
 {
+    /// <summary>
+    /// 窗口状态到命令转换器
+    /// </summary>
+    public class WindowStateToCommandConverter : IValueConverter
+    {
+        public static readonly WindowStateToCommandConverter Instance = new WindowStateToCommandConverter();
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is WindowState state)
+            {
+                return state == WindowState.Maximized ? SystemCommands.RestoreWindowCommand : SystemCommands.MaximizeWindowCommand;
+            }
+            return SystemCommands.MaximizeWindowCommand;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// 形状到圆角转换器
     /// </summary>

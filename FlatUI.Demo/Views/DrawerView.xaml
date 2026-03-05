@@ -1,0 +1,51 @@
+<UserControl x:Class="FlatUI.Demo.Views.DrawerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library">
+    <Grid>
+        <ScrollViewer Margin="20">
+            <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="抽屉" FontSize="24" FontWeight="Bold"/>
+                <Button Content="查看源码" Style="{DynamicResource FlatButton}" Click="ViewSource_Click" Margin="20,0,0,0"/>
+            </StackPanel>
+            
+            <!-- Drawer Demo -->
+            <HeaderedContentControl Header="抽屉（侧边栏）" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <StackPanel Margin="10">
+                    <TextBlock Text="点击按钮打开抽屉" Margin="0,0,0,10"/>
+                    <Button Content="打开抽屉" Style="{DynamicResource PrimaryButton}" Click="OpenDrawer_Click"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            
+            <!-- Drawer Options -->
+            <HeaderedContentControl Header="抽屉选项" Style="{DynamicResource FlatCard}">
+                <StackPanel Margin="10">
+                    <TextBlock Text="抽屉可以位于左、右、上、下位置" Margin="0,0,0,10"/>
+                    <TextBlock Text="可以包含任意内容，点击外部可关闭" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Drawer Control -->
+        <flat:Drawer x:Name="DemoDrawer" Background="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" DrawerWidth="300" Placement="Right">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="抽屉内容" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel>
+                        <TextBlock Text="这是一个从右侧滑入的抽屉面板。" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="您可以在此处放置任何内容，包括表单、列表或设置。" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="点击外部关闭。" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Grid.Row="2" Content="关闭" Style="{DynamicResource FlatButton}" Click="CloseDrawer_Click" Margin="0,20,0,0"/>
+            </Grid>
+        </flat:Drawer>
+    </Grid>
+</UserControl>

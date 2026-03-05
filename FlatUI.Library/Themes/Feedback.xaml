@@ -17,7 +17,7 @@
                     <Grid>
                         <Ellipse Stroke="{StaticResource BorderBrush}" StrokeThickness="3"/>
                         <Path x:Name="PART_Path" Stroke="{StaticResource PrimaryBrush}" StrokeThickness="3" 
-                              Data="M 16,1 A 15,15 0 0 1 31,16" 
+                              Data="M 16,0 A 16,16 0 0 1 32,16" 
                               RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <RotateTransform Angle="0"/>

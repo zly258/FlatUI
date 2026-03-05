@@ -12,6 +12,7 @@ namespace FlatUI.Library.Controls
 
         public FlatWindow()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));

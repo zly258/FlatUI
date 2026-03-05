@@ -46,6 +46,15 @@ namespace FlatUI.Library.Controls
             set { SetValue(IncrementProperty, value); }
         }
 
+        public static readonly DependencyProperty DecimalPlacesProperty =
+            DependencyProperty.Register("DecimalPlaces", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0));
+
+        public int DecimalPlaces
+        {
+            get { return (int)GetValue(DecimalPlacesProperty); }
+            set { SetValue(DecimalPlacesProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

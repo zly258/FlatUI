@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace FlatUI.Library.Controls
 {
@@ -12,6 +13,8 @@ namespace FlatUI.Library.Controls
 
     public static class ThemeManager
     {
+        public static event EventHandler? ThemeChanged;
+
         public static void ChangeTheme(ThemeMode mode)
         {
             var genericDict = System.Windows.Application.Current.Resources.MergedDictionaries
@@ -32,6 +35,8 @@ namespace FlatUI.Library.Controls
 
             brushesSubDict.MergedDictionaries.Clear();
             brushesSubDict.MergedDictionaries.Add(themeDict);
+
+            NotifyThemeChanged();
         }
 
         public static void ChangeAccentColor(System.Windows.Media.Color color)
@@ -46,10 +51,8 @@ namespace FlatUI.Library.Controls
 
             if (brushesSubDict == null) return;
 
-            // 动态修改 PrimaryColor
             brushesSubDict["PrimaryColor"] = color;
             
-            // 计算 Hover 和 Pressed 颜色
             brushesSubDict["PrimaryHoverColor"] = System.Windows.Media.Color.FromArgb(
                 color.A,
                 (byte)Math.Min(255, color.R + 20),
@@ -61,6 +64,21 @@ namespace FlatUI.Library.Controls
                 (byte)Math.Max(0, color.R - 20),
                 (byte)Math.Max(0, color.G - 20),
                 (byte)Math.Max(0, color.B - 20));
+
+            NotifyThemeChanged();
+        }
+
+        private static void NotifyThemeChanged()
+        {
+            ThemeChanged?.Invoke(null, EventArgs.Empty);
+
+            foreach (Window window in System.Windows.Application.Current.Windows)
+            {
+                window.Resources["PrimaryBrush"] = System.Windows.Application.Current.FindResource("PrimaryBrush");
+                window.Resources["PrimaryHoverBrush"] = System.Windows.Application.Current.FindResource("PrimaryHoverBrush");
+                window.Resources["PrimaryPressedBrush"] = System.Windows.Application.Current.FindResource("PrimaryPressedBrush");
+                window.Resources["PrimaryLightBrush"] = System.Windows.Application.Current.FindResource("PrimaryLightBrush");
+            }
         }
     }
 }

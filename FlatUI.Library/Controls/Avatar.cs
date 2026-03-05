@@ -104,7 +104,7 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 字体大小
         /// </summary>
-        public static readonly DependencyProperty FontSizeProperty =
+        public static new readonly DependencyProperty FontSizeProperty =
             DependencyProperty.Register("FontSize", typeof(double), typeof(Avatar), new PropertyMetadata(16.0));
 
         public new double FontSize

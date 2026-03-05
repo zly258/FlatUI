@@ -45,25 +45,61 @@ namespace FlatUI.Demo
             
             switch (tag)
             {
-                case "Dashboard":
+                case "仪表台":
                     MainContent.Content = new DashboardView();
                     break;
-                case "Chart":
+                case "图表":
                     MainContent.Content = new ChartView();
                     break;
-                case "Avatar":
+                case "表格":
+                    MainContent.Content = new DataDisplayView();
+                    break;
+                case "列表":
+                    MainContent.Content = new Views.ListView();
+                    break;
+                case "树形":
+                    MainContent.Content = new Views.TreeView();
+                    break;
+                case "按钮":
+                    MainContent.Content = new ButtonView();
+                    break;
+                case "输入框":
+                    MainContent.Content = new InputView();
+                    break;
+                case "复选框":
+                    MainContent.Content = new CheckboxView();
+                    break;
+                case "头像":
                     MainContent.Content = new AvatarView();
                     break;
-                case "Badge":
+                case "徽标":
                     MainContent.Content = new BadgeView();
                     break;
-                case "Tag":
+                case "标签":
                     MainContent.Content = new TagView();
                     break;
-                case "Bubble":
+                case "气泡":
                     MainContent.Content = new BubbleView();
                     break;
-                case "Settings":
+                case "通知":
+                    MainContent.Content = new NotificationView();
+                    break;
+                case "抽屉":
+                    MainContent.Content = new DrawerView();
+                    break;
+                case "分页":
+                    MainContent.Content = new PaginationView();
+                    break;
+                case "数字输入":
+                    MainContent.Content = new NumericUpDownView();
+                    break;
+                case "下拉树":
+                    MainContent.Content = new DropdownTreeView();
+                    break;
+                case "下拉表格":
+                    MainContent.Content = new DropdownGridView();
+                    break;
+                case "设置":
                     MainContent.Content = new SettingsView();
                     break;
             }
@@ -71,18 +107,29 @@ namespace FlatUI.Demo
 
         private string GetViewTitle(string? tag)
         {
-            // 使用 LanguageManager 获取本地化的标题
             if (string.IsNullOrEmpty(tag)) return "";
             
             switch (tag)
             {
-                case "Dashboard": return LanguageManager.Instance.GetString("Nav_Dashboard");
-                case "Chart": return LanguageManager.Instance.GetString("Nav_Chart");
-                case "Avatar": return LanguageManager.Instance.GetString("Nav_Avatar");
-                case "Badge": return LanguageManager.Instance.GetString("Nav_Badge");
-                case "Tag": return LanguageManager.Instance.GetString("Nav_Tag");
-                case "Bubble": return LanguageManager.Instance.GetString("Nav_Bubble");
-                case "Settings": return LanguageManager.Instance.GetString("Nav_Settings");
+                case "仪表台": return "仪表台";
+                case "图表": return "图表";
+                case "表格": return "表格";
+                case "列表": return "列表";
+                case "树形": return "树形";
+                case "按钮": return "按钮";
+                case "输入框": return "输入框";
+                case "复选框": return "复选框";
+                case "头像": return "头像";
+                case "徽标": return "徽标";
+                case "标签": return "标签";
+                case "气泡": return "气泡";
+                case "通知": return "通知";
+                case "抽屉": return "抽屉";
+                case "分页": return "分页";
+                case "数字输入": return "数字输入";
+                case "下拉树": return "下拉树";
+                case "下拉表格": return "下拉表格";
+                case "设置": return "设置";
                 default: return tag ?? "";
             }
         }

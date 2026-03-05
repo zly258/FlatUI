@@ -1,0 +1,34 @@
+<UserControl x:Class="FlatUI.Demo.Views.DropdownTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library">
+    <ScrollViewer Margin="20">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="下拉树" FontSize="24" FontWeight="Bold"/>
+                <Button Content="查看源码" Style="{DynamicResource FlatButton}" Click="ViewSource_Click" Margin="20,0,0,0"/>
+            </StackPanel>
+            
+            <!-- Basic -->
+            <HeaderedContentControl Header="基础" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <StackPanel Margin="10">
+                    <flat:DropdownTree Width="250" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            
+            <!-- With Placeholder -->
+            <HeaderedContentControl Header="带占位符" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <StackPanel Margin="10">
+                    <flat:DropdownTree Width="250" HorizontalAlignment="Left" IsEditable="True"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            
+            <!-- With Tree Data -->
+            <HeaderedContentControl Header="带树形数据" Style="{DynamicResource FlatCard}">
+                <StackPanel Margin="10">
+                    <flat:DropdownTree Width="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </HeaderedContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

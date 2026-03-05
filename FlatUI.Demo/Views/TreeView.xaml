@@ -1,0 +1,91 @@
+<UserControl x:Class="FlatUI.Demo.Views.TreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:flat="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library">
+    <ScrollViewer Margin="20">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="树形控件" FontSize="24" FontWeight="Bold"/>
+                <Button Content="查看源码" Style="{DynamicResource FlatButton}" Click="ViewSource_Click" Margin="20,0,0,0"/>
+            </StackPanel>
+            
+            <!-- Basic Tree -->
+            <HeaderedContentControl Header="基础树形" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <TreeView Style="{DynamicResource FlatTreeView}" Width="300" Margin="10">
+                    <TreeViewItem Header="根节点 1">
+                        <TreeViewItem Header="子节点 1.1"/>
+                        <TreeViewItem Header="子节点 1.2"/>
+                        <TreeViewItem Header="子节点 1.3"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="根节点 2">
+                        <TreeViewItem Header="子节点 2.1">
+                            <TreeViewItem Header="孙节点 2.1.1"/>
+                            <TreeViewItem Header="孙节点 2.1.2"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="子节点 2.2"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="根节点 3"/>
+                </TreeView>
+            </HeaderedContentControl>
+            
+            <!-- Tree with CheckBox -->
+            <HeaderedContentControl Header="带复选框的树" Style="{DynamicResource FlatCard}" Margin="0,0,0,20">
+                <TreeView Style="{DynamicResource FlatTreeView}" Width="350" Margin="10">
+                    <TreeViewItem Header="全选">
+                        <CheckBox Content="选项 1" IsChecked="True" Margin="20,2"/>
+                        <CheckBox Content="选项 2" IsChecked="False" Margin="20,2"/>
+                        <CheckBox Content="选项 3" IsChecked="True" Margin="20,2"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="文档">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="True" Margin="0,0,5,0"/>
+                            <TextBlock Text="report.pdf"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="False" Margin="0,0,5,0"/>
+                            <TextBlock Text="notes.docx"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="True" Margin="0,0,5,0"/>
+                            <TextBlock Text="data.xlsx"/>
+                        </StackPanel>
+                    </TreeViewItem>
+                    <TreeViewItem Header="图片">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="False" Margin="0,0,5,0"/>
+                            <TextBlock Text="photo1.jpg"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="False" Margin="0,0,5,0"/>
+                            <TextBlock Text="photo2.png"/>
+                        </StackPanel>
+                    </TreeViewItem>
+                </TreeView>
+            </HeaderedContentControl>
+            
+            <!-- Tree with Icons -->
+            <HeaderedContentControl Header="带图标的树" Style="{DynamicResource FlatCard}">
+                <TreeView Style="{DynamicResource FlatTreeView}" Width="350" Margin="10">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" Fill="{DynamicResource PrimaryBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                                <TextBlock Text="文件夹"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Header="文件 1.txt"/>
+                        <TreeViewItem Header="文件 2.txt"/>
+                    </TreeViewItem>
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" Fill="{DynamicResource WarningBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                                <TextBlock Text="文档.pdf"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeView>
+            </HeaderedContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

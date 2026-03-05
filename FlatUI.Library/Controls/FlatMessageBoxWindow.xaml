@@ -1,9 +1,9 @@
 <Window x:Class="FlatUI.Library.Controls.FlatMessageBoxWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:FlatUI.Library.Controls"
         Title="Message" Height="180" Width="350"
         WindowStartupLocation="CenterOwner"
-        Style="{StaticResource FlatWindow}"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent">
     <Border Background="{StaticResource BackgroundBrush}" 
