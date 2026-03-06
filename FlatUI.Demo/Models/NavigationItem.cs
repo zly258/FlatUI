@@ -9,6 +9,7 @@ namespace FlatUI.Demo.Models
         private string _title = null!;
         private string _icon = null!;
         private bool _isExpanded;
+        private bool _isSelected;
         private ObservableCollection<NavigationItem> _children = null!;
         private NavigationItem? _parent;
 
@@ -38,6 +39,16 @@ namespace FlatUI.Demo.Models
             set
             {
                 _isExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
                 OnPropertyChanged();
             }
         }

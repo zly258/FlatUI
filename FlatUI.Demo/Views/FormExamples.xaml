@@ -1,0 +1,76 @@
+<UserControl x:Class="FlatUI.Demo.Views.FormExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Form 表单"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="具有数据收集、校验、提交等功能的表单"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础表单" Description="基础表单布局。">
+                <Border Background="{DynamicResource RegionBrush}" Padding="24" CornerRadius="4" Width="400">
+                    <StackPanel>
+                        <TextBlock Text="用户名" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                        <TextBox Text="FlatUI" Padding="8" Margin="0,0,0,16"/>
+                        
+                        <TextBlock Text="密码" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                        <TextBox Text="password" Padding="8" Margin="0,0,0,16"/>
+                        
+                        <Button Content="提交" Style="{DynamicResource PrimaryButton}" Width="120" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="表单项布局" Description="使用表单项进行布局。">
+                <Border Background="{DynamicResource RegionBrush}" Padding="24" CornerRadius="4" Width="400">
+                    <StackPanel>
+                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="12,8" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="用户名" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                <TextBox Text="FlatUI" Padding="8"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="12,8" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="邮箱" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                <TextBox Text="demo@flatui.com" Padding="8"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="12,8">
+                            <StackPanel>
+                                <TextBlock Text="备注" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                <TextBox Text="这是备注信息" Padding="8" Height="80" TextWrapping="Wrap" AcceptsReturn="True"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="行内表单" Description="行内表单布局。">
+                <Border Background="{DynamicResource RegionBrush}" Padding="24" CornerRadius="4">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="用户名" Padding="8" Width="200" Margin="0,0,16,0"/>
+                        <TextBox Text="密码" Padding="8" Width="200" Margin="0,0,16,0"/>
+                        <Button Content="查询" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                        <Button Content="重置" Style="{DynamicResource FlatButton}" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </Border>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

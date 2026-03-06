@@ -1,0 +1,71 @@
+<UserControl x:Class="FlatUI.Demo.Views.ImageCropperExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="ImageCropper 图片裁剪"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="图片裁剪编辑组件"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="基础图片裁剪功能。">
+                <StackPanel>
+                    <Button Content="打开图片裁剪" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="200"
+                            Click="OpenCropper_Click"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="不同比例" Description="支持不同裁剪比例。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="1:1" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Margin="0,0,8,0"
+                            Click="Crop1x1_Click"/>
+                    <Button Content="4:3" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Margin="0,0,8,0"
+                            Click="Crop4x3_Click"/>
+                    <Button Content="16:9" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Click="Crop16x9_Click"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="旋转和翻转" Description="支持图片旋转和翻转。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="左旋转" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Margin="0,0,8,0"
+                            Click="RotateLeft_Click"/>
+                    <Button Content="右旋转" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Margin="0,0,8,0"
+                            Click="RotateRight_Click"/>
+                    <Button Content="水平翻转" 
+                            Style="{DynamicResource PrimaryButton}" 
+                            Width="100"
+                            Click="FlipHorizontal_Click"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,4 +1,4 @@
-<Window x:Class="FlatUI.Demo.MainWindow"
+<controls:FlatWindow x:Class="FlatUI.Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,16 +6,79 @@
         xmlns:local="clr-namespace:FlatUI.Demo"
         xmlns:vm="clr-namespace:FlatUI.Demo.ViewModels"
         xmlns:models="clr-namespace:FlatUI.Demo.Models"
+        xmlns:converters="clr-namespace:FlatUI.Demo.Converters"
+        xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
         mc:Ignorable="d"
-        Title="FlatUI - Ant Design 风格组件库" 
-        Height="768" 
-        Width="1366"
-        WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource BackgroundBrush}">
+        Title="FlatUI Demo" 
+        Height="800" 
+        Width="1400"
+        WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    
+    <Window.Resources>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:BooleanToAngleConverter x:Key="BooleanToAngleConverter"/>
+        
+        <Style x:Key="SidebarCategoryButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="Transparent"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource RegionBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="SidebarItemButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="40,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="Transparent"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource RegionBrush}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -25,8 +88,8 @@
         
         <Border Grid.Row="0" 
                 Background="{DynamicResource PrimaryBrush}"
-                Height="64"
-                Padding="24,0">
+                Height="48"
+                Padding="16,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -38,161 +101,127 @@
                             Orientation="Horizontal" 
                             VerticalAlignment="Center">
                     <TextBlock Text="FlatUI" 
-                               FontSize="24" 
-                               FontWeight="Bold"
-                               Foreground="White"
-                               VerticalAlignment="Center"/>
-                    <TextBlock Text="Demo" 
-                               FontSize="14" 
-                               FontWeight="Normal"
-                               Foreground="White"
-                               Opacity="0.8"
-                               Margin="8,0,0,0"
-                               VerticalAlignment="Center"/>
+                               FontSize="20" 
+                               FontWeight="Bold" 
+                               Foreground="White"/>
                 </StackPanel>
-                
-                <Border Grid.Column="1" 
-                        Background="White"
-                        CornerRadius="4"
-                        MaxWidth="400"
-                        Height="32"
-                        Margin="32,0"
-                        VerticalAlignment="Center"
-                        Padding="8,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Path Grid.Column="0"
-                              Data="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                              Fill="{DynamicResource TextSecondaryBrush}"
-                              Width="16"
-                              Height="16"
-                              Stretch="Uniform"
-                              VerticalAlignment="Center"/>
-                        
-                        <TextBox Grid.Column="1"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalAlignment="Center"
-                                 Padding="8,0,0,0"
-                                 FontSize="14"
-                                 Foreground="{DynamicResource TextBrush}"/>
-                    </Grid>
-                </Border>
                 
                 <StackPanel Grid.Column="2" 
                             Orientation="Horizontal" 
                             VerticalAlignment="Center">
-                    <Button Content="GitHub"
-                            Style="{DynamicResource FlatButton}"
+                    <Button x:Name="PreviewToggleBtn"
+                            Style="{DynamicResource SidebarCategoryButton}"
                             Foreground="White"
-                            BorderBrush="White"
-                            Margin="0,0,16,0"
-                            Padding="12,6"/>
-                    <Button Content="v1.0.0"
-                            Style="{DynamicResource FlatButton}"
+                            Padding="12,8"
+                            Margin="0,0,12,0"
+                            ToolTip="预览切换">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                                  Fill="White" 
+                                  Width="18" 
+                                  Height="18" 
+                                  Stretch="Uniform"
+                                  Margin="0,0,6,0"/>
+                            <TextBlock Text="预览" FontSize="13" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button x:Name="ThemeToggleBtn"
+                            Style="{DynamicResource SidebarCategoryButton}"
                             Foreground="White"
-                            BorderBrush="White"
-                            Padding="12,6"/>
+                            Padding="12,8"
+                            Margin="0,0,12,0"
+                            Click="ThemeToggle_Click"
+                            ToolTip="切换主题">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"
+                                  Fill="White" 
+                                  Width="18" 
+                                  Height="18" 
+                                  Stretch="Uniform"
+                                  Margin="0,0,6,0"/>
+                            <TextBlock Text="主题" FontSize="13" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button x:Name="FullscreenBtn"
+                            Style="{DynamicResource SidebarCategoryButton}"
+                            Foreground="White"
+                            Padding="12,8"
+                            ToolTip="全屏">
+                        <Path Data="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+                              Fill="White" 
+                              Width="18" 
+                              Height="18" 
+                              Stretch="Uniform"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
         
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="280"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
             <Border Grid.Column="0" 
-                    Background="{DynamicResource RegionBrush}"
+                    Background="{DynamicResource SidebarBrush}"
                     BorderBrush="{DynamicResource BorderBrush}"
-                    BorderThickness="0,0,1,0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    BorderThickness="0,1,1,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,8">
                     <ItemsControl ItemsSource="{Binding NavigationItems}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="models:NavigationItem">
                                 <StackPanel>
-                                    <Button Content="{Binding Title}"
+                                    <Button Style="{StaticResource SidebarCategoryButton}"
                                             Command="{Binding DataContext.ExpandCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                            CommandParameter="{Binding}"
-                                            Style="{DynamicResource FlatButton}"
-                                            HorizontalContentAlignment="Left"
-                                            Padding="16,12"
-                                            Background="Transparent"
-                                            BorderThickness="0"
-                                            Foreground="{DynamicResource TextBrush}"
-                                            FontWeight="SemiBold">
-                                        <Button.ContentTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    
-                                                    <Path Grid.Column="0"
-                                                          Data="{Binding Icon}"
-                                                          Fill="{DynamicResource TextSecondaryBrush}"
-                                                          Width="16"
-                                                          Height="16"
-                                                          Stretch="Uniform"
-                                                          Margin="0,0,12,0"
-                                                          Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"/>
-                                                    
-                                                    <TextBlock Grid.Column="1"
-                                                               Text="{Binding Title}"
-                                                               VerticalAlignment="Center"/>
-                                                    
-                                                    <Path Grid.Column="2"
-                                                          Data="M7 10l5 5 5-5z"
-                                                          Fill="{DynamicResource TextSecondaryBrush}"
-                                                          Width="16"
-                                                          Height="16"
-                                                          Stretch="Uniform"
-                                                          RenderTransformOrigin="0.5,0.5">
-                                                        <Path.RenderTransform>
-                                                            <RotateTransform Angle="{Binding IsExpanded, Converter={StaticResource BooleanToAngleConverter}}"/>
-                                                        </Path.RenderTransform>
-                                                    </Path>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </Button.ContentTemplate>
+                                            CommandParameter="{Binding}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Path Grid.Column="0"
+                                                  Data="{Binding Icon}"
+                                                  Fill="{DynamicResource TextSecondaryBrush}"
+                                                  Width="16"
+                                                  Height="16"
+                                                  Stretch="Uniform"
+                                                  Margin="0,0,10,0"
+                                                  Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"/>
+                                            
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding Title}"
+                                                       FontSize="14"
+                                                       FontWeight="SemiBold"
+                                                       VerticalAlignment="Center"/>
+                                            
+                                            <Path Grid.Column="2"
+                                                  Data="M7 10l5 5 5-5z"
+                                                  Fill="{DynamicResource TextSecondaryBrush}"
+                                                  Width="14"
+                                                  Height="14"
+                                                  Stretch="Uniform"
+                                                  RenderTransformOrigin="0.5,0.5">
+                                                <Path.RenderTransform>
+                                                    <RotateTransform Angle="{Binding IsExpanded, Converter={StaticResource BooleanToAngleConverter}}"/>
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </Grid>
                                     </Button>
                                     
                                     <ItemsControl ItemsSource="{Binding Children}"
                                                   Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate DataType="models:NavigationItem">
-                                                <Button Content="{Binding Title}"
+                                                <Button Style="{StaticResource SidebarItemButton}"
                                                         Command="{Binding DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                        CommandParameter="{Binding}"
-                                                        HorizontalContentAlignment="Left"
-                                                        Padding="40,10"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"
-                                                        Foreground="{DynamicResource TextBrush}">
-                                                    <Button.Style>
-                                                        <Style TargetType="Button" BasedOn="{StaticResource FlatButton}">
-                                                            <Setter Property="Background" Value="Transparent"/>
-                                                            <Setter Property="BorderThickness" Value="0"/>
-                                                            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                                    <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                                                                    <Setter Property="Foreground" Value="White"/>
-                                                                </DataTrigger>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
-                                                                </Trigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Button.Style>
+                                                        CommandParameter="{Binding}">
+                                                    <TextBlock Text="{Binding Title}"
+                                                               FontSize="13"/>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -204,17 +233,10 @@
                 </ScrollViewer>
             </Border>
             
-            <ScrollViewer Grid.Column="1" 
-                          VerticalScrollBarVisibility="Auto">
-                <ContentControl Content="{Binding CurrentContent}"
-                                Margin="48,32,48,48">
-                    <ContentControl.ContentTemplate>
-                        <DataTemplate>
-                            <ContentPresenter Content="{Binding}"/>
-                        </DataTemplate>
-                    </ContentControl.ContentTemplate>
-                </ContentControl>
-            </ScrollViewer>
+            <Border Grid.Column="1" 
+                    Background="{DynamicResource BackgroundBrush}">
+                <ContentControl Content="{Binding CurrentContent}"/>
+            </Border>
         </Grid>
     </Grid>
-</Window>
+</controls:FlatWindow>

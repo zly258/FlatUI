@@ -1,0 +1,41 @@
+<UserControl x:Class="FlatUI.Demo.Views.FloatingWindowExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="FloatingWindow 浮动窗口"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="悬浮在主窗口之上的浮动窗口"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="基础浮动窗口。">
+                <Button Content="打开浮动窗口" Style="{DynamicResource PrimaryButton}" Click="OpenFloatingWindow_Click"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="带图标" Description="带图标的浮动窗口。">
+                <Button Content="打开带图标的浮动窗口" Style="{DynamicResource PrimaryButton}" Click="OpenIconFloatingWindow_Click"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="不同位置" Description="在不同位置显示浮动窗口。">
+                <StackPanel>
+                    <Button Content="左上角" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8" Click="OpenTopLeft_Click"/>
+                    <Button Content="右上角" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8" Click="OpenTopRight_Click"/>
+                    <Button Content="左下角" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8" Click="OpenBottomLeft_Click"/>
+                    <Button Content="右下角" Style="{DynamicResource PrimaryButton}" Click="OpenBottomRight_Click"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

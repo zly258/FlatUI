@@ -1,0 +1,58 @@
+<UserControl x:Class="FlatUI.Demo.Views.PropertyGridExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="PropertyGrid 属性网格"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="用于显示和编辑对象属性的网格控件"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="基础属性网格。">
+                <controls:FlatPropertyGrid Width="400" Height="300">
+                    <controls:FlatPropertyGrid.Properties>
+                        <controls:PropertyItem Name="Name" Value="FlatUI" Description="应用名称" Category="General"/>
+                        <controls:PropertyItem Name="Version" Value="1.0.0" Description="版本号" Category="General"/>
+                        <controls:PropertyItem Name="Author" Value="FlatUI Team" Description="作者" Category="General"/>
+                        <controls:PropertyItem Name="License" Value="MIT" Description="许可证" Category="General"/>
+                    </controls:FlatPropertyGrid.Properties>
+                </controls:FlatPropertyGrid>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="分组属性" Description="按类别分组的属性。">
+                <controls:FlatPropertyGrid Width="400" Height="300">
+                    <controls:FlatPropertyGrid.Properties>
+                        <controls:PropertyItem Name="Width" Value="800" Description="窗口宽度" Category="Layout"/>
+                        <controls:PropertyItem Name="Height" Value="600" Description="窗口高度" Category="Layout"/>
+                        <controls:PropertyItem Name="Title" Value="FlatUI Demo" Description="窗口标题" Category="General"/>
+                        <controls:PropertyItem Name="Theme" Value="Light" Description="主题模式" Category="Appearance"/>
+                        <controls:PropertyItem Name="FontSize" Value="14" Description="字体大小" Category="Appearance"/>
+                        <controls:PropertyItem Name="Language" Value="zh-CN" Description="语言" Category="General"/>
+                    </controls:FlatPropertyGrid.Properties>
+                </controls:FlatPropertyGrid>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="只读属性" Description="只读属性网格。">
+                <controls:FlatPropertyGrid Width="400" Height="200">
+                    <controls:FlatPropertyGrid.Properties>
+                        <controls:PropertyItem Name="System" Value="Windows 11" Description="操作系统" Category="System"/>
+                        <controls:PropertyItem Name="Framework" Value=".NET 8.0" Description="框架版本" Category="System"/>
+                        <controls:PropertyItem Name="Runtime" Value="Windows" Description="运行时" Category="System"/>
+                    </controls:FlatPropertyGrid.Properties>
+                </controls:FlatPropertyGrid>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

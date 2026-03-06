@@ -56,6 +56,7 @@ namespace FlatUI.Demo.ViewModels
         }
 
         public ICommand ExpandCommand { get; private set; } = null!;
+        public ICommand SelectCommand { get; private set; } = null!;
         public ICommand SearchCommand { get; private set; } = null!;
 
         public MainWindowViewModel()
@@ -63,7 +64,9 @@ namespace FlatUI.Demo.ViewModels
             NavigationItems = new ObservableCollection<Models.NavigationItem>();
             InitializeNavigation();
             ExpandCommand = new RelayCommand(ExpandItem);
+            SelectCommand = new RelayCommand(SelectItem);
             SearchCommand = new RelayCommand(ExecuteSearch);
+            CurrentContent = new Views.WelcomePage();
         }
 
         private void InitializeNavigation()
@@ -107,6 +110,13 @@ namespace FlatUI.Demo.ViewModels
             {
                 Title = "Tag 标签",
                 ViewName = "TagExamples",
+                Parent = general
+            });
+
+            general.Children.Add(new Models.NavigationItem
+            {
+                Title = "Chart 图表",
+                ViewName = "ChartExamples",
                 Parent = general
             });
 
@@ -267,11 +277,88 @@ namespace FlatUI.Demo.ViewModels
                 Parent = input
             });
 
+            var other = new Models.NavigationItem
+            {
+                Title = "其他",
+                Icon = "M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+            };
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "Form 表单",
+                ViewName = "FormExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "PropertyGrid 属性网格",
+                ViewName = "PropertyGridExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "StatusBadge 状态徽章",
+                ViewName = "StatusBadgeExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "Toast 消息提示",
+                ViewName = "ToastExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "FloatingWindow 浮动窗口",
+                ViewName = "FloatingWindowExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "DragDropUpload 拖拽上传",
+                ViewName = "DragDropUploadExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "DropdownGrid 下拉网格",
+                ViewName = "DropdownGridExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "DropdownTree 下拉树",
+                ViewName = "DropdownTreeExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "ImageCropper 图片裁剪",
+                ViewName = "ImageCropperExamples",
+                Parent = other
+            });
+
+            other.Children.Add(new Models.NavigationItem
+            {
+                Title = "LedText LED文本",
+                ViewName = "LedTextExamples",
+                Parent = other
+            });
+
             NavigationItems.Add(general);
             NavigationItems.Add(layout);
             NavigationItems.Add(dataDisplay);
             NavigationItems.Add(feedback);
             NavigationItems.Add(input);
+            NavigationItems.Add(other);
         }
 
         private void LoadContent(Models.NavigationItem? item)
@@ -335,6 +422,9 @@ namespace FlatUI.Demo.ViewModels
                 case "TagExamples":
                     CurrentContent = new Views.TagExamples();
                     break;
+                case "ChartExamples":
+                    CurrentContent = new Views.ChartExamples();
+                    break;
                 case "BubbleExamples":
                     CurrentContent = new Views.BubbleExamples();
                     break;
@@ -353,6 +443,36 @@ namespace FlatUI.Demo.ViewModels
                 case "TabControlExamples":
                     CurrentContent = new Views.TabControlExamples();
                     break;
+                case "FormExamples":
+                    CurrentContent = new Views.FormExamples();
+                    break;
+                case "PropertyGridExamples":
+                    CurrentContent = new Views.PropertyGridExamples();
+                    break;
+                case "StatusBadgeExamples":
+                    CurrentContent = new Views.StatusBadgeExamples();
+                    break;
+                case "ToastExamples":
+                    CurrentContent = new Views.ToastExamples();
+                    break;
+                case "FloatingWindowExamples":
+                    CurrentContent = new Views.FloatingWindowExamples();
+                    break;
+                case "DragDropUploadExamples":
+                    CurrentContent = new Views.DragDropUploadExamples();
+                    break;
+                case "DropdownGridExamples":
+                    CurrentContent = new Views.DropdownGridExamples();
+                    break;
+                case "DropdownTreeExamples":
+                    CurrentContent = new Views.DropdownTreeExamples();
+                    break;
+                case "ImageCropperExamples":
+                    CurrentContent = new Views.ImageCropperExamples();
+                    break;
+                case "LedTextExamples":
+                    CurrentContent = new Views.LedTextExamples();
+                    break;
                 default:
                     CurrentContent = new Views.WelcomePage();
                     break;
@@ -364,6 +484,22 @@ namespace FlatUI.Demo.ViewModels
             if (parameter is Models.NavigationItem item)
             {
                 item.IsExpanded = !item.IsExpanded;
+            }
+        }
+
+        private void SelectItem(object? parameter)
+        {
+            if (parameter is Models.NavigationItem item)
+            {
+                foreach (var category in NavigationItems)
+                {
+                    foreach (var child in category.Children)
+                    {
+                        child.IsSelected = false;
+                    }
+                }
+                item.IsSelected = true;
+                LoadContent(item);
             }
         }
 
