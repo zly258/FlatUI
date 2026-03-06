@@ -1,0 +1,115 @@
+<UserControl x:Class="FlatUI.Demo.Views.CardExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Card 卡片"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="通用卡片容器"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础卡片" Description="包含标题、内容及操作区域。">
+                <controls:FlatCard Header="Card title" ShowHeader="True" Width="300">
+                    <StackPanel>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                    </StackPanel>
+                </controls:FlatCard>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="无边框卡片" Description="在灰色背景上无边框的卡片。">
+                <Border Background="{DynamicResource RegionBrush}" Padding="24">
+                    <controls:FlatCard Header="Card title" ShowHeader="True" BorderThickness="0" Background="Transparent" Width="300">
+                        <StackPanel>
+                            <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                            <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                            <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        </StackPanel>
+                    </controls:FlatCard>
+                </Border>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="简洁卡片" Description="只包含内容区域。">
+                <controls:FlatCard Width="300">
+                    <StackPanel>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                    </StackPanel>
+                </controls:FlatCard>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="卡片阴影" Description="通过设置 ShadowDepth 属性来控制阴影深度。">
+                <StackPanel Orientation="Horizontal">
+                    <controls:FlatCard Header="None" ShadowDepth="None" Width="200" Margin="0,0,16,0">
+                        <TextBlock Text="No shadow"/>
+                    </controls:FlatCard>
+                    <controls:FlatCard Header="Small" ShadowDepth="Small" Width="200" Margin="0,0,16,0">
+                        <TextBlock Text="Small shadow"/>
+                    </controls:FlatCard>
+                    <controls:FlatCard Header="Medium" ShadowDepth="Medium" Width="200" Margin="0,0,16,0">
+                        <TextBlock Text="Medium shadow"/>
+                    </controls:FlatCard>
+                    <controls:FlatCard Header="Large" ShadowDepth="Large" Width="200">
+                        <TextBlock Text="Large shadow"/>
+                    </controls:FlatCard>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="可悬停卡片" Description="鼠标悬停时卡片会有浮起效果。">
+                <controls:FlatCard Header="Hoverable Card" IsHoverable="True" Width="300">
+                    <StackPanel>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                        <TextBlock Text="Card content" Margin="0,0,0,8"/>
+                    </StackPanel>
+                </controls:FlatCard>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="加载中卡片" Description="内容区域加载中状态。">
+                <controls:FlatCard Header="Loading Card" Width="300">
+                    <StackPanel>
+                        <TextBlock Text="Loading content..." Margin="0,0,0,8" Opacity="0.5"/>
+                        <TextBlock Text="Loading content..." Margin="0,0,0,8" Opacity="0.5"/>
+                        <TextBlock Text="Loading content..." Margin="0,0,0,8" Opacity="0.5"/>
+                    </StackPanel>
+                </controls:FlatCard>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="网格卡片" Description="在系统概览页面常常用到。">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <controls:FlatCard Grid.Column="0" Header="Card title" Margin="0,0,16,0">
+                        <TextBlock Text="Card content"/>
+                    </controls:FlatCard>
+                    
+                    <controls:FlatCard Grid.Column="1" Header="Card title" Margin="0,0,16,0">
+                        <TextBlock Text="Card content"/>
+                    </controls:FlatCard>
+                    
+                    <controls:FlatCard Grid.Column="2" Header="Card title">
+                        <TextBlock Text="Card content"/>
+                    </controls:FlatCard>
+                </Grid>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

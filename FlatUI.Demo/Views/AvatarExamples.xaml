@@ -1,0 +1,65 @@
+<UserControl x:Class="FlatUI.Demo.Views.AvatarExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Avatar 头像"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="用来代表用户或事物，支持图片、图标或字符"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="类型" Description="头像有三种类型：图片、图标和字符。">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="40" Height="40" Fill="#1890FF" Margin="0,0,16,0">
+                        <Ellipse.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=avatar1, Path=Content}"/>
+                        </Ellipse.OpacityMask>
+                    </Ellipse>
+                    <TextBlock Text="A" FontSize="16" Foreground="White" Width="40" Height="40" TextAlignment="Center" VerticalAlignment="Center" Background="#1890FF" Margin="0,0,16,0"/>
+                    <Ellipse Width="40" Height="40" Fill="#52C41A" Margin="0,0,16,0"/>
+                    <TextBlock Text="USER" FontSize="12" Foreground="White" Width="40" Height="40" TextAlignment="Center" VerticalAlignment="Center" Background="#FAAD14" Margin="0,0,16,0"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="尺寸" Description="头像有三种尺寸：大、中、小。">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="64" Height="64" Fill="#1890FF" Margin="0,0,16,0"/>
+                    <Ellipse Width="40" Height="40" Fill="#1890FF" Margin="0,0,16,0"/>
+                    <Ellipse Width="24" Height="24" Fill="#1890FF"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="形状" Description="头像有两种形状：圆形和圆角矩形。">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="40" Height="40" Fill="#1890FF" Margin="0,0,16,0"/>
+                    <Border Width="40" Height="40" Background="#1890FF" CornerRadius="4"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="带徽标的头像" Description="通常用于消息通知。">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="40" Height="40" Margin="0,0,16,0">
+                        <Ellipse Fill="#1890FF"/>
+                        <Ellipse Width="10" Height="10" Fill="#F5222D" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-2,-2,0"/>
+                    </Grid>
+                    <Grid Width="40" Height="40" Margin="0,0,16,0">
+                        <Ellipse Fill="#52C41A"/>
+                        <Ellipse Width="10" Height="10" Fill="#FAAD14" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-2,-2,0"/>
+                    </Grid>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

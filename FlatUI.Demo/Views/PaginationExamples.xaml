@@ -1,0 +1,64 @@
+<UserControl x:Class="FlatUI.Demo.Views.PaginationExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Pagination 分页"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="采用分页形式分隔长列表，每次只加载一个页面"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="基础分页。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="&lt;" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="1" Style="{DynamicResource PrimaryButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="2" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="3" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="4" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="5" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="&gt;" Style="{DynamicResource FlatButton}" Width="32" Height="32"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="更多页码" Description="更多页码时的分页。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="&lt;" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="1" Style="{DynamicResource PrimaryButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="2" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="3" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <TextBlock Text="..." VerticalAlignment="Center" Margin="0,0,4,0"/>
+                    <Button Content="10" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="11" Style="{DynamicResource FlatButton}" Width="32" Height="32" Margin="0,0,4,0"/>
+                    <Button Content="&gt;" Style="{DynamicResource FlatButton}" Width="32" Height="32"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="迷你分页" Description="迷你版的分页。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="&lt;" Style="{DynamicResource FlatButton}" Width="24" Height="24" Margin="0,0,4,0"/>
+                    <Button Content="1/5" Style="{DynamicResource FlatButton}" Width="40" Height="24" Margin="0,0,4,0"/>
+                    <Button Content="&gt;" Style="{DynamicResource FlatButton}" Width="24" Height="24"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="简单分页" Description="简单的翻页。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Previous" Style="{DynamicResource FlatButton}" Margin="0,0,16,0"/>
+                    <Button Content="Next" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

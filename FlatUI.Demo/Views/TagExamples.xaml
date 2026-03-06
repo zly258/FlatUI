@@ -1,0 +1,110 @@
+<UserControl x:Class="FlatUI.Demo.Views.TagExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Tag 标签"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="进行标记和分类的小标签"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="简单的标签。">
+                <StackPanel Orientation="Horizontal">
+                    <Border Background="#108ee9" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Tag 1" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#87d068" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Tag 2" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#f0ad4e" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Tag 3" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#ff4d4f" CornerRadius="4" Padding="8,4">
+                        <TextBlock Text="Tag 4" Foreground="White" FontSize="12"/>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="预设颜色的标签" Description="预设五种颜色的标签。">
+                <StackPanel Orientation="Horizontal">
+                    <Border Background="#108ee9" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Primary" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#52c41a" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Success" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#faad14" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Warning" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#f5222d" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <TextBlock Text="Error" Foreground="White" FontSize="12"/>
+                    </Border>
+                    <Border Background="#1890ff" CornerRadius="4" Padding="8,4">
+                        <TextBlock Text="Info" Foreground="White" FontSize="12"/>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="可关闭的标签" Description="带关闭按钮的标签。">
+                <StackPanel Orientation="Horizontal">
+                    <Border Background="#108ee9" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tag 1" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                            <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#87d068" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tag 2" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                            <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#f0ad4e" CornerRadius="4" Padding="8,4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tag 3" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                            <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="动态添加和删除" Description="动态编辑标签。">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                        <Border Background="#108ee9" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Movies" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                                <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#87d068" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Books" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                                <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#f0ad4e" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Music" Foreground="White" FontSize="12" Margin="0,0,8,0"/>
+                                <TextBlock Text="✕" Foreground="White" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Content="+ New Tag" Style="{DynamicResource FlatButton}" BorderThickness="1" BorderBrush="#d9d9d9" Padding="8,4"/>
+                    </StackPanel>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

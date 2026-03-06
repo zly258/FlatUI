@@ -1,0 +1,40 @@
+<UserControl x:Class="FlatUI.Demo.Views.NotificationExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Notification 通知提醒框"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="全局展示通知提醒框"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="成功提示" Description="成功提示。">
+                <Button Content="Success" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="信息提示" Description="信息提示。">
+                <Button Content="Info" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="警告提示" Description="警告提示。">
+                <Button Content="Warning" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="错误提示" Description="错误提示。">
+                <Button Content="Error" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

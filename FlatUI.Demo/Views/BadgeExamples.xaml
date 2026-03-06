@@ -1,0 +1,78 @@
+<UserControl x:Class="FlatUI.Demo.Views.BadgeExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Badge 徽标数"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="图标右上角的圆形徽标数字"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="简单的展示，当数值为 0 时，不展示 Badge。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Notifications" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    <Button Content="Messages" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    <Button Content="Tasks" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="最大值" Description="超过封顶值 99 会显示 99+。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="99+" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    <Button Content="100+" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    <Button Content="999+" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="独立使用" Description="不包裹任何元素即独立使用，可自定样式。">
+                <StackPanel Orientation="Horizontal">
+                    <Border Background="{DynamicResource ErrorBrush}" CornerRadius="10" Width="20" Height="20" Margin="0,0,16,0">
+                        <TextBlock Text="5" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                    </Border>
+                    <Border Background="{DynamicResource WarningBrush}" CornerRadius="10" Width="20" Height="20" Margin="0,0,16,0">
+                        <TextBlock Text="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                    </Border>
+                    <Border Background="{DynamicResource SuccessBrush}" CornerRadius="10" Width="20" Height="20">
+                        <TextBlock Text="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="状态点" Description="用于表示状态的小圆点。">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                        <Ellipse Width="8" Height="8" Fill="{DynamicResource SuccessBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Success" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                        <Ellipse Width="8" Height="8" Fill="{DynamicResource ProcessingBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Processing" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                        <Ellipse Width="8" Height="8" Fill="{DynamicResource WarningBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Warning" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Fill="{DynamicResource ErrorBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Error" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

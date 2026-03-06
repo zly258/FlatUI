@@ -1,0 +1,36 @@
+<UserControl x:Class="FlatUI.Demo.Views.ModalExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Modal 对话框"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="模态对话框"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="第一个对话框。">
+                <Button Content="Open Modal" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="异步关闭" Description="点击确定后异步关闭对话框，例如提交表单。">
+                <Button Content="Async Modal" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="确认对话框" Description="使用确认对话框。">
+                <Button Content="Confirm" Style="{DynamicResource PrimaryButton}"/>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,58 @@
+<UserControl x:Class="FlatUI.Demo.Views.SpaceExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Space 间距"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="设置组件之间的间距"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="水平间距" Description="相邻组件水平间距。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,8,0"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,8,0"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,8,0"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="垂直间距" Description="相邻组件垂直间距。">
+                <StackPanel>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}" Margin="0,0,0,8"/>
+                    <Button Content="Button" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="间距大小" Description="大中小三种间距。">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Small" Style="{DynamicResource PrimaryButton}" Margin="0,0,4,0"/>
+                    <Button Content="Small" Style="{DynamicResource PrimaryButton}" Margin="0,0,4,0"/>
+                    <Button Content="Small" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    
+                    <Button Content="Medium" Style="{DynamicResource PrimaryButton}" Margin="0,0,8,0"/>
+                    <Button Content="Medium" Style="{DynamicResource PrimaryButton}" Margin="0,0,8,0"/>
+                    <Button Content="Medium" Style="{DynamicResource PrimaryButton}" Margin="0,0,16,0"/>
+                    
+                    <Button Content="Large" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0"/>
+                    <Button Content="Large" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0"/>
+                    <Button Content="Large" Style="{DynamicResource PrimaryButton}"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,48 @@
+<UserControl x:Class="FlatUI.Demo.Views.CheckboxExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Checkbox 多选框"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="在一组备选项中进行多选"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="简单的多选框。">
+                <StackPanel>
+                    <CheckBox Content="Checkbox A" Margin="0,0,0,8"/>
+                    <CheckBox Content="Checkbox B" Margin="0,0,0,8"/>
+                    <CheckBox Content="Checkbox C" IsChecked="True"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="不可用状态" Description="多选框不可用状态。">
+                <StackPanel>
+                    <CheckBox Content="Disabled" IsEnabled="False" Margin="0,0,0,8"/>
+                    <CheckBox Content="Disabled &amp; Checked" IsEnabled="False" IsChecked="True"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="全选" Description="在实现全选效果时，你可能会用到 indeterminate 属性。">
+                <StackPanel>
+                    <CheckBox Content="Check all" Margin="0,0,0,8"/>
+                    <CheckBox Content="Option A" Margin="0,0,0,8"/>
+                    <CheckBox Content="Option B" Margin="0,0,0,8"/>
+                    <CheckBox Content="Option C"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

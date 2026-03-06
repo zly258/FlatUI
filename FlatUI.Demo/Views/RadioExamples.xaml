@@ -1,0 +1,47 @@
+<UserControl x:Class="FlatUI.Demo.Views.RadioExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Radio 单选框"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="单选框"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="简单的单选框。">
+                <StackPanel>
+                    <RadioButton Content="Radio A" GroupName="group1" Margin="0,0,0,8"/>
+                    <RadioButton Content="Radio B" GroupName="group1" Margin="0,0,0,8"/>
+                    <RadioButton Content="Radio C" GroupName="group1" IsChecked="True"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="不可用状态" Description="单选框不可用状态。">
+                <StackPanel>
+                    <RadioButton Content="Disabled" GroupName="group2" IsEnabled="False" Margin="0,0,0,8"/>
+                    <RadioButton Content="Disabled &amp; Checked" GroupName="group2" IsEnabled="False" IsChecked="True"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="单选框组合" Description="一组互斥的单选框。">
+                <StackPanel>
+                    <RadioButton Content="Option A" GroupName="group3" Margin="0,0,0,8"/>
+                    <RadioButton Content="Option B" GroupName="group3" Margin="0,0,0,8"/>
+                    <RadioButton Content="Option C" GroupName="group3" IsChecked="True"/>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

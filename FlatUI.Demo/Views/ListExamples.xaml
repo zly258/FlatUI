@@ -1,0 +1,77 @@
+<UserControl x:Class="FlatUI.Demo.Views.ListExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="List 列表"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="最基础的列表展示，可承载文字、列表、图片、段落"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础列表" Description="基础列表。">
+                <ListBox BorderThickness="0" Background="Transparent">
+                    <ListBoxItem>
+                        <TextBlock Text="Racing car sprays burning fuel into crowd."/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Japanese princess to wed commoner."/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Australian walks 100km after outback crash."/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Man charged over missing wedding girl."/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Los Angeles battles huge wildfires."/>
+                    </ListBoxItem>
+                </ListBox>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="带图标的列表" Description="带图标的列表。">
+                <ListBox BorderThickness="0" Background="Transparent">
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" 
+                                  Fill="{DynamicResource SuccessBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Success story"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" 
+                                  Fill="{DynamicResource InfoBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Info story"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" 
+                                  Fill="{DynamicResource WarningBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Warning story"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" 
+                                  Fill="{DynamicResource ErrorBrush}" Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Error story"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

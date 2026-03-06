@@ -1,0 +1,143 @@
+<UserControl x:Class="FlatUI.Demo.Views.NumericUpDownExamples"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlatUI.Demo.Views"
+             xmlns:controls="clr-namespace:FlatUI.Library.Controls;assembly=FlatUI.Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="NumericUpDown 数字输入框"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"
+                       Margin="0,0,0,8"/>
+            
+            <TextBlock Text="通过点击按钮增加或减少数值"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       Margin="0,0,0,32"/>
+            
+            <controls:FlatExampleContainer Title="基础用法" Description="基础数字输入框。">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Margin="0,0,16,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Margin="0,0,16,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="100" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="禁用状态" Description="禁用状态。">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Margin="0,0,16,0" Opacity="0.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1" IsEnabled="False"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0" IsEnabled="False"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Opacity="0.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1" IsEnabled="False"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0" IsEnabled="False"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+            
+            <controls:FlatExampleContainer Title="步长设置" Description="设置每次增加或减少的步长。">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Margin="0,0,16,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32" Margin="0,0,16,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="10" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#d9d9d9" BorderThickness="1" CornerRadius="4" Width="100" Height="32">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="100" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                                <Button Content="+" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0,0,0,1"/>
+                                <Button Content="-" Style="{DynamicResource FlatButton}" Width="24" Height="16" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </controls:FlatExampleContainer>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
