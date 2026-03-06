@@ -252,6 +252,7 @@ namespace FlatUI.Library.Controls
             double chartWidth = width - margin * 2;
             double chartHeight = height - margin * 2;
             
+            if (ItemsSource == null || !ItemsSource.Any()) return;
             double maxValue = ItemsSource.Max(item => item.Value);
             if (maxValue == 0) maxValue = 1;
             

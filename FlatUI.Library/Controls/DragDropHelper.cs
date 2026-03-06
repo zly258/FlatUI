@@ -68,14 +68,26 @@ namespace FlatUI.Library.Controls
         }
 
         private static System.Windows.Point _dragStartPoint;
-        private static object _draggedItem;
-        private static ListBox _sourceListBox;
-        private static FrameworkElement _dragIndicator;
+        private static object? _draggedItem;
+        private static ListBox? _sourceListBox;
+        private static FrameworkElement? _dragIndicator;
 
         private static void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _dragStartPoint = e.GetPosition(null);
             _sourceListBox = sender as ListBox;
+            
+            if (_sourceListBox != null)
+            {
+                var item = GetItemUnderMouse(_sourceListBox, e.GetPosition(_sourceListBox));
+                if (item != null)
+                {
+                    _draggedItem = item;
+                    
+                    // 创建拖拽指示器
+                    CreateDragIndicator(_sourceListBox);
+                }
+            }
             
             if (_sourceListBox != null)
             {
@@ -110,8 +122,8 @@ namespace FlatUI.Library.Controls
                     if (effects == DragDropEffects.None || effects == DragDropEffects.Move)
                     {
                         RemoveDragIndicator();
-                        _draggedItem = null;
-                        _sourceListBox = null;
+                    _draggedItem = null;
+                    _sourceListBox = null;
                     }
                 }
             }
@@ -280,7 +292,7 @@ namespace FlatUI.Library.Controls
         {
             if (_dragIndicator != null && _dragIndicator.Parent is Panel panel)
             {
-                panel.Children.Remove(_dragIndicator);
+                if (_dragIndicator != null) panel.Children.Remove(_dragIndicator);
                 _dragIndicator = null;
             }
         }
@@ -297,7 +309,7 @@ namespace FlatUI.Library.Controls
             }
         }
 
-        private static Panel GetItemsPanel(ListBox listBox)
+        private static Panel? GetItemsPanel(ListBox listBox)
         {
             var itemsPresenter = FindVisualChild<ItemsPresenter>(listBox);
             if (itemsPresenter != null)
@@ -307,7 +319,7 @@ namespace FlatUI.Library.Controls
             return null;
         }
 
-        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
@@ -326,7 +338,7 @@ namespace FlatUI.Library.Controls
             return null;
         }
 
-        private static ListBoxItem GetListBoxItem(ListBox listBox, object item)
+        private static ListBoxItem? GetListBoxItem(ListBox listBox, object item)
         {
             return listBox.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
         }

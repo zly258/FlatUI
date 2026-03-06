@@ -429,10 +429,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:DropdownTree}" BasedOn="{StaticResource FlatComboBox}">
+    <Style TargetType="{x:Type controls:FlatDropdownTree}" BasedOn="{StaticResource FlatComboBox}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:DropdownTree}">
+                <ControlTemplate TargetType="{x:Type controls:FlatDropdownTree}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="True"
@@ -472,10 +472,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:PropertyGrid}">
+    <Style TargetType="{x:Type controls:FlatPropertyGrid}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:PropertyGrid}">
+                <ControlTemplate TargetType="{x:Type controls:FlatPropertyGrid}">
                     <Border Background="{StaticResource BackgroundBrush}"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1">
@@ -514,10 +514,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:StatusBadge}">
+    <Style TargetType="{x:Type controls:FlatStatusBadge}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:StatusBadge}">
+                <ControlTemplate TargetType="{x:Type controls:FlatStatusBadge}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Ellipse x:Name="dot" Width="8" Height="8" Fill="{StaticResource BorderBrush}" Margin="0,0,5,0"/>
                         <TextBlock Text="{TemplateBinding Text}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeNormal}"/>

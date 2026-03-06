@@ -118,7 +118,7 @@ namespace FlatUI.Library.Controls
         /// <summary>
         /// 获取图标的路径数据
         /// </summary>
-        public string GetIconData()
+        public string? GetIconData()
         {
             if (!string.IsNullOrEmpty(CustomIconData))
                 return CustomIconData;

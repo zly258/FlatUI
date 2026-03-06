@@ -280,7 +280,7 @@ namespace FlatUI.Library.Controls
     /// </summary>
     public class LocalizeExtension : MarkupExtension
     {
-        public string Key { get; set; }
+        public string Key { get; set; } = string.Empty;
 
         public LocalizeExtension() { }
 
